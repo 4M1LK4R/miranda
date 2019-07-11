@@ -1,0 +1,19 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Provider extends Model
+{
+    protected $fillable =[
+        'id_catalog_zone', 'name', 'description','contact',
+        'phone','address','state'
+    ];
+
+    // un proveedor pertenece a un sola zona
+    public function catalogue()
+    {
+        return $this->belongsTo(Catalogue::class);
+    }
+}

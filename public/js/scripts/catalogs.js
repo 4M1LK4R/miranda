@@ -22,7 +22,7 @@ function ListDatatable()
             "url": "/js/assets/Spanish.json"
         },
         ajax: {
-            url: 'brand/datatable',
+            url: 'catalogs',
             data: function (obj) {
                 obj.type_catalog_id = type_catalog_id;
             }
@@ -83,7 +83,7 @@ function ListDatatable()
 // guarda los datos nuevos
 function Save() {
     $.ajax({
-        url: "catalog/store",
+        url: "catalogs",
         method: 'post',
         data: catch_parameters(),
         success: function (result) {
@@ -97,7 +97,7 @@ function Save() {
             }
         },
         error: function (result) {
-            toastr.error(result.smg);
+            toastr.error(result.smg + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
             console.log(result);
         },
     });
@@ -107,7 +107,7 @@ function Save() {
 // captura los datos
 function Edit(id) {
     $.ajax({
-        url: "catalog/edit/{id}",
+        url: "catalogs/{catalog}/edit",
         method: 'get',
         data: {
             id: id
@@ -116,7 +116,8 @@ function Edit(id) {
             show_data(result);
         },
         error: function (result) {
-            toastr.error(result);
+            toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
+
             console.log(result);
         },
 
@@ -150,7 +151,7 @@ function Update() {
     var data_new = $(".form-data").serialize();
     if (data_old != data_new) {
         $.ajax({
-            url: "catalog/update/{id}",
+            url: "catalogs/{catalog}",
             method: 'put',
             data: catch_parameters(),
             success: function (result) {
@@ -161,7 +162,7 @@ function Update() {
                 }
             },
             error: function (result) {
-                toastr.error(result.msg);
+                toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
             },
         });
         table.ajax.reload();
@@ -176,7 +177,7 @@ function Delete(id_) {
 }
 $("#btn_delete").click(function () {
     $.ajax({
-        url: "catalog/delete/{id}",
+        url: "catalogs/{catalog}",
         method: 'delete',
         data: {
             id: id
@@ -189,7 +190,7 @@ $("#btn_delete").click(function () {
             }
         },
         error: function (result) {
-            toastr.error(result.msg);
+            toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
             console.log(result);
         },
 

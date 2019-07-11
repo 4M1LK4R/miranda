@@ -61,8 +61,6 @@
                 </button>
             </div>
             <form class="form-data" id="form-data" novalidate>
-                <input id="id" name="id" value="0" type="hidden">
-                <input id="type_catalog_id" name="type_catalog_id" value="1" type="hidden">
                 <div class="modal-body">
                         <div class="modal-body">
                             <div class="md-form mb-3">
@@ -130,7 +128,7 @@
 @section('scripts')
 <script src="{{ URL::asset('js/scripts/catalogs.js') }}"></script>
 <script>
-type_catalog_id=1;
+type_catalog_id=4;
 title_modal_data="Registrar Nueva Linea de Producto";
 </script>
 @endsection

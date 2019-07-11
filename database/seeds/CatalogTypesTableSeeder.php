@@ -24,8 +24,8 @@ class CatalogTypesTableSeeder extends Seeder
         ]);
 
         App\TypeCatalog::create([
-            'name' => 'DEPARTAMENTO',
-            'description' => 'Departamentos de Bolivia.',
+            'name' => 'ZONA',
+            'description' => 'Zonas de Bolivia.',
             'state' => 'ACTIVO'
         ]);
 

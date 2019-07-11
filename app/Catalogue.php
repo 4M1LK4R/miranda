@@ -14,4 +14,19 @@ class Catalogue extends Model
     {
         return $this->belongsTo(TypeCatalog::class);
     }
+    // un tipo de cliente tiene muchos cliente (hasMany)
+    public function clients()
+    {
+        return $this->hasMany(Client::class);
+    }
+    // un tipo de producto tiene muchos productos 
+    public function products()
+    {
+        return $this->hasMany(Client::class);
+    }
+    // un tipo de producto tiene muchos productos 
+    public function providers()
+    {
+        return $this->hasMany(Provider::class);
+    }
 }
