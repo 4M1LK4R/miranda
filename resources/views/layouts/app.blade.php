@@ -44,14 +44,61 @@
                             </li>
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownConfigTurism" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="icon-wrench"></i>Configurar
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTienda" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon-tags"></i>Tienda
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownConfigTurism">
-                                    <a class="dropdown-item" href="{{ route('line') }}">Linea de Productos</a>
-                                    <a class="dropdown-item" href="#">Tipos de Productos</a>
-                                    <a class="dropdown-item" href="#">Industria de Productos</a>
-                                    <a class="dropdown-item" href="#">Almacenes</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownTienda">
+                                    <a class="dropdown-item" href="#">Registrar venta</a>
+                                    <!--<a class="dropdown-item" href="#">Registrar cotización</a>-->
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdmVentas" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon-list-alt"></i>Administrar ventas
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmVentas">
+                                    <a class="dropdown-item" href="#">Clientes</a>
+                                    <a class="dropdown-item" href="#">Cotizaciones </a>
+                                    <a class="dropdown-item" href="#">Ventas</a>
+                                    <!--<a class="dropdown-item" href="#">Devoluciones</a>-->
+                                    <a class="dropdown-item" href="#">Vendedores</a>
+                                    <a class="dropdown-item" href="#">Facturas</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Cuentas por Cobrar</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdmInventario" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon-box"></i>Administrar inventario
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmInventario">
+                                    <a class="dropdown-item" href="#">Productos</a>
+                                    <a class="dropdown-item" href="#">Compras</a>
+                                    <a class="dropdown-item" href="#">Proveedores</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Cuentas por Pagar</a>         
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownReportes" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon-chart-bar"></i>Reportes
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
+                                    <a class="dropdown-item" href="#">Reporte</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdministracion" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon-sliders"></i>Configuración
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownAdministracion">
+                                    <a class="dropdown-item" href="#">Empresa</a>
+                                    <a class="dropdown-item" href="#">Usuarios</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Tipos de produto</a>
+                                    <a class="dropdown-item" href="#">Industrias</a>
+                                    <a class="dropdown-item" href="#">Almacenes</a>            
+                                    <a class="dropdown-item" href="{{ route('line') }}">Lineas</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -60,6 +107,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="!#">Cambiar contraseña</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
