@@ -85,6 +85,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
                                     <a class="dropdown-item" href="#">Reporte</a>
+                                    <a class="dropdown-item" href="#">Reporte Agustin</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
