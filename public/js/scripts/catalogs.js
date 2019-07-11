@@ -1,6 +1,6 @@
-var title_modal_data="Registro Nuevo";
-var type_catalog_id=1;
+var table;
 var id=0;
+var type_catalog_id=1;
 $(document).ready(function(){
     $.ajaxSetup({
         headers: {
@@ -10,33 +10,19 @@ $(document).ready(function(){
     ListDatatable();
     catch_parameters();
 });
-
-
-// funcion para volver a mayusculas
-function Mayus(e) {
-    e.value = e.value.toUpperCase();
-}
-// obtiene los datos de los formularios
-function catch_parameters()
-{
-    var data = $(".form-data").serialize();
-    data += "&id="+id;
-    data += "&type_catalog_id="+type_catalog_id;
-    console.log(data);
-    return data;
-}
-
-
-
+// datatable catalogos
 function ListDatatable()
 {
-   var table = $('#table').DataTable({
+    table = $('#table').DataTable({
         dom: 'lfBrtip',
         processing: true,
         serverSide: true,
         "paging": true,
+        language: {
+            "url": "/js/assets/Spanish.json"
+        },
         ajax: {
-            url: 'brand-datatable',
+            url: 'brand/datatable',
             data: function (obj) {
                 obj.type_catalog_id = type_catalog_id;
             }
@@ -94,7 +80,150 @@ function ListDatatable()
     });
 };
 
+// guarda los datos nuevos
+function Save() {
+    $.ajax({
+        url: "catalog/store",
+        method: 'post',
+        data: catch_parameters(),
+        success: function (result) {
+            if (result.success) {
+                console.log("se registro ");
+                toastr.success(result.msg);
+                
+            } else {
+                toastr.warning(result.smg);
+                console.log(result);
+            }
+        },
+        error: function (result) {
+            toastr.error(result.smg);
+            console.log(result);
+        },
+    });
+    table.ajax.reload();
+}
 
+// captura los datos
+function Edit(id) {
+    $.ajax({
+        url: "catalog/edit/{id}",
+        method: 'get',
+        data: {
+            id: id
+        },
+        success: function (result) {
+            show_data(result);
+        },
+        error: function (result) {
+            toastr.error(result);
+            console.log(result);
+        },
+
+    });
+};
+
+/// muestra la vista con los datos capturados
+var data_old;
+function show_data(obj) {
+    ClearInputs();
+    obj = JSON.parse(obj);
+    id= obj.id;
+    $("#name").val(obj.name);
+    $("#description").val(obj.description);
+    $("#type_catalog_id").val(obj.type_catalog_id);
+    if (obj.state == "ACTIVO") {
+        $('#estado_activo').prop('checked', true);
+    }
+    if (obj.state == "INACTIVO") {
+        $('#estado_inactivo').prop('checked', true);
+    }
+    $("#title-modal").html("Editar Registro");
+
+    data_old = $(".form-data").serialize();
+
+    $('#modal_datos').modal('show');
+};
+
+// actualiza los datos
+function Update() {
+    var data_new = $(".form-data").serialize();
+    if (data_old != data_new) {
+        $.ajax({
+            url: "catalog/update/{id}",
+            method: 'put',
+            data: catch_parameters(),
+            success: function (result) {
+                if (result.success) {
+                    toastr.success(result.msg);
+                } else {
+                    toastr.warning(result.msg);
+                }
+            },
+            error: function (result) {
+                toastr.error(result.msg);
+            },
+        });
+        table.ajax.reload();
+        
+    }
+}
+
+//funcion para eliminar valor seleccionado
+function Delete(id_) {
+    id= id_;
+    $('#modal_eliminar').modal('show');
+}
+$("#btn_delete").click(function () {
+    $.ajax({
+        url: "catalog/delete/{id}",
+        method: 'delete',
+        data: {
+            id: id
+        },
+        success: function (result) {
+            if (result.success) {
+                toastr.success(result.msg);
+            } else {
+                toastr.warning(result.msg);
+            }
+        },
+        error: function (result) {
+            toastr.error(result.msg);
+            console.log(result);
+        },
+
+    });
+    table.ajax.reload();
+    $('#modal_eliminar').modal('hide');
+});
+
+//////////////////////////////////////////////
+
+// METODOS NECESARIOS
+// funcion para volver mayusculas
+function Mayus(e) {
+    e.value = e.value.toUpperCase();
+}
+
+// obtiene los datos del formulario
+function catch_parameters()
+{
+    var data = $(".form-data").serialize();
+    data += "&id="+id;
+    data += "&type_catalog_id="+type_catalog_id;
+    return data;
+    
+}
+
+// muestra el modal
+$("#btn-agregar").click(function () {
+    ClearInputs();
+    $("#title-modal").html(title_modal_data);
+    $("#modal_datos").modal("show");
+});
+
+// metodo de bootstrap para validar campos
 
 (function () {
     'use strict';
@@ -106,15 +235,12 @@ function ListDatatable()
                     event.preventDefault();
                     event.stopPropagation();
                 } else {
-                    //__Stop Event Submit
                     event.preventDefault();
                     event.stopPropagation();
-                    console.log("entrando");
                     if (id == 0) {
-                        console.log("entradno a guardar");
-                        SaveNew();
+                        Save();
                     } else {
-                        //Save();
+                        Update();
                     }
                     $('#modal_datos').modal('hide');
                 }
@@ -124,56 +250,13 @@ function ListDatatable()
     }, false);
 })();
 
-$("#btn-agregar").click(function () {
-    $("#title-modal").html(title_modal_data);
-    $("#modal_datos").modal("show");
-});
-
-function SaveNew() {
-    console.log("Guardando...");
-    $.ajax({
-        url: "catalog/store",
-        method: 'post',
-        data: catch_parameters(),
-        success: function (result) {
-            //console.log(result);
-            if (result.success) {
-                console.log("se registro ");
-            } else {
-                console.log(result);
-            }
-        },
-        error: function (result) {
-            
-            console.log(result);
-        },
+/// limpi campos despues de utilizar el modal
+function ClearInputs() {
+    var forms = document.getElementsByClassName('form-data');
+    Array.prototype.filter.call(forms, function (form) {
+        form.classList.remove('was-validated');
     });
-
-   // table.ajax.reload();
-    
-}
-function Save() {
-    var values_new = $(".form-data").serialize();
-    if (values_old != values_new) {
-        $.ajax({
-            url: "../Catalogos/Update",
-            method: 'post',
-            data: catch_parameters(),
-            success: function (result) {
-                console.log(result);
-                if (result.success) {
-                    
-                } else {
-                    console.log(result);
-                    
-                }
-            },
-            error: function (result) {
-                console.log(result);
-                
-            },
-        });
-        table.ajax.reload();
-    }
-    ListDataTable();
-}
+    //__Clean values of inputs
+    $("#form-data")[0].reset();
+    id=0;
+};

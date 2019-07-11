@@ -62,7 +62,7 @@
             </div>
             <form class="form-data" id="form-data" novalidate>
                 <input id="id" name="id" value="0" type="hidden">
-                <input id="type_catalog_id" name="type_catalog_id" value="4" type="hidden">
+                <input id="type_catalog_id" name="type_catalog_id" value="1" type="hidden">
                 <div class="modal-body">
                         <div class="modal-body">
                             <div class="md-form mb-3">

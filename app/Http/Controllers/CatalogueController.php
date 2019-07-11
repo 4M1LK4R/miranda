@@ -9,12 +9,13 @@ use App\Catalogue;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\CatalogueRequest;
 
+
 class CatalogueController extends Controller
 {
 
     public function index(Request $request)
     {
-        return datatables()->of(Catalogue::all()->where('type_catalog_id', $request->type_catalog_id))
+        return datatables()->of(Catalogue::all()->where('type_catalog_id', $request->type_catalog_id)->where('state','ACTIVO'))
         ->addColumn('Editar', function ($item) {
             return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
         })
@@ -32,20 +33,26 @@ class CatalogueController extends Controller
     }
     public function show($id)
     {
-        //
+        $Catalogue = Catalogue::find($id);
+        return $Catalogue->toJson();
     }
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+       $Catalogue = Catalogue::find($request->id);
+        return $Catalogue->toJson();
     }
-    public function update(Request $request, $id)
+    public function update(CatalogueRequest $request)
     {
-        //
+        $Catalogue = Catalogue::find($request->id);
+        $Catalogue->update($request->all());
+        return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $Catalogue = Catalogue::find($request->id);
+        $Catalogue->delete();
+        return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
 
     // Return Views
