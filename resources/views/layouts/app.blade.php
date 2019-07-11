@@ -97,7 +97,8 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Tipos de produto</a>
                                     <a class="dropdown-item" href="#">Industrias</a>
-                                    <a class="dropdown-item" href="#">Almacenes</a>            
+                                    <a class="dropdown-item" href="#">Almacenes</a>
+                                    <a class="dropdown-item" href="#">Zonas</a>            
                                     <a class="dropdown-item" href="{{ route('line') }}">Lineas</a>
                                 </div>
                             </li>
