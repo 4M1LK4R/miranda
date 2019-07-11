@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TypesCatalogueTableSeeder extends Seeder
+class CatalogTypesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,8 +11,6 @@ class TypesCatalogueTableSeeder extends Seeder
      */
     public function run()
     {
-
-
         App\TypeCatalog::create([
             'name' => 'TIPO',
             'description' => 'Tipo de Productos.',
