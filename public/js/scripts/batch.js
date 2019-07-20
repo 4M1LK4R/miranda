@@ -7,9 +7,6 @@ $(document).ready(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
-
-    
     ListDatatable();
     SelectProduct();
     SelectLine();
@@ -161,8 +158,6 @@ function ClearInputs() {
 function dateEntry()
 {
     $('#datetimepicker1').datetimepicker({
-        format: 'L',
-        locale: 'es'
     });
 }
 

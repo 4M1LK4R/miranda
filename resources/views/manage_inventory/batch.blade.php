@@ -50,9 +50,9 @@
 <!-- Modals-->
 <!-- Modal Datos -->
 
-<div class="modal fade bd-example-modal-xl" id="modal_datos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<div class="modal fade bd-example-modal-xl " id="modal_datos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog mw-100 w-100">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
                 <center>
@@ -67,7 +67,7 @@
                 <div class="modal-body">
                     <div class="form-group row">
                         <div class="col-sm-6">
-                            <label for="inputFirstname">Codigo de Lote:</label>
+                            <label for="inputFirstname">Codigos de Lote:</label>
                             <input type="text" class="form-control" id="code" name="code" placeholder="Codigo de lote">
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                             <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                                 <input type="text" id="entry_date" name="entry_date" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
                                 <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    <div class="input-group-text"><i class="icon-calendar"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                             <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
                                 <input type="text" id="expiration_date" name="expiration_date" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
                                 <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    <div class="input-group-text"><i class="icon-calendar"></i></div>
                                 </div>
                             </div>
                         </div>
