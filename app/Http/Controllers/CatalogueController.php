@@ -60,17 +60,36 @@ class CatalogueController extends Controller
     {
         return view('catalogs.line');
     }
-    public function depot() // almacen
+    public function deposit() // almacen
     {
-        
+        return view('catalogs.deposit');
     }
-    public function product_type() // tipo de producto
+    public function zone() // departamento
     {
-        
+        return view('catalogs.zone');
     }
-    public function department() // departamento
+    public function industry() // industrias
     {
-
+        return view('catalogs.industry');
+    }
+    // lista los catalogos depende del id que pase
+    public function listcatalog(Request $request)
+    {
+        switch ($request->by)
+        {
+            case 'type_catalog_id':
+                $list=Catalogue::All()
+                ->where('type_catalog_id',$request->type_catalog_id)
+                ->where('state','ACTIVO');
+                return $list;
+            break;
+            case 'all':
+                $list=Catalogue::All();
+                return $list=Catalogue::All();
+            break;         
+            default:
+            break;
+        }
     }
 
 }

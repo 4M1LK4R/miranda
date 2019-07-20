@@ -1,6 +1,6 @@
 var table;
 var id=0;
-var type_catalog_id=1;
+var title_modal_data = "Registrar Nuevo Cliente";
 $(document).ready(function(){
     $.ajaxSetup({
         headers: {
@@ -8,7 +8,10 @@ $(document).ready(function(){
         }
     });
     ListDatatable();
+    SelectZone();
+    SelectTypeClient();
     catch_parameters();
+    
 });
 // datatable catalogos
 function ListDatatable()
@@ -22,18 +25,22 @@ function ListDatatable()
             "url": "/js/assets/Spanish.json"
         },
         ajax: {
-            url: 'catalogs',
-            data: function (obj) {
-                obj.type_catalog_id = type_catalog_id;
-            }
+            url: 'client'
+            
         },
         columns: [
             { data: 'name'},
-            { data: 'state'},
+            { data: 'nit'},
             { data: 'description'},
+            { data: 'phone'},
+            { data: 'address'},
+            { data: 'id_catalog_zone'},
+            { data: 'id_catalog_client'},
+            { data: 'state'},
             { data: 'Editar',   orderable: false, searchable: false },
             { data: 'Eliminar', orderable: false, searchable: false },
         ],
+        
         buttons: [
             {
                 text: '<i class="icon-eye"></i> ',
@@ -83,7 +90,7 @@ function ListDatatable()
 // guarda los datos nuevos
 function Save() {
     $.ajax({
-        url: "catalogs",
+        url: "client",
         method: 'post',
         data: catch_parameters(),
         success: function (result) {
@@ -97,17 +104,19 @@ function Save() {
             }
         },
         error: function (result) {
-            toastr.error(result.smg + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-            console.log(result);
+            toastr.error(result.errors + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            console.log(result.errors);
         },
     });
     table.ajax.reload();
 }
 
+
+
 // captura los datos
 function Edit(id) {
     $.ajax({
-        url: "catalogs/{catalog}/edit",
+        url: "client/{client}/edit",
         method: 'get',
         data: {
             id: id
@@ -128,11 +137,16 @@ function Edit(id) {
 var data_old;
 function show_data(obj) {
     ClearInputs();
+    console.log(obj)
     obj = JSON.parse(obj);
     id= obj.id;
     $("#name").val(obj.name);
+    $("#nit").val(obj.nit);
     $("#description").val(obj.description);
-    $("#type_catalog_id").val(obj.type_catalog_id);
+    $("#phone").val(obj.phone);
+    $("#address").val(obj.address);
+    $("#id_catalog_zone").val(obj.id_catalog_zone);
+    $("#id_catalog_client").val(obj.id_catalog_client);
     if (obj.state == "ACTIVO") {
         $('#estado_activo').prop('checked', true);
     }
@@ -151,7 +165,7 @@ function Update() {
     var data_new = $(".form-data").serialize();
     if (data_old != data_new) {
         $.ajax({
-            url: "catalogs/{catalog}",
+            url: "client/{client}",
             method: 'put',
             data: catch_parameters(),
             success: function (result) {
@@ -177,7 +191,7 @@ function Delete(id_) {
 }
 $("#btn_delete").click(function () {
     $.ajax({
-        url: "catalogs/{catalog}",
+        url: "client/{client}",
         method: 'delete',
         data: {
             id: id
@@ -199,6 +213,10 @@ $("#btn_delete").click(function () {
     $('#modal_eliminar').modal('hide');
 });
 
+
+
+
+
 //////////////////////////////////////////////
 
 // METODOS NECESARIOS
@@ -212,7 +230,7 @@ function catch_parameters()
 {
     var data = $(".form-data").serialize();
     data += "&id="+id;
-    data += "&type_catalog_id="+type_catalog_id;
+    console.log(data);
     return data;
     
 }
@@ -261,3 +279,65 @@ function ClearInputs() {
     $("#form-data")[0].reset();
     id=0;
 };
+
+function SelectZone() {
+    $.ajax({
+        url: "listcatalog",
+        method: 'get',
+        data: {
+            by: "type_catalog_id",
+            type_catalog_id: 3
+        },
+        success: function (result) {
+            var code = '<div class="form-group">';
+            code += '<label for="tipo-zone"><b>Zonas:</b></label>';
+            code += '<select class="form-control" name="id_catalog_zone" id="id_catalog_zone" required>';
+            code += '<option disabled value="" selected>(Seleccionar)</option>';
+            $.each(result, function (key, value) {
+                code += '<option value="' + value.id + '">' + value.name + '</option>';
+            });
+            code += '</select>';
+            code += '<div class="invalid-feedback">';
+            code += 'Dato necesario.';
+            code += '</div>';
+            code += '</div>';
+            $("#select_zone").html(code);
+        },
+        error: function (result) {
+            toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            console.log(result);
+        },
+
+    });
+}
+
+function SelectTypeClient() {
+    $.ajax({
+        url: "listcatalog",
+        method: 'get',
+        data: {
+            by: "type_catalog_id",
+            type_catalog_id: 5
+        },
+        success: function (result) {
+            var code = '<div class="form-group">';
+            code += '<label for="tipo-client"><b>Tipo de Cliente:</b></label>';
+            code += '<select class="form-control" name="id_catalog_client" id="id_catalog_client" required>';
+            code += '<option disabled value="" selected>(Seleccionar)</option>';
+            $.each(result, function (key, value) {
+                code += '<option value="' + value.id + '">' + value.name + '</option>';
+            });
+            code += '</select>';
+            code += '<div class="invalid-feedback">';
+            code += 'Dato necesario.';
+            code += '</div>';
+            code += '</div>';
+            $("#select_type_client").html(code);
+        },
+        error: function (result) {
+            toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            console.log(result);
+        },
+
+    });
+}

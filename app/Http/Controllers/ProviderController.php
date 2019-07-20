@@ -3,82 +3,80 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// importados
+use App\Provider;
+use App\Catalogue;
+use App\TypeCatalog;
+use Yajra\DataTables\DataTables;
+use App\Http\Requests\ProviderRequest;
 
 class ProviderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return datatables()->of(Provider::all()->where('state','ACTIVO'))
+        ->addColumn('id_catalog_zone', function ($item) {
+            $id_catalog_zone = Catalogue::find($item->id_catalog_zone);
+            return  $id_catalog_zone->name;
+        })
+        ->addColumn('Editar', function ($item) {
+            return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
+        })
+        ->addColumn('Eliminar', function ($item) {
+            return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
+        })
+        ->rawColumns(['Editar','Eliminar']) 
+              
+        ->toJson();
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(ProviderRequest $request)
     {
-        //
+        $Provider = Provider::create($request->all());
+        return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $Provider = Provider::find($id);
+        return $Provider->toJson();
+    }
+    public function edit(Request $request)
+    {
+        $Provider = Provider::find($request->id);
+        return $Provider->toJson();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+  
+    public function update(ProviderRequest $request)
     {
-        //
+        $Provider = Provider::find($request->id);
+        $Provider->update($request->all());
+        return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function destroy(Request $request)
     {
-        //
+        $Provider = Provider::find($request->id);
+        $Provider->delete();
+        return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function listprovider(Request $request)
     {
-        //
+        switch ($request->by)
+        {
+            case 'all':
+                $list=Provider::All();
+                return $list=Provider::All();
+            break;         
+            default:
+            break;
+        }
+    }
+
+    // Return Views
+    public function provider()
+    {
+        return view('manage_inventory.provider');
     }
 }

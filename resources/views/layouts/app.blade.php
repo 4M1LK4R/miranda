@@ -9,7 +9,11 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-    <!-- Styles  tadatable-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+
+
+    <!-- Styles  tadatable -->
     <link rhref="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" el="stylesheet" >    
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -57,11 +61,11 @@
                                     <i class="icon-list-alt"></i>Administrar ventas
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmVentas">
-                                    <a class="dropdown-item" href="#">Clientes</a>
+                                    <a class="dropdown-item" href="{{ route('client') }}">Clientes</a>
                                     <a class="dropdown-item" href="#">Cotizaciones </a>
                                     <a class="dropdown-item" href="#">Ventas</a>
                                     <!--<a class="dropdown-item" href="#">Devoluciones</a>-->
-                                    <a class="dropdown-item" href="#">Vendedores</a>
+                                    <a class="dropdown-item" href="{{ route('seller') }}">Vendedores</a>
                                     <a class="dropdown-item" href="#">Facturas</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Cuentas por Cobrar</a>
@@ -72,9 +76,9 @@
                                     <i class="icon-box"></i>Administrar inventario
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmInventario">
-                                    <a class="dropdown-item" href="#">Productos</a>
-                                    <a class="dropdown-item" href="#">Compras</a>
-                                    <a class="dropdown-item" href="#">Proveedores</a>
+                                    <a class="dropdown-item" href="{{ route('product') }}">Productos</a>
+                                    <a class="dropdown-item" href="{{ route('batch') }}">Lotes(Compras)</a>
+                                    <a class="dropdown-item" href="{{ route('provider') }}">Proveedores</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Cuentas por Pagar</a>         
                                 </div>
@@ -97,9 +101,9 @@
                                     <a class="dropdown-item" href="#">Usuarios</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Tipos de produto</a>
-                                    <a class="dropdown-item" href="#">Industrias</a>
-                                    <a class="dropdown-item" href="#">Almacenes</a>
-                                    <a class="dropdown-item" href="#">Zonas</a>            
+                                    <a class="dropdown-item" href="{{ route('industry') }}">Industrias</a>
+                                    <a class="dropdown-item" href="{{ route('deposit') }}">Almacenes</a>
+                                    <a class="dropdown-item" href="{{ route('zone') }}">Zonas</a>            
                                     <a class="dropdown-item" href="{{ route('line') }}">Lineas</a>
                                 </div>
                             </li>
@@ -133,6 +137,12 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <script src="{{ asset('js/assets/moment.js') }}"></script>
+    <script src="{{ asset('js/assets/es.js') }}"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

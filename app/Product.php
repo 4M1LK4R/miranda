@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $filla=[
+    protected $fillable =[
         'id_catalog_product','name', 'description','state'
     ];
 
@@ -14,5 +14,9 @@ class Product extends Model
     public function catalogue()
     {
         return $this->belongsTo(Catalogue::class);
+    }
+    public function batchs()
+    {
+        return $this->belongsToMany(Batch::class);
     }
 }

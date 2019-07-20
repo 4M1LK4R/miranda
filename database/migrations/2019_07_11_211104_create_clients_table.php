@@ -22,6 +22,7 @@ class CreateClientsTable extends Migration
             $table->mediumText('description')->nullable();
             $table->integer('phone')->nullable();
             $table->mediumText('address')->nullable();
+            $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
             $table->timestamps();
             //RELACTIONS
             $table->foreign('id_catalog_zone')->references('id')->on('catalogues')

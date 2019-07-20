@@ -2,83 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Seller;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use App\Http\Requests\SellerRequest;
 
 class SellerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        //
+        return datatables()->of(Seller::all()->where('state','ACTIVO'))
+        ->addColumn('Editar', function ($item) {
+            return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
+        })
+        ->addColumn('Eliminar', function ($item) {
+            return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
+        })
+        ->rawColumns(['Editar','Eliminar']) 
+              
+        ->toJson();
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(SellerRequest $request)
     {
-        //
+        $Seller = Seller::create($request->all());
+        return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $Seller = Seller::find($id);
+        return $Seller->toJson();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $Seller = Seller::find($request->id);
+        return $Seller->toJson();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(SellerRequest $request)
     {
-        //
+        $Seller = Seller::find($request->id);
+        $Seller->update($request->all());
+        return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $Seller = Seller::find($request->id);
+        $Seller->delete();
+        return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
+    }
+
+    public function seller()
+    {
+        return view('manage_sales.seller');
     }
 }
