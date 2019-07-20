@@ -80,6 +80,22 @@
                     </div>
 
                     <div class="form-group row">
+                        <div class="col-sm-6" id="select_provider">
+                        </div>  
+        
+                        <div class="col-sm-6" id="select_storage">
+                        </div> 
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-6" id="select_payment_status">
+                        </div>  
+            
+                        <div class="col-sm-6" id="select_payment_type">
+                        </div> 
+                        </div>
+
+                    <div class="form-group row">
                         <div class="col-sm-3">
                             <label for="inputLastname">Stock Inicial:</label>
                                 <input type="text" class="form-control" id="initial_stock" name="initial_stock" placeholder="Stock Inicial">
@@ -135,6 +151,27 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group row">
+                            <div class="md-form mb-3">
+                                    <label for="state"><b>Estado:</b></label>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="estado_activo" name="state" class="custom-control-input bg-danger"
+                                        value="ACTIVO" checked>
+                                    <label class="custom-control-label" for="estado_activo">Activo</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="estado_inactivo" name="state" class="custom-control-input"
+                                        value="INACTIVO">
+                                    <label class="custom-control-label" for="estado_inactivo">Inactivo</label>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-group row">
+                            <div class="md-form mb-6">
+                                    <label for="nombre"><b>Descripción:</b></label>
+                                    <textarea  type="text" class="form-control" onkeyup="Mayus(this);" rows="4" id="description" name="description" ></textarea>  
+                                </div>
                     </div>
 
                         

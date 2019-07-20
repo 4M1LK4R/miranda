@@ -11,6 +11,10 @@ $(document).ready(function(){
     SelectProduct();
     SelectLine();
     SelectIndustry();
+    SelectPaymentStatus();
+    SelectProvider();
+    SelectStorage();
+    SelectPaymentType();
     dateEntry();
     dateExpiration();
     catch_parameters(); 
