@@ -65,85 +65,23 @@
             </div>
             <form class="form-data" id="form-data" novalidate>
                 <div class="modal-body">
+                    <b>DATOS DE PRODUCTO:</b>
+                    <hr>
                     <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="inputFirstname">Codigos de Lote:</label>
-                            <input type="text" class="form-control" id="code" name="code" placeholder="Codigo de lote">
+                        <div class="col-sm-3" id="select_product">
+                        </div>  
+                        <div class="col-sm-3" id="select_line">
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6" id="select_product">
-                        </div>  
-
-                        <div class="col-sm-6" id="select_line">
+                        <div class="col-sm-3" id="select_provider">
                         </div> 
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-6" id="select_provider">
-                        </div>  
-        
-                        <div class="col-sm-6" id="select_storage">
-                        </div> 
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-6" id="select_payment_status">
-                        </div>  
-            
-                        <div class="col-sm-6" id="select_payment_type">
-                        </div> 
+                        <div class="col-sm-3" id="select_industry">
                         </div>
-
-                    <div class="form-group row">
+                        <div class="col-sm-3"><!---->
+                            <label for="code">Código de lote:</label>
+                            <input type="text" class="form-control" id="code" name="code" placeholder="Código de lote">
+                        </div>
                         <div class="col-sm-3">
-                            <label for="inputLastname">Stock Inicial:</label>
-                                <input type="text" class="form-control" id="initial_stock" name="initial_stock" placeholder="Stock Inicial">
-                            </div>
-                        <div class="col-sm-3">
-                            <label for="inputLastname">Stock:</label>
-                            <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock">
-                         </div>
-
-                         <div class="col-sm-6">
-                            <label for="inputLastname">Precio de Compra del Lote:</label>
-                            <input type="text" class="form-control" id="batch_price" name="batch_price" placeholder="Precio de Compra">
-                         </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="inputLastname">Precio de Venta Mayorista:</label>
-                            <input type="text" class="form-control" id="wholesaler_price" name="wholesaler_price" placeholder="Precio de Venta Mayorista">
-                        </div>
-        
-                        <div class="col-sm-6">
-                            <label for="inputLastname">Precio de Venta Minorista:</label>
-                            <input type="text" class="form-control" id="retail_price" name="retail_price" placeholder="Precio de Venta Minorista">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-6" id="select_provider">
-                        </div>  
-        
-                        <div class="col-sm-6" id="select_industry">
-                        </div> 
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="inputLastname">Fecha de Entrada:</label>
-                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                <input type="text" id="entry_date" name="entry_date" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="icon-calendar"></i></div>
-                                </div>
-                            </div>
-                        </div>
-            
-                        <div class="col-sm-6">
-                            <label for="inputLastname">Fecha de Vencimiento:</label>
+                            <label for="datetimepicker2">Fecha de vencimiento:</label>
                             <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
                                 <input type="text" id="expiration_date" name="expiration_date" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
                                 <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
@@ -151,30 +89,66 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-sm-3">
+                                <label for="state"><b>Estado:</b></label>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="estado_activo" name="state" class="custom-control-input bg-danger"
+                                    value="ACTIVO" checked>
+                                <label class="custom-control-label" for="estado_activo">Activo</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="estado_inactivo" name="state" class="custom-control-input"
+                                    value="INACTIVO">
+                                <label class="custom-control-label" for="estado_inactivo">Inactivo</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="description"><b>Descripción:</b></label>
+                            <textarea  type="text" class="form-control" onkeyup="Mayus(this);" rows="4" id="description" name="description" ></textarea>  
+                        </div>
                     </div>
+                    <b>DATOS DE COMPRA:</b>
+                    <hr>
                     <div class="form-group row">
-                            <div class="md-form mb-3">
-                                    <label for="state"><b>Estado:</b></label>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="estado_activo" name="state" class="custom-control-input bg-danger"
-                                        value="ACTIVO" checked>
-                                    <label class="custom-control-label" for="estado_activo">Activo</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="estado_inactivo" name="state" class="custom-control-input"
-                                        value="INACTIVO">
-                                    <label class="custom-control-label" for="estado_inactivo">Inactivo</label>
+                        <div class="col-sm-3" id="select_payment_status">
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="batch_price">Precio de compra del lote:</label>
+                            <input type="text" class="form-control" id="batch_price" name="batch_price" placeholder="Precio de Compra">
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="initial_stock">Stock inicial:</label>
+                            <input type="text" class="form-control" id="initial_stock" name="initial_stock" placeholder="Stock Inicial">
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="entry_date">Fecha de Entrada:</label>
+                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                <input type="text" id="entry_date" name="entry_date" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="icon-calendar"></i></div>
                                 </div>
                             </div>
+                        </div>
                     </div>
+                    <b>DATOS DE IVENTARIO:</b>
+                    <hr>
                     <div class="form-group row">
-                            <div class="md-form mb-6">
-                                    <label for="nombre"><b>Descripción:</b></label>
-                                    <textarea  type="text" class="form-control" onkeyup="Mayus(this);" rows="4" id="description" name="description" ></textarea>  
-                                </div>
-                    </div>
-
-                        
+                        <div class="col-sm-3" id="select_storage">
+                        </div>             
+                        <div class="col-sm-3">
+                            <label for="inputLastname">Stock:</label>
+                            <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock">
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="inputLastname">Precio de Venta Mayorista:</label>
+                            <input type="text" class="form-control" id="wholesaler_price" name="wholesaler_price" placeholder="Precio de Venta Mayorista">
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="inputLastname">Precio de Venta Minorista:</label>
+                            <input type="text" class="form-control" id="retail_price" name="retail_price" placeholder="Precio de Venta Minorista">
+                        </div>
+                    </div>      
                 </div>
                 <div class="modal-footer bg-dark">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar<i class="icon-cancel"></i></button>
