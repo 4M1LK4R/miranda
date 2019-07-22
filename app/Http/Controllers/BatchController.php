@@ -10,7 +10,7 @@ use App\Provider;
 use App\User;
 use App\Batch;
 use Yajra\DataTables\DataTables;
-//use App\Http\Requests\ProductRequest;
+use App\Http\Requests\BatchRequest;
 
 class BatchController extends Controller
 {
@@ -35,7 +35,7 @@ class BatchController extends Controller
               
         ->toJson();
     }
-    public function store(Request $request)
+    public function store(BatchRequest $request)
     {
         //
     }

@@ -92,7 +92,6 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
                                     <a class="dropdown-item" href="#">Reporte</a>
-                                    <a class="dropdown-item" href="#">Reporte Agustin</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -103,7 +102,6 @@
                                     <a class="dropdown-item" href="#">Empresa</a>
                                     <a class="dropdown-item" href="#">Usuarios</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Tipos de produto</a>
                                     <a class="dropdown-item" href="{{ route('industry') }}">Industrias</a>
                                     <a class="dropdown-item" href="{{ route('deposit') }}">Almacenes</a>
                                     <a class="dropdown-item" href="{{ route('zone') }}">Zonas</a>            

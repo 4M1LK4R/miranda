@@ -93,6 +93,32 @@ function ListDatatable()
 
 
 
+// guarda los datos nuevos
+function Save() {
+    $.ajax({
+        url: "batch",
+        method: 'post',
+        data: catch_parameters(),
+        success: function (result) {
+            if (result.success) {
+                console.log("se registro ");
+                toastr.success(result.msg,{"progressBar": true});
+                
+            } else {
+                toastr.warning(result.smg);
+                console.log(result);
+            }
+        },
+        error: function (result) {
+            toastr.error(result.errors + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            console.log(result.errors);
+        },
+    });
+    table.ajax.reload();
+}
+
+
+
 //////////////////////////////////////////////
 
 // METODOS NECESARIOS

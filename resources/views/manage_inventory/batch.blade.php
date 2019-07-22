@@ -64,8 +64,10 @@
                 </button>
             </div>
             <form class="form-data" id="form-data" novalidate>
+
                 <div class="modal-body">
                     <b>DATOS DE PRODUCTO:</b>
+                    <input id="user_id" name="user_id" value="{{ auth()->user()->id }}" type="hidden">
                     <hr>
                     <div class="form-group row">
                         <div class="col-sm-3" id="select_product">
@@ -81,7 +83,7 @@
                             <input type="text" class="form-control" id="code" name="code" placeholder="Código de lote">
                         </div>
                         <div class="col-sm-3">
-                            <label for="datetimepicker2">Fecha de vencimiento:</label>
+                            <label for="expiration-date">Fecha de vencimiento:</label>
                             <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
                                 <input type="text" id="expiration_date" name="expiration_date" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
                                 <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
@@ -122,7 +124,7 @@
                             <input type="text" class="form-control" id="initial_stock" name="initial_stock" placeholder="Stock Inicial">
                         </div>
                         <div class="col-sm-3">
-                            <label for="entry_date">Fecha de Entrada:</label>
+                            <label for="entry-date">Fecha de Entrada:</label>
                             <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                                 <input type="text" id="entry_date" name="entry_date" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
                                 <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
@@ -131,7 +133,7 @@
                             </div>
                         </div>
                     </div>
-                    <b>DATOS DE IVENTARIO:</b>
+                    <b>DATOS DE INVENTARIO:</b>
                     <hr>
                     <div class="form-group row">
                         <div class="col-sm-3" id="select_storage">
