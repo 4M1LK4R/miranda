@@ -30,7 +30,7 @@ function ListDatatable()
             { data: 'name'},
             { data: 'state'},
             { data: 'description'},
-            { data: 'id_catalog_product'},
+            { data: 'catalog_product_id'},
             { data: 'Editar',   orderable: false, searchable: false },
             { data: 'Eliminar', orderable: false, searchable: false },
         ],
@@ -89,7 +89,7 @@ function Save() {
         success: function (result) {
             if (result.success) {
                 console.log("se registro ");
-                toastr.success(result.msg,{"progressBar": true});
+                toastr.success(result.msg,{"progressBar": true,"closeButton": true});
                 
             } else {
                 toastr.warning(result.smg);
@@ -135,7 +135,7 @@ function show_data(obj) {
     id= obj.id;
     $("#name").val(obj.name);
     $("#description").val(obj.description);
-    $("#id_catalog_product").val(obj.id_catalog_product);
+    $("#catalog_product_id").val(obj.catalog_product_id);
     if (obj.state == "ACTIVO") {
         $('#estado_activo').prop('checked', true);
     }
@@ -159,7 +159,7 @@ function Update() {
             data: catch_parameters(),
             success: function (result) {
                 if (result.success) {
-                    toastr.success(result.msg,{"progressBar": true});
+                    toastr.success(result.msg,{"progressBar": true,"closeButton": true});
                 } else {
                     toastr.warning(result.msg);
                 }
@@ -187,7 +187,7 @@ $("#btn_delete").click(function () {
         },
         success: function (result) {
             if (result.success) {
-                toastr.success(result.msg,{"progressBar": true});
+                toastr.success(result.msg,{"progressBar": true,"closeButton": true});
             } else {
                 toastr.warning(result.msg);
             }
@@ -280,7 +280,7 @@ function SelectTypeProduct() {
         success: function (result) {
             var code = '<div class="form-group">';
             code += '<label for="tipo-product"><b>Tipo de Producto:</b></label>';
-            code += '<select class="form-control" name="id_catalog_product" id="id_catalog_product" required>';
+            code += '<select class="form-control" name="catalog_product_id" id="catalog_product_id" required>';
             code += '<option disabled value="" selected>(Seleccionar)</option>';
             $.each(result, function (key, value) {
                 code += '<option value="' + value.id + '">' + value.name + '</option>';

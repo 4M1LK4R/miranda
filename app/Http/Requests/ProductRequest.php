@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
         return [
             'name'               => 'required|string|max:255',
             'state'              => 'required|string|max:255',
-            'id_catalog_product' => 'required|integer',
+            'catalog_product_id' => 'required|integer',
         ];
     }
 }

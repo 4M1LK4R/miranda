@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Provider extends Model
 {
     protected $fillable =[
-        'id_catalog_zone', 'name', 'description','contact',
+        'catalog_zone_id', 'name', 'description','contact',
         'phone','address','state'
     ];
 

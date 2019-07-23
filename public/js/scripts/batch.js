@@ -102,7 +102,7 @@ function Save() {
         success: function (result) {
             if (result.success) {
                 console.log("se registro ");
-                toastr.success(result.msg,{"progressBar": true});
+                toastr.success(result.msg,{"progressBar": true,"closeButton": true});
                 
             } else {
                 toastr.warning(result.smg);
@@ -145,7 +145,7 @@ function show_(obj) {
     string +="<b>DETALLE DE LOTE</b>";
     string +="<hr>";
     string +="<p><b>Codigo de Lote: &nbsp;</b>"+ obj.code +"</p>";
-    $("#id_user").val(obj.user_id)
+    $("#user_id").val(obj.user_id)
 
     $("#id").val(obj.id);
     //datos de producto
@@ -209,7 +209,7 @@ function show_data(obj) {
     id= obj.id;
     $("#name").val(obj.name);
     $("#description").val(obj.description);
-    $("#id_catalog_product").val(obj.id_catalog_product);
+    $("#catalog_product_id").val(obj.catalog_product_id);
     if (obj.state == "ACTIVO") {
         $('#estado_activo').prop('checked', true);
     }
@@ -233,7 +233,7 @@ function Update() {
             data: catch_parameters(),
             success: function (result) {
                 if (result.success) {
-                    toastr.success(result.msg,{"progressBar": true});
+                    toastr.success(result.msg,{"progressBar": true,"closeButton": true});
                 } else {
                     toastr.warning(result.msg);
                 }
@@ -261,7 +261,7 @@ $("#btn_delete").click(function () {
         },
         success: function (result) {
             if (result.success) {
-                toastr.success(result.msg,{"progressBar": true});
+                toastr.success(result.msg,{"progressBar": true,"closeButton": true});
             } else {
                 toastr.warning(result.msg);
             }

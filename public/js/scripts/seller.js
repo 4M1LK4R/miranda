@@ -94,7 +94,7 @@ function Save() {
         success: function (result) {
             if (result.success) {
                 console.log("se registro ");
-                toastr.success(result.msg,{"progressBar": true});
+                toastr.success(result.msg,{"progressBar": true,"closeButton": true});
                 
             } else {
                 toastr.warning(result.smg);
@@ -165,7 +165,7 @@ function Update() {
             data: catch_parameters(),
             success: function (result) {
                 if (result.success) {
-                    toastr.success(result.msg,{"progressBar": true});
+                    toastr.success(result.msg,{"progressBar": true,"closeButton": true});
                 } else {
                     toastr.warning(result.msg);
                 }
@@ -193,7 +193,7 @@ $("#btn_delete").click(function () {
         },
         success: function (result) {
             if (result.success) {
-                toastr.success(result.msg,{"progressBar": true});
+                toastr.success(result.msg,{"progressBar": true,"closeButton": true});
             } else {
                 toastr.warning(result.msg);
             }

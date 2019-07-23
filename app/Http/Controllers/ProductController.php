@@ -14,9 +14,9 @@ class ProductController extends Controller
     public function index()
     {
         return datatables()->of(Product::all()->where('state','ACTIVO'))
-        ->addColumn('id_catalog_product', function ($item) {
-            $id_catalog_product = Catalogue::find($item->id_catalog_product);
-            return  $id_catalog_product->name;
+        ->addColumn('catalog_product_id', function ($item) {
+            $catalog_product_id = Catalogue::find($item->catalog_product_id);
+            return  $catalog_product_id->name;
         })
         ->addColumn('Editar', function ($item) {
             return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';

@@ -15,9 +15,9 @@ class ProviderController extends Controller
     public function index()
     {
         return datatables()->of(Provider::all()->where('state','ACTIVO'))
-        ->addColumn('id_catalog_zone', function ($item) {
-            $id_catalog_zone = Catalogue::find($item->id_catalog_zone);
-            return  $id_catalog_zone->name;
+        ->addColumn('catalog_zone_id', function ($item) {
+            $catalog_zone_id = Catalogue::find($item->catalog_zone_id);
+            return  $catalog_zone_id->name;
         })
         ->addColumn('Editar', function ($item) {
             return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';

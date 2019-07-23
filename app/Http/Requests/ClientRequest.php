@@ -28,8 +28,8 @@ class ClientRequest extends FormRequest
             'name'              => 'required|string|max:255',
             'nit'               => 'required|integer',
             'state'             => 'required|string|max:255',
-            'id_catalog_zone'   => 'required|integer',
-            'id_catalog_client' => 'required|integer',
+            'catalog_zone_id'   => 'required|integer',
+            'catalog_client_id' => 'required|integer',
         ];
     }
 }

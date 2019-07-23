@@ -26,7 +26,7 @@ class ProviderRequest extends FormRequest
         return [
             'name'            => 'required|string|max:255',
             'state'           => 'required|string|max:255',
-            'id_catalog_zone' => 'required|integer',
+            'catalog_zone_id' => 'required|integer',
         ];
     }
 }

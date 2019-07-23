@@ -33,7 +33,7 @@ function ListDatatable()
             { data: 'contact'},
             { data: 'phone'},
             { data: 'address'},
-            { data: 'id_catalog_zone'},
+            { data: 'catalog_zone_id'},
             { data: 'Editar',   orderable: false, searchable: false },
             { data: 'Eliminar', orderable: false, searchable: false },
         ],
@@ -92,7 +92,7 @@ function Save() {
         success: function (result) {
             if (result.success) {
                 console.log("se registro ");
-                toastr.success(result.msg,{"progressBar": true});
+                toastr.success(result.msg,{"progressBar": true,"closeButton": true});
                 
             } else {
                 toastr.warning(result.smg);
@@ -141,7 +141,7 @@ function show_data(obj) {
     $("#contact").val(obj.contact);
     $("#phone").val(obj.phone);
     $("#address").val(obj.address);
-    $("#id_catalog_zone").val(obj.id_catalog_zone);
+    $("#catalog_zone_id").val(obj.catalog_zone_id);
     if (obj.state == "ACTIVO") {
         $('#estado_activo').prop('checked', true);
     }
@@ -165,7 +165,7 @@ function Update() {
             data: catch_parameters(),
             success: function (result) {
                 if (result.success) {
-                    toastr.success(result.msg,{"progressBar": true});
+                    toastr.success(result.msg,{"progressBar": true,"closeButton": true});
                 } else {
                     toastr.warning(result.msg);
                 }
@@ -193,7 +193,7 @@ $("#btn_delete").click(function () {
         },
         success: function (result) {
             if (result.success) {
-                toastr.success(result.msg,{"progressBar": true});
+                toastr.success(result.msg,{"progressBar": true,"closeButton": true});
             } else {
                 toastr.warning(result.msg);
             }
@@ -286,7 +286,7 @@ function SelectZone() {
         success: function (result) {
             var code = '<div class="form-group">';
             code += '<label for="tipo-zone"><b>Zonas:</b></label>';
-            code += '<select class="form-control" name="id_catalog_zone" id="id_catalog_zone" required>';
+            code += '<select class="form-control" name="catalog_zone_id" id="catalog_zone_id" required>';
             code += '<option disabled value="" selected>(Seleccionar)</option>';
             $.each(result, function (key, value) {
                 code += '<option value="' + value.id + '">' + value.name + '</option>';

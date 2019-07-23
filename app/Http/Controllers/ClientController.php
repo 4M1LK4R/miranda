@@ -15,13 +15,13 @@ class ClientController extends Controller
     public function index()
     {
         return datatables()->of(Client::all()->where('state','ACTIVO'))
-        ->addColumn('id_catalog_zone', function ($item) {
-            $id_catalog_zone = Catalogue::find($item->id_catalog_zone);
-            return  $id_catalog_zone->name;
+        ->addColumn('catalog_zone_id', function ($item) {
+            $catalog_zone_id = Catalogue::find($item->catalog_zone_id);
+            return  $catalog_zone_id->name;
         })
-        ->addColumn('id_catalog_client', function ($item) {
-            $id_catalog_client = Catalogue::find($item->id_catalog_client);
-            return  $id_catalog_client->name;
+        ->addColumn('catalog_client_id', function ($item) {
+            $catalog_client_id = Catalogue::find($item->catalog_client_id);
+            return  $catalog_client_id->name;
         })
         ->addColumn('Editar', function ($item) {
             return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';

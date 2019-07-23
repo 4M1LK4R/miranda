@@ -48,7 +48,7 @@ class BatchController extends Controller
 
         //return compact($Batch);
         //['user' => auth()->user()]
-        return  $Batch->product;
+        return compact(Batch);
 
     }
 

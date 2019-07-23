@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable =[
-        'id_catalog_product','name', 'description','state'
+        'catalog_product_id','name', 'description','state'
     ];
 
     // un producto pertenece a un solo tipo de producto

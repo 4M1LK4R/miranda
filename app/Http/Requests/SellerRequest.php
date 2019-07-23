@@ -26,7 +26,6 @@ class SellerRequest extends FormRequest
         return [
             'name'    => 'required|string|max:255',
             'phone'   => 'required|integer',
-            'address' => 'required|string|max:255',
             'state'   => 'required|string|max:255',
         ];
     }
