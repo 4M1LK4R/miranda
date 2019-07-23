@@ -41,15 +41,15 @@ class Catalogue extends Model
     }
     public function storagebatch()
     {
-        return $this->hasOne(Batch::class);
+        return $this->belongsTo(Batch::class);
     }
     public function paymentstatu()
     {
-        return $this->hasOne(Batch::class);
+        return $this->belongsTo(Batch::class);
     }
     public function paymenttype()
     {
-        return $this->hasOne(Batch::class);
+        return $this->belongsTo(Batch::class);
     }
 
 }

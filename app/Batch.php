@@ -31,36 +31,36 @@ class Batch extends Model
 
     public function product()
     {
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class);
     }
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
     public function provider()
     {
-        return $this->hasOne(Provider::class);
+        return $this->belongsTo(Provider::class);
     }
 
     public function line()
     {
-        return $this->hasOne(Catalogue::class);
+        return $this->belongsTo(Catalogue::class);
     }
     public function storage()
     {
-        return $this->hasOne(Catalogue::class);
+        return $this->belongsTo(Catalogue::class);
     }
     public function industry()
     {
-        return $this->hasOne(Catalogue::class);
+        return $this->belongsTo(Catalogue::class);
     }
     public function payment_status()
     {
-        return $this->hasOne(Catalogue::class);
+        return $this->belongsTo(Catalogue::class);
     }
     public function payment_type()
     {
-        return $this->hasOne(Catalogue::class);
+        return $this->belongsTo(Catalogue::class);
     }
 
 

@@ -16,7 +16,7 @@ class Provider extends Model
     {
         return $this->belongsTo(Catalogue::class);
     }
-    public function batchs()
+    public function batches()
     {
         return $this->belongsToMany(Batch::class);
     }
