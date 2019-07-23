@@ -23,7 +23,7 @@ class BatchController extends Controller
             return  $product_id->name;
         })
         ->addColumn('Detalle', function ($item) {
-            return '<a class="btn btn-xs btn-primary text-white" onclick="Show('.$item->id.')"><i class="icon-list-bullet"></i></a>';
+            return '<a class="btn btn-xs btn-success text-white" onclick="Show('.$item->id.')"><i class="icon-list-bullet"></i></a>';
         })
         ->addColumn('Editar', function ($item) {
             return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
@@ -31,17 +31,19 @@ class BatchController extends Controller
         ->addColumn('Eliminar', function ($item) {
             return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
         })
-        ->rawColumns(['Editar','Eliminar']) 
+        ->rawColumns(['Detalle','Editar','Eliminar']) 
               
         ->toJson();
     }
     public function store(BatchRequest $request)
     {
-        //
+        $Product = Batch::create($request->all());
+        return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
     }
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $Batch = Batch::find($request->id);
+        return $Batch->toJson();
     }
 
     public function edit($id)

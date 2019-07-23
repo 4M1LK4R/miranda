@@ -78,14 +78,14 @@
                         </div> 
                         <div class="col-sm-3" id="select_industry">
                         </div>
-                        <div class="col-sm-3"><!---->
+                        <div class="col-sm-3">
                             <label for="code">Código de lote:</label>
-                            <input type="text" class="form-control" id="code" name="code" placeholder="Código de lote">
+                            <input type="text" class="form-control" id="code" name="code" placeholder="Código de lote" required>
                         </div>
                         <div class="col-sm-3">
                             <label for="expiration-date">Fecha de vencimiento:</label>
                             <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                                <input type="text" id="expiration_date" name="expiration_date" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
+                                <input type="text" id="expiration_date" name="expiration_date" class="form-control datetimepicker-input" data-target="#datetimepicker2" required/>
                                 <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="icon-calendar"></i></div>
                                 </div>
@@ -115,18 +115,20 @@
                     <div class="form-group row">
                         <div class="col-sm-3" id="select_payment_status">
                         </div>
+                        <div class="col-sm-3" id="select_payment_type">
+                        </div>
                         <div class="col-sm-3">
                             <label for="batch_price">Precio de compra del lote:</label>
-                            <input type="text" class="form-control" id="batch_price" name="batch_price" placeholder="Precio de Compra">
+                            <input type="text" class="form-control" id="batch_price" name="batch_price" placeholder="Precio de Compra" required>
                         </div>
                         <div class="col-sm-3">
                             <label for="initial_stock">Stock inicial:</label>
-                            <input type="text" class="form-control" id="initial_stock" name="initial_stock" placeholder="Stock Inicial">
+                            <input type="text" class="form-control" id="initial_stock" name="initial_stock" placeholder="Stock Inicial" required>
                         </div>
                         <div class="col-sm-3">
                             <label for="entry-date">Fecha de Entrada:</label>
                             <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                <input type="text" id="entry_date" name="entry_date" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                                <input type="text" id="entry_date" name="entry_date" class="form-control datetimepicker-input" data-target="#datetimepicker1" required/>
                                 <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="icon-calendar"></i></div>
                                 </div>
@@ -140,11 +142,11 @@
                         </div>             
                         <div class="col-sm-3">
                             <label for="inputLastname">Stock:</label>
-                            <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock">
+                            <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock" required>
                         </div>
                         <div class="col-sm-3">
                             <label for="inputLastname">Precio de Venta Mayorista:</label>
-                            <input type="text" class="form-control" id="wholesaler_price" name="wholesaler_price" placeholder="Precio de Venta Mayorista">
+                            <input type="text" class="form-control" id="wholesaler_price" name="wholesaler_price" placeholder="Precio de Venta Mayorista" required>
                         </div>
                         <div class="col-sm-3">
                             <label for="inputLastname">Precio de Venta Minorista:</label>
@@ -157,6 +159,34 @@
                     <button class="btn btn-success" type="submit">Aceptar<i class="icon-ok"></i></button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Modal detalle-->
+
+<div class="modal fade bd-example-modal-lg" id="modal_detalle" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <center>
+                    <h5 class="modal-title" id="title-modal-detalle"></h5>
+                </center>
+
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="content_detalle">
+                    
+             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            
         </div>
     </div>
 </div>

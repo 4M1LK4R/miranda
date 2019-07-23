@@ -117,6 +117,166 @@ function Save() {
     table.ajax.reload();
 }
 
+function Show(id) {
+    $.ajax({
+        url: "batch/{batch}",
+        method: 'get',
+        data: {
+            id: id
+        },
+        success: function (result) {
+            show_(result);
+            console.log(result);
+        },
+        error: function (result) {
+            toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
+
+            console.log(result);
+        },
+
+    });
+};
+
+function show_(obj) {
+    var string="";
+    obj = JSON.parse(obj);
+    id= obj.id;
+    string +="<p><b class='h6'>USUARIO: &nbsp;</b>"+ obj.user_id.name +"</p>";
+    string +="<b>DETALLE DE LOTE</b>";
+    string +="<hr>";
+    string +="<p><b>Codigo de Lote: &nbsp;</b>"+ obj.code +"</p>";
+    $("#id_user").val(obj.user_id)
+
+    $("#id").val(obj.id);
+    //datos de producto
+    $("#code").val(obj.code);
+    $("#product_id").val(obj.product_id);
+    $("#line_id").val(obj.line_id);
+    $("#provider_id").val(obj.provider_id);
+    $("#industry_id").val(obj.industry_id);
+    $("#expiration_date").val(obj.expiration_date);
+    $("#state").val(obj.state);
+    $("#description").val(obj.description);
+    //datos de compra
+    $("#payment_status_id").val(obj.payment_status_id);
+    $("#payment_type_id").val(obj.payment_type_id);
+    $("#batch_price").val(obj.batch_price);
+    $("#initial_stock").val(obj.initial_stock);
+    $("#entry_date").val(obj.entry_date);
+    // datos de inventario
+    $("#storage_id").val(obj.storage_id);
+    $("#stock").val(obj.stock);
+    $("#wholesaler_price").val(obj.wholesaler_price);
+    $("#retail_price").val(obj.retail_price);
+
+    $("#title-modal-detalle").html("Detalle de Lote");
+    $('#content_detalle').html(string);
+    $('#modal_detalle').modal('show');
+};
+
+
+
+
+
+
+
+// captura los datos
+function Edit(id) {
+    $.ajax({
+        url: "product/{product}/edit",
+        method: 'get',
+        data: {
+            id: id
+        },
+        success: function (result) {
+            show_data(result);
+        },
+        error: function (result) {
+            toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
+
+            console.log(result);
+        },
+
+    });
+};
+
+/// muestra la vista con los datos capturados
+var data_old;
+function show_data(obj) {
+    ClearInputs();
+    console.log(obj)
+    obj = JSON.parse(obj);
+    id= obj.id;
+    $("#name").val(obj.name);
+    $("#description").val(obj.description);
+    $("#id_catalog_product").val(obj.id_catalog_product);
+    if (obj.state == "ACTIVO") {
+        $('#estado_activo').prop('checked', true);
+    }
+    if (obj.state == "INACTIVO") {
+        $('#estado_inactivo').prop('checked', true);
+    }
+    $("#title-modal").html("Editar Registro");
+
+    data_old = $(".form-data").serialize();
+
+    $('#modal_datos').modal('show');
+};
+
+// actualiza los datos
+function Update() {
+    var data_new = $(".form-data").serialize();
+    if (data_old != data_new) {
+        $.ajax({
+            url: "product/{product}",
+            method: 'put',
+            data: catch_parameters(),
+            success: function (result) {
+                if (result.success) {
+                    toastr.success(result.msg,{"progressBar": true});
+                } else {
+                    toastr.warning(result.msg);
+                }
+            },
+            error: function (result) {
+                toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            },
+        });
+        table.ajax.reload();
+        
+    }
+}
+
+//funcion para eliminar valor seleccionado
+function Delete(id_) {
+    id= id_;
+    $('#modal_eliminar').modal('show');
+}
+$("#btn_delete").click(function () {
+    $.ajax({
+        url: "product/{product}",
+        method: 'delete',
+        data: {
+            id: id
+        },
+        success: function (result) {
+            if (result.success) {
+                toastr.success(result.msg,{"progressBar": true});
+            } else {
+                toastr.warning(result.msg);
+            }
+        },
+        error: function (result) {
+            toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            console.log(result);
+        },
+
+    });
+    table.ajax.reload();
+    $('#modal_eliminar').modal('hide');
+});
+
+
 
 
 //////////////////////////////////////////////
@@ -136,6 +296,8 @@ function catch_parameters()
     return data;
     
 }
+
+
 
 // muestra el modal
 $("#btn-agregar").click(function () {
@@ -188,6 +350,7 @@ function ClearInputs() {
 function dateEntry()
 {
     $('#datetimepicker1').datetimepicker({
+        format: 'YYYY-MM-DD'
     });
 }
 
@@ -195,7 +358,7 @@ function dateEntry()
 function dateExpiration()
 {
     $('#datetimepicker2').datetimepicker({
-        format: 'L'
+        format: 'YYYY-MM-DD'
     });
 }
 
@@ -305,7 +468,7 @@ function SelectIndustry() {
         success: function (result) {
             var code = '<div class="form-group">';
             code += '<label for="industry-product"><b>Industria de Producto:</b></label>';
-            code += '<select class="form-control" name="industry_id" id="industry_id" required>';
+            code += '<select class="form-control" name="industry_id" id="industry_id">';
             code += '<option disabled value="" selected>(Seleccionar)</option>';
             $.each(result, function (key, value) {
                 code += '<option value="' + value.id + '">' + value.name + '</option>';
