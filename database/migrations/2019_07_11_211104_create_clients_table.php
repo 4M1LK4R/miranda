@@ -15,8 +15,8 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_catalog_zone')->unsigned();// FOREING KEY ZONE
-            $table->unsignedBigInteger('id_catalog_client')->unsigned();// FOREING KEY  CLIENT TYPE
+            $table->unsignedBigInteger('catalog_zone_id')->unsigned();// FOREING KEY ZONE
+            $table->unsignedBigInteger('catalog_client_id')->unsigned();// FOREING KEY  CLIENT TYPE
             $table->integer('nit')->unique();
             $table->string('name');
             $table->mediumText('description')->nullable();
@@ -25,10 +25,10 @@ class CreateClientsTable extends Migration
             $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
             $table->timestamps();
             //RELACTIONS
-            $table->foreign('id_catalog_zone')->references('id')->on('catalogues')
+            $table->foreign('catalog_zone_id')->references('id')->on('catalogues')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->foreign('id_catalog_client')->references('id')->on('catalogues')
+            $table->foreign('catalog_client_id')->references('id')->on('catalogues')
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });

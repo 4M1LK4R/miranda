@@ -125,7 +125,7 @@ function Show(id) {
             id: id
         },
         success: function (result) {
-            show_(result);
+            //show_(result);
             console.log(result);
         },
         error: function (result) {

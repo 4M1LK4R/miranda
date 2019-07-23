@@ -43,7 +43,13 @@ class BatchController extends Controller
     public function show(Request $request)
     {
         $Batch = Batch::find($request->id);
-        return $Batch->toJson();
+        //return $Batch->toJson();
+        //json_encode(unserialize(serialize($array)));
+
+        //return compact($Batch);
+        //['user' => auth()->user()]
+        return  $Batch->product;
+
     }
 
     public function edit($id)

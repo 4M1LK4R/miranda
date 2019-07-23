@@ -15,7 +15,7 @@ class CreateProvidersTable extends Migration
     {
         Schema::create('providers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_catalog_zone')->unsigned();// FOREING KEY ZONE
+            $table->unsignedBigInteger('catalog_zone_id')->unsigned();// FOREING KEY ZONE
             $table->string('name');
             $table->mediumText('description')->nullable();
             $table->mediumText('contact')->nullable();
@@ -24,7 +24,7 @@ class CreateProvidersTable extends Migration
             $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
             $table->timestamps();
             //RELACTIONS
-            $table->foreign('id_catalog_zone')->references('id')->on('catalogues')
+            $table->foreign('catalog_zone_id')->references('id')->on('catalogues')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 

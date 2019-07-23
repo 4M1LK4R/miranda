@@ -12,8 +12,8 @@ class ClientsTableSeeder extends Seeder
     public function run()
     {
         App\Client::create([
-            'id_catalog_zone'=>10,
-            'id_catalog_client'=>3,
+            'catalog_zone_id'=>10,
+            'catalog_client_id'=>3,
             'nit' => 7159779,
             'name' => 'agustin ayaviri',
             'description' => 'cliente de tarija',
