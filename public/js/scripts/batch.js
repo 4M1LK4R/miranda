@@ -119,13 +119,14 @@ function Save() {
 
 function Show(id) {
     $.ajax({
-        url: "batch/{batch}",
+        url: "detail",
         method: 'get',
+        dataType: 'json',
         data: {
             id: id
         },
         success: function (result) {
-            //show_(result);
+            show_(result);
             console.log(result);
         },
         error: function (result) {
@@ -140,11 +141,13 @@ function Show(id) {
 function show_(obj) {
     var string="";
     obj = JSON.parse(obj);
-    id= obj.id;
-    string +="<p><b class='h6'>USUARIO: &nbsp;</b>"+ obj.user_id.name +"</p>";
+    console.log(obj);
+
+    //id= obj.id;
+   // string +="<p><b class='h6'>USUARIO: &nbsp;</b>"+ obj.user.name +"</p>";
     string +="<b>DETALLE DE LOTE</b>";
     string +="<hr>";
-    string +="<p><b>Codigo de Lote: &nbsp;</b>"+ obj.code +"</p>";
+    //string +="<p><b>Codigo de Lote: &nbsp;</b>"+ test.code +"</p>";
     $("#user_id").val(obj.user_id)
 
     $("#id").val(obj.id);

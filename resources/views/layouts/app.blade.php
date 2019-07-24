@@ -80,7 +80,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmInventario">
                                     <a class="dropdown-item" href="{{ route('product') }}">Productos</a>
-                                    <a class="dropdown-item" href="{{ route('batch') }}">Lotes(Compras)</a>
+                                    <a class="dropdown-item" href="{{ route('batch') }}">Lotes (Compras)</a>
                                     <a class="dropdown-item" href="{{ route('provider') }}">Proveedores</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Cuentas por Pagar</a>         

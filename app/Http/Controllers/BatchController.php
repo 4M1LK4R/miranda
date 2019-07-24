@@ -43,13 +43,7 @@ class BatchController extends Controller
     public function show(Request $request)
     {
         $Batch = Batch::find($request->id);
-        //return $Batch->toJson();
-        //json_encode(unserialize(serialize($array)));
-
-        //return compact($Batch);
-        //['user' => auth()->user()]
-        return $Batch->product->name;
-
+        return Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get();
     }
 
     public function edit($id)
@@ -69,4 +63,14 @@ class BatchController extends Controller
     {
         return view('manage_inventory.batch');
     }
+
+    public function detail(Request $request)
+    {
+        $Batch = Batch::find($request->id);
+        return Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get()->toJson();
+
+    }
+
+
+
 }

@@ -96,7 +96,8 @@ function Save() {
         success: function (result) {
             if (result.success) {
                 console.log("se registro ");
-                toastr.success(result.msg,{"progressBar": true,"closeButton": true});
+                toastr.success(result.msg);
+                
                 
             } else {
                 toastr.warning(result.smg);
