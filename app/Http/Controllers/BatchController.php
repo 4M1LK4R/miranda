@@ -66,8 +66,16 @@ class BatchController extends Controller
 
     public function detail(Request $request)
     {
-        $Batch = Batch::find($request->id);
-        return Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get()->toJson();
+        
+        $Batch = Batch::find($request->id)->with('product','user','provider','line','storage','industry','payment_status','payment_type')->first();
+        return $Batch;
+        //$Batch = Batch::find($request->id);
+        //return $Batch->hasMany('Batch');
+        //return $Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get();
+        
+        //ESTE PARA VENTAS 
+        //Este funciona!
+        //return Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get()->where('id',$request->id);
 
     }
 
