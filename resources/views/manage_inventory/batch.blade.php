@@ -35,7 +35,7 @@
                                 <td>Codigo</td>
                                 <td>Registro Sanitario</td>
                                 <td>Producto</td>
-                                <td>Estado</td>
+                                <td>Stock</td>
                                 <td>Detalle</td>
                                 <td>Editar</td>
                                 <td>Eliminar</td>
@@ -82,7 +82,7 @@
                         <div class="col-sm-3">
                             <label for="code">Código de lote:</label>
                             <input type="text" class="form-control" id="code" name="code" placeholder="Código de lote" required>
-
+                            <br>
                             <label for="code">Registro Sanitario:</label>
                             <input type="text" class="form-control" id="sanitary_registration" name="sanitary_registration" placeholder="Registro sanitario" required>
                         </div>
@@ -96,7 +96,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-3">
+                        <div class="col-sm-3" hidden>
                                 <label for="state"><b>Estado:</b></label>
                             <div class="custom-control custom-radio">
                                 <input type="radio" id="estado_activo" name="state" class="custom-control-input bg-danger"
@@ -182,10 +182,11 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body-fluid" id="content_detalle">
-                
+            <div class="modal-body" id="content_detalle">
+    
             </div>
             <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="printDetails();">Imprimir<i class="icon-print"></i></button>
                 <button class="btn btn-danger" data-dismiss="modal">Cancelar<i class="icon-cancel"></i></button>
             </div>
             

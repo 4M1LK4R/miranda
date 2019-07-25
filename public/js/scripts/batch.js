@@ -1,5 +1,6 @@
 var table;
 var id = 0;
+var stock = 0;
 var title_modal_data = "Registrar Nuevo Lote";
 $(document).ready(function () {
     $.ajaxSetup({
@@ -46,7 +47,7 @@ function ListDatatable() {
                 data: 'product_id'
             },
             {
-                data: 'state'
+                data: 'stock'
             },
             {
                 data: 'Detalle',
@@ -110,12 +111,12 @@ function ListDatatable() {
 };
 // guarda los datos nuevos
 function Save() {
-    var data_save=catch_parameters();
+    var data_save = catch_parameters();
     data_save += "&stock=" + $("#initial_stock").val();
     $.ajax({
         url: "batch",
         method: 'post',
-        data: data_save(),
+        data: data_save,
         success: function (result) {
             if (result.success) {
                 console.log("se registro ");
@@ -154,7 +155,36 @@ function Detail(id) {
 //muestra el detalle
 function show_detail(obj) {
     var string = "";
-    console.log(obj);
+    //console.log(obj);
+    //DATOS DE PRODUCTO
+    string += "<p><h5><b>USUARIO</b></h5></p>";
+    string += "<p><b>Usuario:</b>&nbsp;" + obj.user.name + "</p>";
+    string += "<hr>";
+    string += "<p><h5><b>DATOS DE PRODUCTO</b></h5></p>";
+    string += "<p><b>Producto:</b>&nbsp;" + obj.product.name + "</p>";
+    string += "<p><b>Stock:</b>&nbsp;" + obj.stock + "</p>";
+    string += "<p><b>Línea:</b>&nbsp;" + obj.line.name + "</p>";
+    string += "<p><b>Proveedor:</b>&nbsp;" + obj.provider.name + "</p>";
+    string += "<p><b>Industria:</b>&nbsp;" + obj.industry.name + "</p>";
+    string += "<p><b>Código de lote:</b>&nbsp;" + obj.code + "</p>";
+    string += "<p><b>Registro sanitario:</b>&nbsp;" + obj.sanitary_registration + "</p>";
+    string += "<p><b>Fecha de expiración:</b>&nbsp;" + obj.expiration_date + "</p>";
+    string += "<p><b>Estado:</b>&nbsp;" + obj.state + "</p>";
+    string += "<p><b>Descripción:</b>&nbsp;" + obj.description + "</p>";
+    string += "<hr>";
+    //DATOS DE COMPRA
+    string += "<p><h5><b>DATOS DE COMPRA</b></h5></p>";
+    string += "<p><b>Estado de pago:</b>&nbsp;" + obj.payment_status.name + "</p>";
+    string += "<p><b>Tipo de pago:</b>&nbsp;" + obj.payment_type.name + "</p>";
+    string += "<p><b>Precio de compra del lote:</b>&nbsp;" + obj.batch_price + "</p>";
+    string += "<p><b>Stock inicial:</b>&nbsp;" + obj.initial_stock + "</p>";
+    string += "<p><b>Fecha de entrada:</b>&nbsp;" + obj.entry_date + "</p>";
+    string += "<hr>";
+    //DATOS DE INVENTARIO
+    string += "<p><h5><b>DATOS DE INVENTARIO</b></h5></p>";
+    string += "<p><b>Almacén:</b>&nbsp;" + obj.storage.name + "</p>";
+    string += "<p><b>Precio de venta mayorista:</b>&nbsp;" + obj.wholesaler_price + "</p>";
+    string += "<p><b>Precio de venta minorista:</b>&nbsp;" + obj.retail_price + "</p>";
     $("#title-modal-detalle").html("Detalle de Lote");
     $('#content_detalle').html(string);
     $('#modal_detalle').modal('show');
@@ -183,12 +213,13 @@ function Edit(id) {
 
 /// muestra la vista con los datos capturados
 var data_old;
+
 function show_data(obj) {
     ClearInputs();
     obj = JSON.parse(obj);
-    console.log(obj);
+    //console.log(obj);
     id = obj.id;
-    var stock;
+    stock = obj.stock;
     $("#user_id").val(obj.user_id);
     $("#product_id").val(obj.product_id);
     $("#line_id").val(obj.line_id);
@@ -213,23 +244,20 @@ function show_data(obj) {
     $("#wholesaler_price").val(obj.wholesaler_price);
     $("#retail_price").val(obj.retail_price);
     $("#title-modal").html("Editar Registro");
-    data_old = $(".form-data").serialize();
-    data_old+= "&stock=" + $("#initial_stock").val();
-
+    data_old = catch_parameters();;
+    data_old += "&stock=" + stock;
     $('#modal_datos').modal('show');
 };
 
 // actualiza los datos
 function Update() {
-    var data_new = $(".form-data").serialize();
-    data_new+= "&stock=" + $("#initial_stock").val();
-    console.log(data_new);
-    console.log(data_old);
+    var data_new = catch_parameters();;
+    data_new += "&stock=" + stock;
     if (data_old != data_new) {
         $.ajax({
             url: "batch/{batch}",
             method: 'put',
-            data: catch_parameters(),
+            data: data_new,
             success: function (result) {
                 if (result.success) {
                     toastr.success(result.msg);
@@ -242,7 +270,6 @@ function Update() {
             },
         });
         table.ajax.reload();
-
     }
 }
 
@@ -577,4 +604,13 @@ function SelectPaymentType() {
         },
 
     });
+}
+
+
+function printDetails() {
+    var divToPrint = document.getElementById("content_detalle");
+    newWin = window.open("");
+    newWin.document.write(divToPrint.outerHTML);
+    newWin.print();
+    newWin.close();
 }

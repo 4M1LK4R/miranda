@@ -50,6 +50,12 @@ class CataloguesTableSeeder extends Seeder
             'state' => 'ACTIVO'
         ]);
         App\Catalogue::create([
+            'name' => 'EN CURSO',
+            'type_catalog_id'=>7,
+            'description' => 'ESTADO DE PAGO EN CURSO.',
+            'state' => 'ACTIVO'
+        ]);
+        App\Catalogue::create([
             'name' => 'CANCELADO',
             'type_catalog_id'=>7,
             'description' => 'ESTADO DE PAGO CANCELADO.',
