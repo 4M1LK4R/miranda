@@ -17,6 +17,7 @@ class Batch extends Model
         'payment_status_id',
         'payment_type_id',
         'code',
+        'sanitary_registration',
         'description',
         'initial_stock',
         'stock',

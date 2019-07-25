@@ -40,7 +40,7 @@ function ListDatatable() {
                 data: 'code'
             },
             {
-                data: 'description'
+                data: 'sanitary_registration'
             },
             {
                 data: 'product_id'
@@ -108,23 +108,18 @@ function ListDatatable() {
         ],
     });
 };
-
-
-
-
 // guarda los datos nuevos
 function Save() {
+    var data_save=catch_parameters();
+    data_save += "&stock=" + $("#initial_stock").val();
     $.ajax({
         url: "batch",
         method: 'post',
-        data: catch_parameters(),
+        data: data_save(),
         success: function (result) {
             if (result.success) {
                 console.log("se registro ");
-                toastr.success(result.msg, {
-                    "progressBar": true,
-                    "closeButton": true
-                });
+                toastr.success(result.msg);
 
             } else {
                 toastr.warning(result.smg);
@@ -138,78 +133,35 @@ function Save() {
     });
     table.ajax.reload();
 }
-
-function Show(id) {
+// detalle de lote
+function Detail(id) {
     $.ajax({
-        url: "detail",
+        url: "batch/{batch}",
         method: 'get',
         data: {
             id: id
         },
         success: function (result) {
-            show_(result);
-            //console.log(result.user.name);
-            //console.log(result);
+            show_detail(result);
         },
         error: function (result) {
             toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-
             console.log(result);
         },
 
     });
 };
-
-function show_(obj) {
+//muestra el detalle
+function show_detail(obj) {
     var string = "";
-    //console.log(key);
-    //console.log(obj.industry.name);
-    string += "<b>DETALLE DE LOTE</b>";
-    string += "<hr>";
-    string +="<p><b>Usuario:&nbsp;</b>"+ obj.user.name +"</p>";
-    string +="<p><b>Codigo de Lote:&nbsp;</b>"+ obj.code +"</p>";
-    $("#user_id").val(obj.user_id)
-
-    $("#id").val(obj.id);
-    //datos de producto
-    $("#code").val(obj.code);
-    $("#product_id").val(obj.product_id);
-    $("#line_id").val(obj.line_id);
-    $("#provider_id").val(obj.provider_id);
-    $("#industry_id").val(obj.industry_id);
-    $("#expiration_date").val(obj.expiration_date);
-    $("#state").val(obj.state);
-    $("#description").val(obj.description);
-    //datos de compra
-    $("#payment_status_id").val(obj.payment_status_id);
-    $("#payment_type_id").val(obj.payment_type_id);
-    $("#batch_price").val(obj.batch_price);
-    $("#initial_stock").val(obj.initial_stock);
-    $("#entry_date").val(obj.entry_date);
-    // datos de inventario
-    $("#storage_id").val(obj.storage_id);
-    $("#stock").val(obj.stock);
-    $("#wholesaler_price").val(obj.wholesaler_price);
-    $("#retail_price").val(obj.retail_price);
-
-
-    //console.log(obj.code);
-    //id= obj.id;
-    // string +="<p><b class='h6'>USUARIO: &nbsp;</b>"+ obj.user.name +"</p>";
-
-
+    console.log(obj);
     $("#title-modal-detalle").html("Detalle de Lote");
     $('#content_detalle').html(string);
     $('#modal_detalle').modal('show');
 };
 
 
-
-
-
-
-
-// captura los datos
+// captura los datos para editar
 function Edit(id) {
     $.ajax({
         url: "batch/{batch}/edit",
@@ -218,8 +170,7 @@ function Edit(id) {
             id: id
         },
         success: function (result) {
-            console.log(result);
-            //show_data(result);
+            show_data(result);
         },
         error: function (result) {
             toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
@@ -232,24 +183,38 @@ function Edit(id) {
 
 /// muestra la vista con los datos capturados
 var data_old;
-
 function show_data(obj) {
     ClearInputs();
-    //console.log(obj)
     obj = JSON.parse(obj);
+    console.log(obj);
     id = obj.id;
-    $("#name").val(obj.name);
-    $("#description").val(obj.description);
-    $("#catalog_product_id").val(obj.catalog_product_id);
+    var stock;
+    $("#user_id").val(obj.user_id);
+    $("#product_id").val(obj.product_id);
+    $("#line_id").val(obj.line_id);
+    $("#provider_id").val(obj.provider_id);
+    $("#industry_id").val(obj.industry_id);
+    $("#code").val(obj.code);
+    $("#expiration_date").val(obj.expiration_date);
     if (obj.state == "ACTIVO") {
         $('#estado_activo').prop('checked', true);
     }
     if (obj.state == "INACTIVO") {
         $('#estado_inactivo').prop('checked', true);
     }
+    $("#description").val(obj.description);
+    $("#sanitary_registration").val(obj.sanitary_registration);
+    $("#payment_status_id").val(obj.payment_status_id);
+    $("#payment_type_id").val(obj.payment_type_id);
+    $("#batch_price").val(obj.batch_price);
+    $("#initial_stock").val(obj.initial_stock);
+    $("#entry_date").val(obj.entry_date);
+    $("#storage_id").val(obj.storage_id);
+    $("#wholesaler_price").val(obj.wholesaler_price);
+    $("#retail_price").val(obj.retail_price);
     $("#title-modal").html("Editar Registro");
-
     data_old = $(".form-data").serialize();
+    data_old+= "&stock=" + $("#initial_stock").val();
 
     $('#modal_datos').modal('show');
 };
@@ -257,17 +222,17 @@ function show_data(obj) {
 // actualiza los datos
 function Update() {
     var data_new = $(".form-data").serialize();
+    data_new+= "&stock=" + $("#initial_stock").val();
+    console.log(data_new);
+    console.log(data_old);
     if (data_old != data_new) {
         $.ajax({
-            url: "product/{product}",
+            url: "batch/{batch}",
             method: 'put',
             data: catch_parameters(),
             success: function (result) {
                 if (result.success) {
-                    toastr.success(result.msg, {
-                        "progressBar": true,
-                        "closeButton": true
-                    });
+                    toastr.success(result.msg);
                 } else {
                     toastr.warning(result.msg);
                 }
@@ -288,17 +253,14 @@ function Delete(id_) {
 }
 $("#btn_delete").click(function () {
     $.ajax({
-        url: "product/{product}",
+        url: "batch/{batch}",
         method: 'delete',
         data: {
             id: id
         },
         success: function (result) {
             if (result.success) {
-                toastr.success(result.msg, {
-                    "progressBar": true,
-                    "closeButton": true
-                });
+                toastr.success(result.msg);
             } else {
                 toastr.warning(result.msg);
             }
@@ -328,7 +290,6 @@ function Mayus(e) {
 function catch_parameters() {
     var data = $(".form-data").serialize();
     data += "&id=" + id;
-    console.log(data);
     return data;
 
 }

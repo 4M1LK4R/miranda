@@ -17,7 +17,7 @@ class CreateSellersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->mediumText('description')->nullable();
-            $table->integer('phone')->nullable();
+            $table->string('phone')->nullable();
             $table->mediumText('address')->nullable();
             $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
             $table->timestamps();

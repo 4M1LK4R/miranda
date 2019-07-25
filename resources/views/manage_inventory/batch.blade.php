@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
+
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -32,7 +33,7 @@
                             <tr>
                                 <td>№</td>
                                 <td>Codigo</td>
-                                <td>Descripción</td>
+                                <td>Registro Sanitario</td>
                                 <td>Producto</td>
                                 <td>Estado</td>
                                 <td>Detalle</td>
@@ -81,6 +82,9 @@
                         <div class="col-sm-3">
                             <label for="code">Código de lote:</label>
                             <input type="text" class="form-control" id="code" name="code" placeholder="Código de lote" required>
+
+                            <label for="code">Registro Sanitario:</label>
+                            <input type="text" class="form-control" id="sanitary_registration" name="sanitary_registration" placeholder="Registro sanitario" required>
                         </div>
                         <div class="col-sm-3">
                             <label for="expiration-date">Fecha de vencimiento:</label>
@@ -139,11 +143,7 @@
                     <hr>
                     <div class="form-group row">
                         <div class="col-sm-3" id="select_storage">
-                        </div>             
-                        <div class="col-sm-3">
-                            <label for="inputLastname">Stock:</label>
-                            <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock" required>
-                        </div>
+                        </div>           
                         <div class="col-sm-3">
                             <label for="inputLastname">Precio de Venta Mayorista:</label>
                             <input type="text" class="form-control" id="wholesaler_price" name="wholesaler_price" placeholder="Precio de Venta Mayorista" required>
@@ -165,6 +165,8 @@
 
 
 
+
+
 <!--Modal detalle-->
 
 <div class="modal fade bd-example-modal-lg" id="modal_detalle" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -180,16 +182,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="content_detalle">
-                    
-             </div>
+            <div class="modal-body-fluid" id="content_detalle">
+                
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-danger" data-dismiss="modal">Cancelar<i class="icon-cancel"></i></button>
             </div>
             
         </div>
     </div>
 </div>
+
+
+
 
 <!-- Modal Eliminar -->
 <div class="modal fade bd-example-modal-lg" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"

@@ -23,7 +23,7 @@ class BatchController extends Controller
             return  $product_id->name;
         })
         ->addColumn('Detalle', function ($item) {
-            return '<a class="btn btn-xs btn-success text-white" onclick="Show('.$item->id.')"><i class="icon-list-bullet"></i></a>';
+            return '<a class="btn btn-xs btn-success text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
         })
         ->addColumn('Editar', function ($item) {
             return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
@@ -42,43 +42,30 @@ class BatchController extends Controller
     }
     public function show(Request $request)
     {
+        $Batch = Batch::find($request->id)->with('product','user','provider','line','storage','industry','payment_status','payment_type')->first();
+        return $Batch;
+    }
+
+    public function edit(Request $request)
+    {
         $Batch = Batch::find($request->id);
-        return Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get();
+        return $Batch->toJson();
     }
 
-    public function edit($id)
+    public function update(BatchRequest $request)
     {
-        //
+        $Batch = Batch::find($request->id);
+        $Batch->update($request->all());
+        return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
     }
-
-    public function update(Request $request, $id)
+    public function destroy(Request $request)
     {
-        //
-    }
-    public function destroy($id)
-    {
-        //
+        $Batch = Batch::find($request->id);
+        $Batch->delete();
+        return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
     public function batch()
     {
         return view('manage_inventory.batch');
     }
-
-    public function detail(Request $request)
-    {
-        
-        $Batch = Batch::find($request->id)->with('product','user','provider','line','storage','industry','payment_status','payment_type')->first();
-        return $Batch;
-        //$Batch = Batch::find($request->id);
-        //return $Batch->hasMany('Batch');
-        //return $Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get();
-        
-        //ESTE PARA VENTAS 
-        //Este funciona!
-        //return Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get()->where('id',$request->id);
-
-    }
-
-
-
 }
