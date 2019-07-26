@@ -57,3 +57,8 @@ Route::resource('seller','SellerController');
 Route::get('/batches', 'BatchController@batch')->name('batch')->middleware('auth');
 Route::resource('batch','BatchController');
 
+/////SHOP/////////
+Route::get('/shops', 'ShopController@shop')->name('shop')->middleware('auth');
+Route::resource('shop','ShopController');
+
+

@@ -31,17 +31,11 @@ function ListDatatable() {
             "url": "/js/assets/Spanish.json"
         },
         ajax: {
-            url: 'batch'
+            url: 'shop'
 
         },
         columns: [{
-                data: 'id'
-            },
-            {
                 data: 'code'
-            },
-            {
-                data: 'sanitary_registration'
             },
             {
                 data: 'product_name'
@@ -55,49 +49,12 @@ function ListDatatable() {
                 searchable: false
             },
             {
-                data: 'Editar',
-                orderable: false,
-                searchable: false
-            },
-            {
-                data: 'Eliminar',
+                data: 'Agregar',
                 orderable: false,
                 searchable: false
             },
         ],
-        buttons: [{
-                text: '<i class="icon-eye"></i> ',
-                className: 'rounded btn-dark m-2',
-                titleAttr: 'Columnas',
-                extend: 'colvis'
-            },
-            {
-                text: '<i class="icon-download"></i><i class="icon-file-excel"></i>',
-                className: 'rounded btn-dark m-2',
-                titleAttr: 'Excel',
-                extend: 'excel',
-                exportOptions: {
-                    columns: [0, 1, 2]
-                }
-            },
-            {
-                text: '<i class="icon-download"></i><i class="icon-file-pdf"></i> ',
-                className: 'rounded btn-dark m-2',
-                titleAttr: 'PDF',
-                extend: 'pdf',
-                exportOptions: {
-                    columns: [0, 1, 2]
-                }
-            },
-            {
-                text: '<i class="icon-download"></i><i class="icon-print"></i> ',
-                className: 'rounded btn-dark m-2',
-                titleAttr: 'Imprimir',
-                extend: 'print',
-                exportOptions: {
-                    columns: [0, 1, 2]
-                }
-            },
+        buttons: [
             //btn Refresh
             {
                 text: '<i class="icon-arrows-cw"></i>',

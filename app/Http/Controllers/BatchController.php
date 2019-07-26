@@ -18,9 +18,9 @@ class BatchController extends Controller
     public function index()
     {
         return datatables()->of(Batch::all()->where('state','ACTIVO'))
-        ->addColumn('product_id', function ($item) {
-            $product_id = Product::find($item->product_id);
-            return  $product_id->name;
+        ->addColumn('product_name', function ($item) {
+            $product_name = Product::find($item->product_id);
+            return  $product_name->name;
         })
         ->addColumn('Detalle', function ($item) {
             return '<a class="btn btn-xs btn-success text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';

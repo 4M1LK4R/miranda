@@ -8,12 +8,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h5 class="card-title text-primary">Lista de Lotes</h5>
+                        <h5 class="card-title text-primary">Ventas</h5>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
-                        <button class="btn btn-outline-success" id="btn-agregar">
-                            <i class="icon-plus"></i>&nbsp;Agregar Lote
-                        </button>
                     </div>
                 </div>
                 <div class="row p-2">
@@ -31,14 +28,11 @@
                     <table id="table" class="table table-striped ">
                         <thead>
                             <tr>
-                                <td>№</td>
                                 <td>Codigo</td>
-                                <td>Registro Sanitario</td>
                                 <td>Producto</td>
                                 <td>Stock</td>
                                 <td>Detalle</td>
-                                <td>Editar</td>
-                                <td>Eliminar</td>
+                                <td>Agregar</td>
                             </tr>
                         </thead>
                     </table>
@@ -221,5 +215,5 @@
 
 @endsection
 @section('scripts')
-<script src="{{ URL::asset('js/scripts/batch.js') }}"></script>
+<script src="{{ URL::asset('js/scripts/shop.js') }}"></script>
 @endsection

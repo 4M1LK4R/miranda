@@ -52,7 +52,7 @@
                                     <i class="icon-tags"></i>Tienda
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownTienda">
-                                    <a class="dropdown-item" href="#">Registrar venta</a>
+                                    <a class="dropdown-item" href="{{ route('shop') }}">Registrar venta</a>
                                     <!--<a class="dropdown-item" href="#">Registrar cotización</a>-->
                                 </div>
                             </li>
