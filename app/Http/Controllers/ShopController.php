@@ -19,16 +19,17 @@ class ShopController extends Controller
     {
         return datatables()->of(Batch::all()->where('stock','>',0))
         ->addColumn('product_name', function ($item) {
-            $product_name = Product::find($item->product_id);
-            return  $product_name->name;
+            $product = Product::find($item->product_id);
+            return  $product->name;
         })
         ->addColumn('Detalle', function ($item) {
             return '<a class="btn btn-xs btn-success text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
         })
-        ->addColumn('Agregar', function ($item) {
-            return '<a class="btn btn-xs btn-success text-white" onclick="Edit('.$item->id.')"><i class="icon-cart-plus"></i></a>';
+        ->addColumn('Shop', function ($item) {
+            $product = Product::find($item->product_id);
+            return '<a class="btn btn-xs btn-success text-white" onclick="Shop('.$item->id.',\''.$product->name.'\')"><i class="icon-cart-plus"></i></a>';
         })
-        ->rawColumns(['Detalle','Agregar']) 
+        ->rawColumns(['Detalle','Shop']) 
               
         ->toJson();
     }

@@ -28,6 +28,7 @@ function ListDatatable() {
         serverSide: true,
         "paging": true,
         language: {
+            //"url": "{{ asset('js/assets/Spanish.json) }}"
             "url": "/js/assets/Spanish.json"
         },
         ajax: {
@@ -49,7 +50,7 @@ function ListDatatable() {
                 searchable: false
             },
             {
-                data: 'Agregar',
+                data: 'Shop',
                 orderable: false,
                 searchable: false
             },
@@ -277,8 +278,6 @@ function catch_parameters() {
     return data;
 
 }
-
-
 
 // muestra el modal
 $("#btn-agregar").click(function () {
@@ -570,4 +569,31 @@ function printDetails() {
     newWin.document.write(divToPrint.outerHTML);
     newWin.print();
     newWin.close();
+}
+
+//For Sales
+var Basket = [];
+
+function Shop(id, name) {
+
+    var product = {
+        "id": id,
+        "name": name,
+        "amount": 1
+    };
+    Basket.push(product);
+    var code = "";
+    /*$.each(Basket, function (key, value) {
+        console.log(key);
+        console.log(value);
+        code += '<tr><td>my data</td><td>more data</td></tr>';
+    });*/
+
+    var code ='<tr>';
+    code+='<td>'+product.name+'</td>';
+    code+='<td><input type="number" class="form-control" name="amount" min="1" max="1000" value="1"></td>';
+    code+='<td><a class="btn btn-xs btn-danger text-white" onclick="RemoveShop()"><i class="icon-cart-arrow-down"></i></a></td>';
+    code+='</tr>'
+    $('#table-basket').append(code);
+    console.log(Basket);
 }

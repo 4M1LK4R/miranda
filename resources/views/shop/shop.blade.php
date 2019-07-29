@@ -8,7 +8,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h5 class="card-title text-primary">Ventas</h5>
+                        <h5 class="card-title text-primary">Registrar Venta</h5>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
                     </div>
@@ -25,7 +25,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="table" class="table table-striped ">
+                    <table id="table" class="table table-striped">
                         <thead>
                             <tr>
                                 <td>Codigo</td>
@@ -35,6 +35,36 @@
                                 <td>Agregar</td>
                             </tr>
                         </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Carrito</h5>
+                <div class="table-responsive">
+                    <table id="table-basket" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>Producto</td>
+                                <td>Catidad</td>
+                                <td>Quitar</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--
+                            <tr>
+                                <td>Aspirina 10 gr.</td>
+                                <td><input type="number" class="form-control" name="amount" min="1" max="1000" value="1"></td>
+                                <td><a class="btn btn-xs btn-danger text-white" onclick="RemoveShop()"><i class="icon-cart-arrow-down"></i></a></td>
+                            </tr>-->
+                        </tbody>
                     </table>
                 </div>
             </div>
