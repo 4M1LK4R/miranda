@@ -158,7 +158,6 @@
     <script src="{{ asset('js/assets/moment.js') }}"></script>
     <script src="{{ asset('js/assets/es.js') }}"></script>
     <script src="{{ asset('js/assets/tempusdominus-bootstrap-4.js') }}"></script>
-    
 
     @yield('scripts')
 </body>

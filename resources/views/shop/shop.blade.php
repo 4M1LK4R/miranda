@@ -40,32 +40,47 @@
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
+</div>
+<br>
+<div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title text-primary">Carrito</h5>
-                <div class="table-responsive">
-                    <table id="table-basket" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <td>Producto</td>
-                                <td>Catidad</td>
-                                <td>Quitar</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!--
-                            <tr>
-                                <td>Aspirina 10 gr.</td>
-                                <td><input type="number" class="form-control" name="amount" min="1" max="1000" value="1"></td>
-                                <td><a class="btn btn-xs btn-danger text-white" onclick="RemoveShop()"><i class="icon-cart-arrow-down"></i></a></td>
-                            </tr>-->
-                        </tbody>
-                    </table>
+                <h5 class="card-title text-primary"><i class="icon-basket"></i>Carrito</h5>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table id="table-basket" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>Producto</td>
+                                        <td>Precio</td>
+                                        <td>Subtotal</td>
+                                        <td>Catidad</td>
+                                        <td>Quitar</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--
+                                    <tr>
+                                        <td>Aspirina 10 gr.</td>
+                                        <td><input type="number" class="form-control" name="amount" min="1" max="1000" value="1"></td>
+                                        <td><a class="btn btn-xs btn-danger text-white" onclick="RemoveShop()"><i class="icon-cart-arrow-down"></i></a></td>
+                                    </tr>-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1 class="card-title text-danger">TOTAL <b id="i_total">0</b> Bs.</h1>
+                    </div>
+                    <div class="col-sm-6 d-flex justify-content-end">
+                        <button class="btn btn-outline-success" id="btn-agregar">
+                            <i class="icon-plus"></i>&nbsp;Registrar Venta
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

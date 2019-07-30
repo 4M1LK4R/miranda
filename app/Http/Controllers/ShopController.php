@@ -27,7 +27,7 @@ class ShopController extends Controller
         })
         ->addColumn('Shop', function ($item) {
             $product = Product::find($item->product_id);
-            return '<a class="btn btn-xs btn-success text-white" onclick="Shop('.$item->id.',\''.$product->name.'\')"><i class="icon-cart-plus"></i></a>';
+            return '<a class="btn btn-xs btn-success text-white" onclick="AddBasket('.$item->id.',\''.$product->name.'\',\''.$item->wholesaler_price.'\')"><i class="icon-cart-plus"></i></a>';
         })
         ->rawColumns(['Detalle','Shop']) 
               

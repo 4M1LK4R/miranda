@@ -571,29 +571,69 @@ function printDetails() {
     newWin.close();
 }
 
-//For Sales
+//For basket
+
 var Basket = [];
+var row_index=1;
+var total=0;
+function AddBasket(id, name, price) {
+    console.log(price);
+    var index = Basket.findIndex(item => item.id === id);
+    if (index==-1) {
+        var product = {
+            "id": id,
+            "name": name,
+            "price":price,
+            "subtotal":1*price,
+            "amount": 1
+        };
+        Basket.push(product);
+        var code ='<tr id="tr'+row_index+'">';
+        code+='<td>'+product.name+'</td>';
+        code+='<td>'+product.price+'</td>';
+        code+='<td id="td_subtotal'+row_index+'" class="text-danger"><b>'+product.subtotal+'</b></b>';
+        code+='<td><input id="amount'+row_index+'" type="number" onchange="AmountChange('+row_index+','+product.id+',\''+product.name+'\');" class="form-control" min="1" max="1000" value="1" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"></td>';
+        code+='<td><a class="btn btn-xs btn-danger text-white" onclick="RemoveBasket('+row_index+','+product.id+')"><i class="icon-cart-arrow-down"></i></a></td>';
+        code+='</tr>'
+        $('#table-basket').append(code);
+        row_index++;
+        ShowTotal();
+    }
+    else {
+        toastr.warning('El producto ya se encuentra agregado.');
+    }
+}
 
-function Shop(id, name) {
 
-    var product = {
-        "id": id,
-        "name": name,
-        "amount": 1
-    };
-    Basket.push(product);
-    var code = "";
-    /*$.each(Basket, function (key, value) {
-        console.log(key);
-        console.log(value);
-        code += '<tr><td>my data</td><td>more data</td></tr>';
-    });*/
-
-    var code ='<tr>';
-    code+='<td>'+product.name+'</td>';
-    code+='<td><input type="number" class="form-control" name="amount" min="1" max="1000" value="1"></td>';
-    code+='<td><a class="btn btn-xs btn-danger text-white" onclick="RemoveShop()"><i class="icon-cart-arrow-down"></i></a></td>';
-    code+='</tr>'
-    $('#table-basket').append(code);
+function AmountChange(row_index,id){
+    var idinput = "#amount"+row_index;
+    var index = Basket.findIndex(item => item.id === id);
+    Basket[index].amount=$(idinput).val();
+    Basket[index].subtotal=Basket[index].price * Basket[index].amount;  
+    $('#td_subtotal'+row_index).html('<b>'+Basket[index].subtotal+'</b>');
+    ShowTotal();
+    
     console.log(Basket);
+}
+
+
+function RemoveBasket(row_i, id) {
+    $("#tr"+row_i).remove();
+    var index = Basket.findIndex(item => item.id === id)
+    Basket.splice(index, 1);
+    ShowTotal();
+
+    console.log(Basket);
+}
+
+function ShowButtonSave(){
+
+}
+
+function ShowTotal(){
+    total=0;
+    for (let index = 0; index < Basket.length; index++) {       
+        total+=Basket[index].subtotal;
+    }
+    $('#i_total').html(total); 
 }
