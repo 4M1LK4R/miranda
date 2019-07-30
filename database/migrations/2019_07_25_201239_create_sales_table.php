@@ -15,15 +15,26 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('client_id'); //cliente
-            $table->unsignedBigInteger('slller_id'); //vendedor
-            $table->unsignedBigInteger('user_id'); //usuario
-            $table->decimal('total_to_pay');
+            $table->date('date'); // fecha de registro
+            $table->decimal('total');
+            $table->unsignedBigInteger('client_id')->unsigned(); //cliente
+            $table->unsignedBigInteger('seller_id')->unsigned(); //vendedor
+            $table->Integer('user_id'); //usuario
 
-
-            $table->decimal('discount');
+            $table->decimal('discount')->nullable();
+            $table->date('expiration_discount')->nullable();// fecha de espiración del descuento
             $table->enum('state', ['PENDIENTE','EN PROCESO','CANCELADO'])->default('PENDIENTE'); // estado
             $table->timestamps();
+
+            //RELACTIONS
+
+            $table->foreign('client_id')->references('id')->on('clients') //cliente
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
+            $table->foreign('seller_id')->references('id')->on('sellers') //vendedor
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

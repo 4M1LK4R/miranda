@@ -60,5 +60,6 @@ Route::resource('batch','BatchController');
 /////SHOP/////////
 Route::get('/shops', 'ShopController@shop')->name('shop')->middleware('auth');
 Route::resource('shop','ShopController');
+Route::get('/dt_clients', 'ShopController@dt_clients')->name('dt_clients')->middleware('auth');
 
 

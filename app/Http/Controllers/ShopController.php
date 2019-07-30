@@ -33,6 +33,33 @@ class ShopController extends Controller
               
         ->toJson();
     }
+    public function dt_clients()
+    {
+        return datatables()->of(Client::all()->where('state','ACTIVO'))
+        ->addColumn('zoneclient', function ($item) {
+            $catalog_zone_id = Catalogue::find($item->catalog_zone_id);
+            return  $catalog_zone_id->name;
+        })
+        ->addColumn('SelectClient', function ($item) {
+            return '<a class="btn btn-xs btn-success text-white" onclick="SelectClient('.$item->id.')"><i class="icon-ok-circled"></i></a>';
+        })
+        ->rawColumns(['SelectClient'])              
+        ->toJson();
+    }
+    public function detail(Request $request)
+    {
+        
+        $Batch = Batch::find($request->id)->with('product','user','provider','line','storage','industry','payment_status','payment_type')->first();
+        return $Batch;
+        //$Batch = Batch::find($request->id);
+        //return $Batch->hasMany('Batch');
+        //return $Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get();
+        
+        //ESTE PARA VENTAS 
+        //Este funciona!
+        //return Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get()->where('id',$request->id);
+
+    }
     public function create()
     {
         //

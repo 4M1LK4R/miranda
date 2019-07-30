@@ -29,8 +29,7 @@ class ClientController extends Controller
         ->addColumn('Eliminar', function ($item) {
             return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
         })
-        ->rawColumns(['Editar','Eliminar']) 
-              
+        ->rawColumns(['Editar','Eliminar'])              
         ->toJson();
     }
     public function store(ClientRequest $request)

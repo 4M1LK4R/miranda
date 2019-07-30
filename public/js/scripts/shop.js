@@ -9,6 +9,7 @@ $(document).ready(function () {
         }
     });
     ListDatatable();
+    ListDatatableClients();
     SelectProduct();
     SelectLine();
     SelectIndustry();
@@ -23,7 +24,7 @@ $(document).ready(function () {
 // datatable catalogos
 function ListDatatable() {
     table = $('#table').DataTable({
-        dom: 'lfBrtip',
+        dom: 'lfrtip',
         processing: true,
         serverSide: true,
         "paging": true,
@@ -42,6 +43,9 @@ function ListDatatable() {
                 data: 'product_name'
             },
             {
+                data: 'wholesaler_price'
+            },
+            {
                 data: 'stock'
             },
             {
@@ -54,17 +58,39 @@ function ListDatatable() {
                 orderable: false,
                 searchable: false
             },
-        ],
-        buttons: [
-            //btn Refresh
+        ]
+    });
+};
+// datatable dt_clients
+function ListDatatableClients() {
+    table = $('#table_clients').DataTable({
+        dom: 'lfrtip',
+        processing: true,
+        serverSide: true,
+        "paging": true,
+        language: {
+            //"url": "{{ asset('js/assets/Spanish.json) }}"
+            "url": "/js/assets/Spanish.json"
+        },
+        ajax: {
+            url: 'dt_clients'
+
+        },
+        columns: [{
+                data: 'name'
+            },
             {
-                text: '<i class="icon-arrows-cw"></i>',
-                className: 'rounded btn-info m-2',
-                action: function () {
-                    table.ajax.reload();
-                }
-            }
-        ],
+                data: 'nit'
+            },
+            {
+                data: 'zoneclient'
+            },
+            {
+                data: 'SelectClient',
+                orderable: false,
+                searchable: false
+            },
+        ]
     });
 };
 // guarda los datos nuevos
@@ -142,7 +168,6 @@ function show_detail(obj) {
     string += "<p><h5><b>DATOS DE INVENTARIO</b></h5></p>";
     string += "<p><b>Almacén:</b>&nbsp;" + obj.storage.name + "</p>";
     string += "<p><b>Precio de venta mayorista:</b>&nbsp;" + obj.wholesaler_price + "</p>";
-    string += "<p><b>Precio de venta minorista:</b>&nbsp;" + obj.retail_price + "</p>";
     $("#title-modal-detalle").html("Detalle de Lote");
     $('#content_detalle').html(string);
     $('#modal_detalle').modal('show');

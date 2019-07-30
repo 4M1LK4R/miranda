@@ -7,35 +7,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <h5 class="card-title text-primary">Registrar Venta</h5>
+                    <div class="col-sm-12 d-flex justify-content-center">
+                        <h1 class="card-title text-primary">REGISTRAR VENTA</h1>
                     </div>
-                    <div class="col-sm-6 d-flex justify-content-end">
-                    </div>
-                </div>
-                <div class="row p-2">
-                    <div class="col-sm-12" id="msg-global">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="table" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <td>Codigo</td>
-                                <td>Producto</td>
-                                <td>Stock</td>
-                                <td>Detalle</td>
-                                <td>Agregar</td>
-                            </tr>
-                        </thead>
-                    </table>
                 </div>
             </div>
         </div>
@@ -43,10 +17,10 @@
 </div>
 <br>
 <div class="row">
-    <div class="col-md-12">
-        <div class="card">
+    <div class="col-md-6">
+        <div class="card border-danger shadow p-3">
             <div class="card-body">
-                <h5 class="card-title text-primary"><i class="icon-basket"></i>Carrito</h5>
+                <h2 class="card-title text-danger"><i class="icon-basket"></i>Carrito</h2>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -61,12 +35,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!--
-                                    <tr>
-                                        <td>Aspirina 10 gr.</td>
-                                        <td><input type="number" class="form-control" name="amount" min="1" max="1000" value="1"></td>
-                                        <td><a class="btn btn-xs btn-danger text-white" onclick="RemoveShop()"><i class="icon-cart-arrow-down"></i></a></td>
-                                    </tr>-->
                                 </tbody>
                             </table>
                         </div>
@@ -77,15 +45,60 @@
                         <h1 class="card-title text-danger">TOTAL <b id="i_total">0</b> Bs.</h1>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
-                        <button class="btn btn-outline-success" id="btn-agregar">
-                            <i class="icon-plus"></i>&nbsp;Registrar Venta
+                        <button class="btn btn-outline-danger" id="btn-agregar">
+                            <i class="icon-floppy"></i>&nbsp;Registrar Venta
                         </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="col-md-6">
+        <div class="card shadow p-3">
+            <div class="card-body">
+                <h2 class="card-title text-primary"><i class="icon-user"></i>Cliente</h2>
+                <div class="table-responsive">
+                    <table id="table_clients" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>Nombre</td>
+                                <td>Nit</td>
+                                <td>Zona Cliente</td>
+                                <td>Seleccionar</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>   
 </div>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow p-3">
+            <div class="card-body">
+                <h2 class="card-title text-primary"><i class="icon-box"></i>Productos disponibles</h2>
+                <div class="table-responsive">
+                    <table id="table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>Codigo</td>
+                                <td>Producto</td>
+                                <td>Precio</td>
+                                <td>Stock</td>
+                                <td>Detalle</td>
+                                <td>Agregar</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- Modals-->
 <!-- Modal Datos -->
