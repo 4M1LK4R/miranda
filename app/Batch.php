@@ -23,7 +23,6 @@ class Batch extends Model
         'stock',
         'batch_price',
         'wholesaler_price',
-        'retail_price',
         'entry_date',
         'expiration_date',
         'state'

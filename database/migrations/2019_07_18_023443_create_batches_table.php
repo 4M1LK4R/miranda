@@ -32,7 +32,6 @@ class CreateBatchesTable extends Migration
             $table->integer('stock'); // stock 
             $table->decimal('batch_price',8,2); // precio del lote 
             $table->decimal('wholesaler_price',8,2); // precio para mayoristas
-            $table->decimal('retail_price',8,2)->nullable(); // precio para minoristas
             $table->date('entry_date'); // fecha de entrada en deposito
             $table->date('expiration_date');// fecha de espiración del lote
             $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO'); // estado

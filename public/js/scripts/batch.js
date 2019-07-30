@@ -47,6 +47,9 @@ function ListDatatable() {
                 data: 'product_name'
             },
             {
+                data: 'wholesaler_price'
+            },
+            {
                 data: 'stock'
             },
             {
@@ -184,7 +187,6 @@ function show_detail(obj) {
     string += "<p><h5><b>DATOS DE INVENTARIO</b></h5></p>";
     string += "<p><b>Almacén:</b>&nbsp;" + obj.storage.name + "</p>";
     string += "<p><b>Precio de venta mayorista:</b>&nbsp;" + obj.wholesaler_price + "</p>";
-    string += "<p><b>Precio de venta minorista:</b>&nbsp;" + obj.retail_price + "</p>";
     $("#title-modal-detalle").html("Detalle de Lote");
     $('#content_detalle').html(string);
     $('#modal_detalle').modal('show');
@@ -242,7 +244,6 @@ function show_data(obj) {
     $("#entry_date").val(obj.entry_date);
     $("#storage_id").val(obj.storage_id);
     $("#wholesaler_price").val(obj.wholesaler_price);
-    $("#retail_price").val(obj.retail_price);
     $("#title-modal").html("Editar Registro");
     data_old = catch_parameters();;
     data_old += "&stock=" + stock;

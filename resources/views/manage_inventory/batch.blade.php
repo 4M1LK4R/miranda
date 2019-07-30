@@ -35,6 +35,7 @@
                                 <td>Codigo</td>
                                 <td>Registro Sanitario</td>
                                 <td>Producto</td>
+                                <td>Precio de Venta</td>
                                 <td>Stock</td>
                                 <td>Detalle</td>
                                 <td>Editar</td>
@@ -123,11 +124,11 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="batch_price">Precio de compra del lote:</label>
-                            <input type="text" class="form-control" id="batch_price" name="batch_price" placeholder="Precio de Compra" required>
+                            <input type="number" class="form-control" id="batch_price" name="batch_price" min="0" value="0" step="any" placeholder="Precio de Compra" required>
                         </div>
                         <div class="col-sm-3">
                             <label for="initial_stock">Stock inicial:</label>
-                            <input type="text" class="form-control" id="initial_stock" name="initial_stock" placeholder="Stock Inicial" required>
+                            <input type="number" class="form-control" id="initial_stock" name="initial_stock" min="0" value="0" placeholder="Stock Inicial" required>
                         </div>
                         <div class="col-sm-3">
                             <label for="entry-date">Fecha de Entrada:</label>
@@ -146,11 +147,7 @@
                         </div>           
                         <div class="col-sm-3">
                             <label for="inputLastname">Precio de Venta Mayorista:</label>
-                            <input type="text" class="form-control" id="wholesaler_price" name="wholesaler_price" placeholder="Precio de Venta Mayorista" required>
-                        </div>
-                        <div class="col-sm-3">
-                            <label for="inputLastname">Precio de Venta Minorista:</label>
-                            <input type="text" class="form-control" id="retail_price" name="retail_price" placeholder="Precio de Venta Minorista">
+                            <input type="number" class="form-control" id="wholesaler_price" min="0" value="0" step="any" name="wholesaler_price" placeholder="Precio de Venta Mayorista" required>
                         </div>
                     </div>      
                 </div>
