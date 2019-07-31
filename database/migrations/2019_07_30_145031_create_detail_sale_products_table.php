@@ -20,10 +20,11 @@ class CreateDetailSaleProductsTable extends Migration
             $table->decimal('subtotal',8,2); // subtotal
             $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
             $table->timestamps();
-
+            $table->unsignedBigInteger('sale_id')->unsigned();
+            $table->unsignedBigInteger('product_id')->unsigned();
             //RELACTIONS
 
-            $table->foreign('sale_id')->references('id')->on('sale') //sale
+            $table->foreign('sale_id')->references('id')->on('sales') //sale
             ->onDelete('cascade')
             ->onUpdate('cascade');
             

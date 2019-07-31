@@ -19,10 +19,6 @@ class ClientController extends Controller
             $catalog_zone_id = Catalogue::find($item->catalog_zone_id);
             return  $catalog_zone_id->name;
         })
-        ->addColumn('catalog_client_id', function ($item) {
-            $catalog_client_id = Catalogue::find($item->catalog_client_id);
-            return  $catalog_client_id->name;
-        })
         ->addColumn('Editar', function ($item) {
             return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
         })

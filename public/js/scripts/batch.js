@@ -121,16 +121,23 @@ function Save() {
         method: 'post',
         data: data_save,
         success: function (result) {
+            console.log(result);
             if (result.success) {
                 console.log("se registro ");
                 toastr.success(result.msg);
 
             } else {
-                toastr.warning(result.smg);
-                console.log(result);
+                toastr.warning(result.msg);
+                console.log(result.msg);
             }
         },
         error: function (result) {
+            if(result.responseJSON.hasOwnProperty('errors')){
+                //valido que tenga el error nombre
+                if(error.responseJSON.errors){
+                    console.log(error.responseJSON.errors);
+                }
+            }
             toastr.error(result.errors + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
             console.log(result.errors);
         },
@@ -161,7 +168,7 @@ function show_detail(obj) {
     //console.log(obj);
     //DATOS DE PRODUCTO
     string += "<p><h5><b>USUARIO</b></h5></p>";
-    string += "<p><b>Usuario:</b>&nbsp;" + obj.user.name + "</p>";
+    string += "<p><b>Registrado por:</b>&nbsp;" + obj.user.name + "</p>";
     string += "<hr>";
     string += "<p><h5><b>DATOS DE PRODUCTO</b></h5></p>";
     string += "<p><b>Código de lote:</b>&nbsp;" + obj.code + "</p>";
@@ -173,7 +180,12 @@ function show_detail(obj) {
     string += "<p><b>Industria:</b>&nbsp;" + obj.industry.name + "</p>";
     string += "<p><b>Proveedor:</b>&nbsp;" + obj.provider.name + "</p>";
     string += "<p><b>Estado:</b>&nbsp;" + obj.state + "</p>";
-    string += "<p><b>Descripción:</b>&nbsp;" + obj.description + "</p>";
+    if (obj.description!=null) {
+        string += "<p><b>Descripción:</b>&nbsp;" + obj.description + "</p>";
+    }
+    else {
+        string += "<p><b>Descripción:</p>";
+    }
     string += "<hr>";
     //DATOS DE COMPRA
     string += "<p><h5><b>DATOS DE COMPRA</b></h5></p>";
@@ -186,7 +198,7 @@ function show_detail(obj) {
     //DATOS DE INVENTARIO
     string += "<p><h5><b>DATOS DE INVENTARIO</b></h5></p>";
     string += "<p><b>Almacén:</b>&nbsp;" + obj.storage.name + "</p>";
-    string += "<p><b>Precio de venta mayorista:</b>&nbsp;" + obj.wholesaler_price + "</p>";
+    string += "<p><b>Precio de veta:</b>&nbsp;" + obj.wholesaler_price + "</p>";
     $("#title-modal-detalle").html("Detalle de Lote");
     $('#content_detalle').html(string);
     $('#modal_detalle').modal('show');

@@ -4,11 +4,11 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card border-primary shadow">
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 d-flex justify-content-center">
-                        <h1 class="card-title text-primary">REGISTRAR VENTA</h1>
+                        <h3 class="card-title text-primary">REGISTRAR VENTA</h3>
                     </div>
                 </div>
             </div>
@@ -18,7 +18,53 @@
 <br>
 <div class="row">
     <div class="col-md-6">
-        <div class="card border-danger shadow p-3">
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="card-title text-primary"><i class="icon-box"></i>Productos disponibles</h2>
+                <div class="table-responsive">
+                    <table id="table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>Codigo</td>
+                                <td>Producto</td>
+                                <td>Precio</td>
+                                <td>Stock</td>
+                                <td>Detalle</td>
+                                <td>Agregar</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="card-title text-primary"><i class="icon-id-badge"></i>Vendedor</h2>
+                <div class="md-form mb-3" id="select_seller"></div>
+                <hr>
+                <h2 class="card-title text-primary"><i class="icon-user"></i>Cliente</h2>
+                <div class="table-responsive">
+                    <table id="table_clients" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>Nombre</td>
+                                <td>NIT</td>
+                                <td>Seleccionar</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+<br>
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card border-danger shadow">
             <div class="card-body">
                 <h2 class="card-title text-danger"><i class="icon-basket"></i>Carrito</h2>
                 <div class="row">
@@ -49,49 +95,6 @@
                             <i class="icon-floppy"></i>&nbsp;Registrar Venta
                         </button>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card shadow p-3">
-            <div class="card-body">
-                <h2 class="card-title text-primary"><i class="icon-user"></i>Cliente</h2>
-                <div class="table-responsive">
-                    <table id="table_clients" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <td>Nombre</td>
-                                <td>Nit</td>
-                                <td>Zona Cliente</td>
-                                <td>Seleccionar</td>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>   
-</div>
-<br>
-<div class="row">
-    <div class="col-md-12">
-        <div class="card shadow p-3">
-            <div class="card-body">
-                <h2 class="card-title text-primary"><i class="icon-box"></i>Productos disponibles</h2>
-                <div class="table-responsive">
-                    <table id="table" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <td>Codigo</td>
-                                <td>Producto</td>
-                                <td>Precio</td>
-                                <td>Stock</td>
-                                <td>Detalle</td>
-                                <td>Agregar</td>
-                            </tr>
-                        </thead>
-                    </table>
                 </div>
             </div>
         </div>

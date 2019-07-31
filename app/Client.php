@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     protected $fillable =[
-        'catalog_zone_id','catalog_client_id','nit',
+        'catalog_zone_id','nit',
         'name','description','phone','address','state'
     ];
     // un cliente pertenece a un solo tipo de cliente (belongsTo)

@@ -24,7 +24,6 @@ class BatchRequest extends FormRequest
     public function rules()
     {
         return [
-
         'product_id'            => 'required|integer',
         'user_id'               => 'required|integer',
         'provider_id'           => 'required|integer',
@@ -43,6 +42,12 @@ class BatchRequest extends FormRequest
         'entry_date'            => 'required',
         'expiration_date'       => 'required',
         'state'                 => 'required|string|max:255',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'stock.required' => 'El :attribute es obligatorio kakakakaak.',
         ];
     }
 }

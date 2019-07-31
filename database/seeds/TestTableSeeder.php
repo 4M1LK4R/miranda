@@ -45,12 +45,11 @@ class TestTableSeeder extends Seeder
         // CLIENTE
         App\Client::create([
             'catalog_zone_id'=>10,
-            'catalog_client_id'=>3,
             'nit' => 7159779,
-            'name' => 'AGUSTIN AYAVIRI',
+            'name' => 'FARMACENTER',
             'description' => 'CLIENTE DE TARIJA.',
             'phone' => '72954379',
-            'address' => 'SALAMANCA',
+            'address' => 'AEROPUERTO',
             'state' => 'ACTIVO'
 
         ]);

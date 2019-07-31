@@ -36,7 +36,6 @@
                                 <td>Teléfono</td>
                                 <td>Dirección</td>
                                 <td>Zona</td>
-                                <td>Tipo de Cliente</td>
                                 <td>Estado</td>
                                 <td>Editar</td>
                                 <td>Eliminar</td>
@@ -103,13 +102,7 @@
                                 <label for="nombre"><b>Dirección:</b></label>
                                 <input type="text" class="form-control" onkeyup="Mayus(this);" id="address" name="address" placeholder="Dirección">   
                             </div>
-                            <div class="md-form mb-3" id="select_zone">
-
-                            </div>  
-                            <div class="md-form mb-3" id="select_type_client">
-
-                            </div>  
-                            
+                            <div class="md-form mb-3" id="select_zone"></div>  
                             <div class="md-form mb-3">
                                     <label for="state"><b>Estado:</b></label>
                                 <div class="custom-control custom-radio">

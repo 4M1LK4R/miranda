@@ -9,7 +9,6 @@ $(document).ready(function(){
     });
     ListDatatable();
     SelectZone();
-    SelectTypeClient();
     catch_parameters();
     
 });
@@ -35,7 +34,6 @@ function ListDatatable()
             { data: 'phone'},
             { data: 'address'},
             { data: 'catalog_zone_id'},
-            { data: 'catalog_client_id'},
             { data: 'state'},
             { data: 'Editar',   orderable: false, searchable: false },
             { data: 'Eliminar', orderable: false, searchable: false },
@@ -147,7 +145,6 @@ function show_data(obj) {
     $("#phone").val(obj.phone);
     $("#address").val(obj.address);
     $("#catalog_zone_id").val(obj.catalog_zone_id);
-    $("#catalog_client_id").val(obj.catalog_client_id);
     if (obj.state == "ACTIVO") {
         $('#estado_activo').prop('checked', true);
     }
@@ -303,37 +300,6 @@ function SelectZone() {
             code += '</div>';
             code += '</div>';
             $("#select_zone").html(code);
-        },
-        error: function (result) {
-            toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
-            console.log(result);
-        },
-
-    });
-}
-
-function SelectTypeClient() {
-    $.ajax({
-        url: "listcatalog",
-        method: 'get',
-        data: {
-            by: "type_catalog_id",
-            type_catalog_id: 5
-        },
-        success: function (result) {
-            var code = '<div class="form-group">';
-            code += '<label for="tipo-client"><b>Tipo de Cliente:</b></label>';
-            code += '<select class="form-control" name="catalog_client_id" id="catalog_client_id" required>';
-            code += '<option disabled value="" selected>(Seleccionar)</option>';
-            $.each(result, function (key, value) {
-                code += '<option value="' + value.id + '">' + value.name + '</option>';
-            });
-            code += '</select>';
-            code += '<div class="invalid-feedback">';
-            code += 'Dato necesario.';
-            code += '</div>';
-            code += '</div>';
-            $("#select_type_client").html(code);
         },
         error: function (result) {
             toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');

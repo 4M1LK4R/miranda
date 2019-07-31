@@ -41,7 +41,7 @@ class ShopController extends Controller
             return  $catalog_zone_id->name;
         })
         ->addColumn('SelectClient', function ($item) {
-            return '<a class="btn btn-xs btn-success text-white" onclick="SelectClient('.$item->id.')"><i class="icon-ok-circled"></i></a>';
+            return '<a class="btn btn-xs btn-success text-white circle" onclick="SelectClient('.$item->id.')"><i class="icon-ok-circled"></i></a>';
         })
         ->rawColumns(['SelectClient'])              
         ->toJson();
