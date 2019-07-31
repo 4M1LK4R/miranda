@@ -44,10 +44,4 @@ class BatchRequest extends FormRequest
         'state'                 => 'required|string|max:255',
         ];
     }
-    public function messages()
-    {
-        return [
-            'stock.required' => 'El :attribute es obligatorio kakakakaak.',
-        ];
-    }
 }

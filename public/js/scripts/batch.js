@@ -123,7 +123,7 @@ function Save() {
         success: function (result) {
             console.log(result);
             if (result.success) {
-                console.log("se registro ");
+                console.log("se registro");
                 toastr.success(result.msg);
 
             } else {
@@ -132,14 +132,10 @@ function Save() {
             }
         },
         error: function (result) {
-            if(result.responseJSON.hasOwnProperty('errors')){
-                //valido que tenga el error nombre
-                if(error.responseJSON.errors){
-                    console.log(error.responseJSON.errors);
-                }
-            }
-            toastr.error(result.errors + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-            console.log(result.errors);
+            console.log(result);
+            console.log(result.responseJSON.message);
+            toastr.error(result.responseJSON.message);
+            //console.log(result.errors);
         },
     });
     table.ajax.reload();

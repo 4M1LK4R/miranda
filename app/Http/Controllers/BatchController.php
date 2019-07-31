@@ -35,9 +35,10 @@ class BatchController extends Controller
               
         ->toJson();
     }
-    public function store(BatchRequest $request)
-    {
-        $validator = \Validator::make($request->all(), $request->rules());
+    public function store(Request $request)
+    {   
+        $rule = new BatchRequest();        
+        $validator = \Validator::make($request->all(), $rule->rules());
         if ($validator->fails())
         {
             return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
@@ -46,8 +47,6 @@ class BatchController extends Controller
             $Product = Batch::create($request->all());
             return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
         }
-
-
     }
     public function show(Request $request)
     {
