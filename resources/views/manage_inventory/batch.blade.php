@@ -128,7 +128,7 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="initial_stock">Stock inicial:</label>
-                            <input type="text" class="form-control" id="initial_stock" name="initial_stock" min="0" value="0" placeholder="Stock Inicial" required>
+                            <input type="number" class="form-control" id="initial_stock" name="initial_stock" min="0" value="0" placeholder="Stock Inicial" required>
                         </div>
                         <div class="col-sm-3">
                             <label for="entry-date">Fecha de Entrada:</label>

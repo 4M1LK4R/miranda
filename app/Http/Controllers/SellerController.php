@@ -6,6 +6,7 @@ use App\Seller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\SellerRequest;
+use Validator;
 
 class SellerController extends Controller
 {
@@ -23,10 +24,18 @@ class SellerController extends Controller
               
         ->toJson();
     }
-    public function store(SellerRequest $request)
-    {
-        $Seller = Seller::create($request->all());
-        return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
+    public function store(Request $request)
+    {  
+        $rule = new SellerRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            Seller::create($request->all());
+            return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
+        }
     }
     public function show($id)
     {
@@ -40,11 +49,19 @@ class SellerController extends Controller
         return $Seller->toJson();
     }
 
-    public function update(SellerRequest $request)
+    public function update(Request $request)
     {
-        $Seller = Seller::find($request->id);
-        $Seller->update($request->all());
-        return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
+        $rule = new SellerRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            $Seller = Seller::find($request->id);
+            $Seller->update($request->all());
+            return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
+        }
     }
 
     public function destroy(Request $request)

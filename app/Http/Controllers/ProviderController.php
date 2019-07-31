@@ -9,6 +9,7 @@ use App\Catalogue;
 use App\TypeCatalog;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\ProviderRequest;
+use Validator;
 
 class ProviderController extends Controller
 {
@@ -29,10 +30,18 @@ class ProviderController extends Controller
               
         ->toJson();
     }
-    public function store(ProviderRequest $request)
+    public function store(Request $request)
     {
-        $Provider = Provider::create($request->all());
-        return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
+        $rule = new ProviderRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            Provider::create($request->all());
+            return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
+        }
     }
     public function show($id)
     {
@@ -46,11 +55,19 @@ class ProviderController extends Controller
     }
 
   
-    public function update(ProviderRequest $request)
+    public function update(Request $request)
     {
-        $Provider = Provider::find($request->id);
-        $Provider->update($request->all());
-        return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
+        $rule = new ProviderRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            $Provider = Provider::find($request->id);
+            $Provider->update($request->all());
+            return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
+        }
     }
 
 

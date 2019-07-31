@@ -121,21 +121,16 @@ function Save() {
         method: 'post',
         data: data_save,
         success: function (result) {
-            console.log(result);
             if (result.success) {
-                console.log("se registro");
                 toastr.success(result.msg);
 
             } else {
                 toastr.warning(result.msg);
-                console.log(result.msg);
             }
         },
         error: function (result) {
-            console.log(result);
             console.log(result.responseJSON.message);
-            toastr.error(result.responseJSON.message);
-            //console.log(result.errors);
+            toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
         },
     });
     table.ajax.reload();
@@ -152,7 +147,7 @@ function Detail(id) {
             show_detail(result);
         },
         error: function (result) {
-            toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            toastr.error(result + 'CONTACTE A SU PROVEEDOR POR FAVOR.');
             console.log(result);
         },
 
@@ -213,9 +208,8 @@ function Edit(id) {
             show_data(result);
         },
         error: function (result) {
-            toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-
             console.log(result);
+            toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
         },
 
     });
@@ -270,13 +264,15 @@ function Update() {
             success: function (result) {
                 if (result.success) {
                     toastr.success(result.msg);
+    
                 } else {
                     toastr.warning(result.msg);
                 }
             },
             error: function (result) {
-                toastr.error(result.msg + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-            },
+                console.log(result.responseJSON.message);
+                toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
+            },       
         });
         table.ajax.reload();
     }

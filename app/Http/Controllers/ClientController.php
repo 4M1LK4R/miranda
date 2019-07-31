@@ -8,6 +8,7 @@ use App\TypeCatalog;
 use App\Client;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\ClientRequest;
+use Validator;
 
 class ClientController extends Controller
 {
@@ -28,10 +29,18 @@ class ClientController extends Controller
         ->rawColumns(['Editar','Eliminar'])              
         ->toJson();
     }
-    public function store(ClientRequest $request)
+    public function store(Request $request)
     {
-        $Client = Client::create($request->all());
-        return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
+        $rule = new ClientRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            Client::create($request->all());
+            return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
+        }
     }
     public function show($id)
     {
@@ -45,11 +54,19 @@ class ClientController extends Controller
         return $Client->toJson();
     }
 
-    public function update(ClientRequest $request)
+    public function update(Request $request)
     {
-        $Client = Client::find($request->id);
-        $Client->update($request->all());
-        return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
+        $rule = new ClientRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            $Client = Client::find($request->id);
+            $Client->update($request->all());
+            return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
+        }
     }
 
     public function destroy(Request $request)

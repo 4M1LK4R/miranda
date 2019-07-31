@@ -91,17 +91,15 @@ function Save() {
         data: catch_parameters(),
         success: function (result) {
             if (result.success) {
-                console.log("se registro ");
-                toastr.success(result.msg,{"progressBar": true,"closeButton": true});
-                
+                toastr.success(result.msg);
+
             } else {
-                toastr.warning(result.smg);
-                console.log(result);
+                toastr.warning(result.msg);
             }
         },
         error: function (result) {
-            toastr.error(result.errors + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-            console.log(result.errors);
+            console.log(result.responseJSON.message);
+            toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
         },
     });
     table.ajax.reload();
@@ -165,13 +163,15 @@ function Update() {
             data: catch_parameters(),
             success: function (result) {
                 if (result.success) {
-                    toastr.success(result.msg,{"progressBar": true,"closeButton": true});
+                    toastr.success(result.msg);
+    
                 } else {
                     toastr.warning(result.msg);
                 }
             },
             error: function (result) {
-                toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
+                console.log(result.responseJSON.message);
+                toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
             },
         });
         table.ajax.reload();

@@ -11,6 +11,7 @@ use App\User;
 use App\Batch;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\BatchRequest;
+use Validator;
 
 class BatchController extends Controller
 {
@@ -31,20 +32,19 @@ class BatchController extends Controller
         ->addColumn('Eliminar', function ($item) {
             return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
         })
-        ->rawColumns(['Detalle','Editar','Eliminar']) 
-              
+        ->rawColumns(['Detalle','Editar','Eliminar'])            
         ->toJson();
     }
     public function store(Request $request)
     {   
         $rule = new BatchRequest();        
-        $validator = \Validator::make($request->all(), $rule->rules());
+        $validator = Validator::make($request->all(), $rule->rules());
         if ($validator->fails())
         {
             return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
         } 
         else{
-            $Product = Batch::create($request->all());
+            Batch::create($request->all());
             return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
         }
     }
@@ -62,9 +62,17 @@ class BatchController extends Controller
 
     public function update(BatchRequest $request)
     {
-        $Batch = Batch::find($request->id);
-        $Batch->update($request->all());
-        return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
+        $rule = new BatchRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            $Batch = Batch::find($request->id);
+            $Batch->update($request->all());
+            return response()->json(['success'=>true,'msg'=>'Registro actualizado existosamente.']);
+        }
     }
     public function destroy(Request $request)
     {

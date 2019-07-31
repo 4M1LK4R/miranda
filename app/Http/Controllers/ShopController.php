@@ -11,6 +11,7 @@ use App\User;
 use App\Batch;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
+use Validator;
 
 class ShopController extends Controller
 {

@@ -25,7 +25,7 @@ class CreateBatchesTable extends Migration
             $table->unsignedBigInteger('payment_status_id')->unsigned()->nullable(); // estado de pago
             $table->unsignedBigInteger('payment_type_id')->unsigned()->nullable();// tipo de pago
 
-            $table->string('code')->unique();// codigo
+            $table->string('code');// codigo de lote
             $table->string('sanitary_registration');// codigo
             $table->mediumText('description')->nullable();// descripción
             $table->integer('initial_stock'); // stock inicial

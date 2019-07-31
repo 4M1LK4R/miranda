@@ -8,7 +8,7 @@ use App\TypeCatalogue;
 use App\Catalogue;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\CatalogueRequest;
-
+use Validator;
 
 class CatalogueController extends Controller
 {
@@ -26,10 +26,18 @@ class CatalogueController extends Controller
               
         ->toJson();
     }
-    public function store(CatalogueRequest $request)
+    public function store(Request $request)
     {
-        $Catalogue = Catalogue::create($request->all());
-        return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
+        $rule = new CatalogueRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            Catalogue::create($request->all());
+            return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
+        }
     }
     public function show($id)
     {
@@ -41,11 +49,19 @@ class CatalogueController extends Controller
        $Catalogue = Catalogue::find($request->id);
         return $Catalogue->toJson();
     }
-    public function update(CatalogueRequest $request)
+    public function update(Request $request)
     {
-        $Catalogue = Catalogue::find($request->id);
-        $Catalogue->update($request->all());
-        return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
+        $rule = new CatalogueRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            $Catalogue = Catalogue::find($request->id);
+            $Catalogue->update($request->all());
+            return response()->json(['success'=>true,'msg'=>'Registro actualizado existosamente.']);
+        }
     }
 
     public function destroy(Request $request)

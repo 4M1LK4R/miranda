@@ -8,6 +8,7 @@ use App\TypeCatalog;
 use App\Product;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\ProductRequest;
+use Validator;
 
 class ProductController extends Controller
 {
@@ -28,10 +29,18 @@ class ProductController extends Controller
               
         ->toJson();
     }
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
-        $Product = Product::create($request->all());
-        return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
+        $rule = new ProductRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            Product::create($request->all());
+            return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
+        }
     }
     public function show($id)
     {
@@ -44,11 +53,19 @@ class ProductController extends Controller
         $Product = Product::find($request->id);
         return $Product->toJson();
     }
-    public function update(ProductRequest $request)
+    public function update(Request $request)
     {
-        $Product = Product::find($request->id);
-        $Product->update($request->all());
-        return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
+        $rule = new ProductRequest();        
+        $validator = Validator::make($request->all(), $rule->rules());
+        if ($validator->fails())
+        {
+            return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
+        } 
+        else{
+            $Product = Product::find($request->id);
+            $Product->update($request->all());
+            return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
+        }
     }
     public function destroy(Request $request)
     {
