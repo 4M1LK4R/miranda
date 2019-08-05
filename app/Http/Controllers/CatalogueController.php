@@ -89,7 +89,7 @@ class CatalogueController extends Controller
         return view('catalogs.industry');
     }
     // lista los catalogos depende del id que pase
-    public function listcatalog(Request $request)
+    public function list(Request $request)
     {
         switch ($request->by)
         {
@@ -100,8 +100,8 @@ class CatalogueController extends Controller
                 return $list;
             break;
             case 'all':
-                $list=Catalogue::All();
-                return $list=Catalogue::All();
+                $list=Catalogue::All()->where('state','ACTIVO');
+                return $list;
             break;         
             default:
             break;

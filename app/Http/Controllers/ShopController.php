@@ -30,8 +30,7 @@ class ShopController extends Controller
             $product = Product::find($item->product_id);
             return '<a class="btn btn-xs btn-success text-white" onclick="AddBasket('.$item->id.',\''.$product->name.'\',\''.$item->wholesaler_price.'\')"><i class="icon-cart-plus"></i></a>';
         })
-        ->rawColumns(['Detalle','Shop']) 
-              
+        ->rawColumns(['Detalle','Shop'])              
         ->toJson();
     }
     public function dt_clients()
@@ -42,11 +41,12 @@ class ShopController extends Controller
             return  $catalog_zone_id->name;
         })
         ->addColumn('SelectClient', function ($item) {
-            return '<a class="btn btn-xs btn-success text-white circle" onclick="SelectClient('.$item->id.')"><i class="icon-ok-circled"></i></a>';
+            return '<a class="btn btn-xs btn-success text-white circle" onclick="SelectClient('.$item->id.',\''.$item->name.'\')"><i class="icon-ok-circled"></i></a>';
         })
         ->rawColumns(['SelectClient'])              
         ->toJson();
     }
+    
     public function detail(Request $request)
     {
         
@@ -55,7 +55,6 @@ class ShopController extends Controller
         //$Batch = Batch::find($request->id);
         //return $Batch->hasMany('Batch');
         //return $Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get();
-        
         //ESTE PARA VENTAS 
         //Este funciona!
         //return Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get()->where('id',$request->id);

@@ -75,4 +75,16 @@ class SellerController extends Controller
     {
         return view('manage_sales.seller');
     }
+    public function list(Request $request)
+    {
+        switch ($request->by)
+        {
+            case 'all':
+                $list=Seller::All()->where('state','ACTIVO');
+                return $list;
+            break;         
+            default:
+            break;
+        }
+    }
 }

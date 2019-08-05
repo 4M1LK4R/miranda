@@ -74,13 +74,13 @@ class ProductController extends Controller
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
 
-    public function listproduct(Request $request)
+    public function list(Request $request)
     {
         switch ($request->by)
         {
             case 'all':
-                $list=Product::All();
-                return $list=Product::All();
+                $list=Product::All()->where('state','ACTIVO');
+                return $list;
             break;         
             default:
             break;

@@ -20,7 +20,7 @@
     <div class="col-md-6">
         <div class="card shadow">
             <div class="card-body">
-                <h2 class="card-title text-primary"><i class="icon-box"></i>Productos disponibles</h2>
+                <h4 class="card-title text-primary"><i class="icon-box"></i>Productos disponibles</h4>
                 <div class="table-responsive">
                     <table id="table" class="table table-striped">
                         <thead>
@@ -41,10 +41,10 @@
     <div class="col-md-6">
         <div class="card shadow">
             <div class="card-body">
-                <h2 class="card-title text-primary"><i class="icon-id-badge"></i>Vendedor</h2>
+                <h4 class="card-title text-primary"><i class="icon-id-badge"></i>Vendedor</h4>
                 <div class="md-form mb-3" id="select_seller"></div>
                 <hr>
-                <h2 class="card-title text-primary"><i class="icon-user"></i>Cliente</h2>
+                <h3 class="card-title text-primary"><i class="icon-user"></i>Cliente:&nbsp;<b><span id="name_client" class="text-success"></span></b></h3>
                 <div class="table-responsive">
                     <table id="table_clients" class="table table-striped">
                         <thead>
@@ -66,7 +66,7 @@
     <div class="col-md-12">
         <div class="card border-danger shadow">
             <div class="card-body">
-                <h2 class="card-title text-danger"><i class="icon-basket"></i>Carrito</h2>
+                <h3 class="card-title text-danger"><i class="icon-basket"></i>Carrito</h3>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -87,11 +87,53 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="card-title text-danger">TOTAL SIN DESCUENTO <b id="total_s">0</b> Bs.</h2>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
                     <div class="col-sm-6">
-                        <h1 class="card-title text-danger">TOTAL <b id="i_total">0</b> Bs.</h1>
+                        <label class="text-warning"><b>Descuento:</b></label>
+                        <select class="form-control border-warning text-warning" onchange="ShowTotal();" name="select_discount" id="select_discount">
+                            <option selected value="0">0 %</option> 
+                            <option value="0.05">5 %</option> 
+                            <option value="0.1">10 %</option> 
+                            <option value="0.15">15 %</option> 
+                            <option value="0.2">20 %</option>
+                            <option value="0.25">25 %</option>
+                            <option value="0.3">30 %</option>
+                            <option value="0.35">35 %</option>
+                            <option value="0.4">40 %</option>
+                            <option value="0.45">45 %</option>
+                            <option value="0.5">50 %</option>
+                            <option value="0.55">55 %</option>
+                            <option value="0.6">60 %</option>
+                            <option value="0.65">65 %</option>
+                            <option value="0.7">70 %</option>
+                            <option value="0.75">75 %</option>
+                            <option value="0.8">80 %</option>
+                            <option value="0.85">85 %</option>
+                            <option value="0.9">90 %</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="text-warning"><b>Fecha de vencimiento de descuento:</b></label>
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input type="text" id="entry_date" name="entry_date" class="form-control text-warning datetimepicker-input border-warning" data-target="#datetimepicker1" required/>
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text bg-warning border-warning text-white"><i class="icon-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2 class="card-title text-warning">TOTAL CON DESCUENTO <b id="total_c">0</b> Bs.</h2>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
-                        <button class="btn btn-outline-danger" id="btn-agregar">
+                        <button class="btn btn-outline-success" id="btn-agregar">
                             <i class="icon-floppy"></i>&nbsp;Registrar Venta
                         </button>
                     </div>

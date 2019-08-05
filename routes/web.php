@@ -31,27 +31,29 @@ Route::get('/line', 'CatalogueController@line')->name('line')->middleware('auth'
 Route::get('/zone', 'CatalogueController@zone')->name('zone')->middleware('auth');
 //Catalogs Controllers
 Route::resource('catalogs', 'CatalogueController');
-Route::get('listcatalog', 'CatalogueController@listcatalog')->name('listcatalog')->middleware('auth');
+Route::get('listcatalog', 'CatalogueController@list')->name('listcatalog')->middleware('auth');
 
 /////CLIENTS/////////
 
 Route::get('/clients', 'ClientController@client')->name('client')->middleware('auth');
 Route::resource('client', 'ClientController');
+Route::get('listclient', 'ClientController@list')->name('listclient')->middleware('auth');
 
 /////PRODUCTS/////////
 
 Route::get('/products', 'ProductController@product')->name('product')->middleware('auth');
 Route::resource('product', 'ProductController');
-Route::get('listproduct', 'ProductController@listproduct')->name('listproduct')->middleware('auth');
+Route::get('listproduct', 'ProductController@list')->name('listproduct')->middleware('auth');
 /////PROVIDER/////////
 
 Route::get('/providers', 'ProviderController@provider')->name('provider')->middleware('auth');
 Route::resource('provider', 'ProviderController');
-Route::get('listprovider', 'ProviderController@listprovider')->name('listprovider')->middleware('auth');
+Route::get('listprovider', 'ProviderController@list')->name('listprovider')->middleware('auth');
 
 /////SELLER/////////
 Route::get('/sellers', 'SellerController@seller')->name('seller')->middleware('auth');
 Route::resource('seller','SellerController');
+Route::get('listseller', 'SellerController@list')->name('listseller')->middleware('auth');
 
 /////BATCH/////////
 Route::get('/batches', 'BatchController@batch')->name('batch')->middleware('auth');

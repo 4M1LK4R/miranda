@@ -21,8 +21,10 @@ class CreateSalesTable extends Migration
             $table->unsignedBigInteger('seller_id')->unsigned(); //vendedor
             $table->Integer('user_id'); //usuario
 
+            //DISCOUNTS
             $table->decimal('discount')->nullable();
             $table->date('expiration_discount')->nullable();// fecha de espiración del descuento
+            $table->decimal('total_discount');
             $table->enum('state', ['PENDIENTE','EN PROCESO','CANCELADO'])->default('PENDIENTE'); // estado
             $table->timestamps();
 

@@ -100,7 +100,7 @@ function Save() {
             }
         },
         error: function (result) {
-            console.log(result.responseJSON.message);
+            //console.log(result.responseJSON.message);
             toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
         },
     });
@@ -123,7 +123,7 @@ function Edit(id) {
         error: function (result) {
             toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
 
-            console.log(result);
+            //console.log(result);
         },
 
     });
@@ -133,7 +133,7 @@ function Edit(id) {
 var data_old;
 function show_data(obj) {
     ClearInputs();
-    console.log(obj)
+    //console.log(obj)
     obj = JSON.parse(obj);
     id= obj.id;
     $("#name").val(obj.name);
@@ -172,7 +172,7 @@ function Update() {
                 }
             },
             error: function (result) {
-                console.log(result.responseJSON.message);
+                //console.log(result.responseJSON.message);
                 toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
             },
         });
@@ -202,7 +202,7 @@ $("#btn_delete").click(function () {
         },
         error: function (result) {
             toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
-            console.log(result);
+            //console.log(result);
         },
 
     });
@@ -227,7 +227,7 @@ function catch_parameters()
 {
     var data = $(".form-data").serialize();
     data += "&id="+id;
-    console.log(data);
+    //console.log(data);
     return data;
     
 }
@@ -302,7 +302,7 @@ function SelectZone() {
         },
         error: function (result) {
             toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
-            console.log(result);
+            //console.log(result);
         },
 
     });

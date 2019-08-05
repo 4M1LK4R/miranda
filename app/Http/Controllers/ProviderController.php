@@ -16,9 +16,9 @@ class ProviderController extends Controller
     public function index()
     {
         return datatables()->of(Provider::all()->where('state','ACTIVO'))
-        ->addColumn('catalog_zone_id', function ($item) {
-            $catalog_zone_id = Catalogue::find($item->catalog_zone_id);
-            return  $catalog_zone_id->name;
+        ->addColumn('catalog_zone_name', function ($item) {
+            $catalog_zone_name = Catalogue::find($item->catalog_zone_id);
+            return  $catalog_zone_name->name;
         })
         ->addColumn('Editar', function ($item) {
             return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
@@ -78,13 +78,13 @@ class ProviderController extends Controller
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
 
-    public function listprovider(Request $request)
+    public function list(Request $request)
     {
         switch ($request->by)
         {
             case 'all':
-                $list=Provider::All();
-                return $list=Provider::All();
+                $list=Provider::All()->where('state','ACTIVO');
+                return $list;
             break;         
             default:
             break;

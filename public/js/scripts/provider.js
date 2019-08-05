@@ -33,7 +33,7 @@ function ListDatatable()
             { data: 'contact'},
             { data: 'phone'},
             { data: 'address'},
-            { data: 'catalog_zone_id'},
+            { data: 'catalog_zone_name'},
             { data: 'Editar',   orderable: false, searchable: false },
             { data: 'Eliminar', orderable: false, searchable: false },
         ],

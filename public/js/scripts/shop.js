@@ -11,15 +11,16 @@ $(document).ready(function () {
     ListDatatable();
     ListDatatableClients();
     SelectSeller();
+    DateTimePicker();
     catch_parameters();
 });
+
 function SelectSeller() {
     $.ajax({
-        url: "listcatalog",
+        url: "listseller",
         method: 'get',
         data: {
-            by: "type_catalog_id",
-            type_catalog_id: 5
+            by: "all"
         },
         success: function (result) {
             var code = '<select class="form-control border-primary" name="seller_id" id="seller_id" required>';
@@ -30,7 +31,7 @@ function SelectSeller() {
             $("#select_seller").html(code);
         },
         error: function (result) {
-            toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            toastr.error(result.msg + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
             console.log(result);
         },
 
@@ -140,10 +141,9 @@ function show_detail(obj) {
     string += "<p><b>Industria:</b>&nbsp;" + obj.industry.name + "</p>";
     string += "<p><b>Proveedor:</b>&nbsp;" + obj.provider.name + "</p>";
     string += "<p><b>Estado:</b>&nbsp;" + obj.state + "</p>";
-    if (obj.description!=null) {
+    if (obj.description != null) {
         string += "<p><b>Descripción:</b>&nbsp;" + obj.description + "</p>";
-    }
-    else {
+    } else {
         string += "<p><b>Descripción:</p>";
     }
     string += "<hr>";
@@ -182,62 +182,93 @@ function printDetails() {
 //For basket
 //////////////////////
 var Basket = [];
-var row_index=1;
-var total=0;
+var row_index = 1;
+var total = 0;
+//fecha de expiracion
+function DateTimePicker() {
+    $('#datetimepicker1').datetimepicker({
+        format: 'YYYY-MM-DD',
+        daysOfWeekDisabled: [0, 7]
+    });
+}
+
+function GenerateSelectDiscount() {
+    var code = '<select class="form-control border-primary" name="seller_id" id="seller_id" required>';
+    code += '<option selected value=""></option>';
+    code += '</select>';
+    $("#select_seller").html(code);
+    return
+}
+
 function AddBasket(id, name, price) {
     console.log(price);
     var index = Basket.findIndex(item => item.id === id);
-    if (index==-1) {
+    if (index == -1) {
         var product = {
             "id": id,
             "name": name,
-            "price":price,
-            "subtotal":1*price,
+            "price": price,
+            "subtotal": 1 * price,
             "amount": 1
         };
         Basket.push(product);
-        var code ='<tr id="tr'+row_index+'">';
-        code+='<td>'+product.name+'</td>';
-        code+='<td>'+product.price+'</td>';
-        code+='<td id="td_subtotal'+row_index+'" class="text-danger"><b>'+product.subtotal+'</b></b>';
-        code+='<td><input id="amount'+row_index+'" type="number" onchange="AmountChange('+row_index+','+product.id+',\''+product.name+'\');" class="form-control" min="1" max="1000" value="1" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"></td>';
-        code+='<td><a class="btn btn-xs btn-danger text-white" onclick="RemoveBasket('+row_index+','+product.id+')"><i class="icon-cart-arrow-down"></i></a></td>';
-        code+='</tr>'
+        var code = '<tr id="tr' + row_index + '">';
+        code += '<td>' + product.name + '</td>';
+        code += '<td>' + product.price + '</td>';
+        code += '<td id="td_subtotal' + row_index + '" class="text-danger"><b>' + product.subtotal + '</b></b>';
+        code += '<td><input id="amount' + row_index + '" type="number" onchange="AmountChange(' + row_index + ',' + product.id + ',\'' + product.name + '\');" class="form-control" min="1" max="1000" value="1" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"></td>';
+
+
+        code += '<td><a class="btn btn-xs btn-danger text-white" onclick="RemoveBasket(' + row_index + ',' + product.id + ')"><i class="icon-cart-arrow-down"></i></a></td>';
+        code += '</tr>'
         $('#table-basket').append(code);
         row_index++;
         ShowTotal();
-    }
-    else {
+    } else {
         toastr.warning('El producto ya se encuentra agregado.');
     }
 }
 
 
-function AmountChange(row_index,id){
-    var idinput = "#amount"+row_index;
+function AmountChange(row_index, id) {
+    var idinput = "#amount" + row_index;
     var index = Basket.findIndex(item => item.id === id);
-    Basket[index].amount=$(idinput).val();
-    Basket[index].subtotal=Basket[index].price * Basket[index].amount;  
-    $('#td_subtotal'+row_index).html('<b>'+Basket[index].subtotal+'</b>');
+    Basket[index].amount = $(idinput).val();
+    Basket[index].subtotal = Basket[index].price * Basket[index].amount;
+    $('#td_subtotal' + row_index).html('<b>' + Basket[index].subtotal.toFixed(2) + '</b>');
     ShowTotal();
-    
+
     console.log(Basket);
 }
 
 
 function RemoveBasket(row_i, id) {
-    $("#tr"+row_i).remove();
+    $("#tr" + row_i).remove();
     var index = Basket.findIndex(item => item.id === id)
     Basket.splice(index, 1);
     ShowTotal();
 
     console.log(Basket);
 }
+var id_client = 0;
 
-function ShowTotal(){
-    total=0;
-    for (let index = 0; index < Basket.length; index++) {       
-        total+=Basket[index].subtotal;
+function SelectClient(id, name) {
+    id_client = id;
+    $("#name_client").html(name);;
+}
+
+function ShowTotal() {
+    total = 0;
+    for (let index = 0; index < Basket.length; index++) {
+        total += Basket[index].subtotal;
     }
-    $('#i_total').html(total); 
+    total= total.toFixed(2);
+    var t_c =total-(total*$('#select_discount').val());
+    $('#total_c').html(t_c.toFixed(2));
+    $('#total_s').html(total);
+}
+
+function SaveSale(){
+    var user_id = $('#user_id').val();
+    
 }
