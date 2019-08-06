@@ -262,13 +262,13 @@ function ShowTotal() {
     for (let index = 0; index < Basket.length; index++) {
         total += Basket[index].subtotal;
     }
-    total= total.toFixed(2);
-    var t_c =total-(total*$('#select_discount').val());
+    total = total.toFixed(2);
+    var t_c = total - (total * $('#select_discount').val());
     $('#total_c').html(t_c.toFixed(2));
     $('#total_s').html(total);
 }
 
-function SaveSale(){
+function SaveSale() {
     var user_id = $('#user_id').val();
     var client_id = id_client;
     /*date
@@ -281,5 +281,21 @@ function SaveSale(){
     state	
     created_at	
     updated_a*/
-    
+    $.ajax({
+        url: "sale",
+        method: 'post',
+        data: data,
+        success: function (result) {
+            if (result.success) {
+                toastr.success(result.msg);
+
+            } else {
+                toastr.warning(result.msg);
+            }
+        },
+        error: function (result) {
+            console.log(result.responseJSON.message);
+            toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
+        },
+    });
 }

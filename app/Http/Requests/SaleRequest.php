@@ -24,9 +24,12 @@ class SaleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'               => 'required|string|max:255',
-            'state'              => 'required|string|max:255',
-            'catalog_product_id' => 'required|integer',
+            'date' => 'required',
+            'total' => 'required|numeric|between:0,99999999.99',
+            'client_id' => 'required|integer',	
+            'seller_id' => 'required|integer',	
+            'user_id' => 'required|integer',	
+            'state' => 'required|string|max:255'
         ];
     }
 }
