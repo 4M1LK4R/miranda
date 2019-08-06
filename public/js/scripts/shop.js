@@ -270,5 +270,16 @@ function ShowTotal() {
 
 function SaveSale(){
     var user_id = $('#user_id').val();
+    var client_id = id_client;
+    /*date
+    total
+    client_id	
+    seller_id	
+    user_id	discount	
+    expiration_discount	
+    total_discount	
+    state	
+    created_at	
+    updated_a*/
     
 }
