@@ -29,6 +29,7 @@ function ListDatatable()
         },
         columns: [
             { data: 'name'},
+            { data: 'contact'},
             { data: 'nit'},
             { data: 'description'},
             { data: 'phone'},
@@ -137,6 +138,7 @@ function show_data(obj) {
     obj = JSON.parse(obj);
     id= obj.id;
     $("#name").val(obj.name);
+    $("#contact").val(obj.contact);
     $("#nit").val(obj.nit);
     $("#description").val(obj.description);
     $("#phone").val(obj.phone);

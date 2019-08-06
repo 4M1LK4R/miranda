@@ -8,7 +8,7 @@ class Client extends Model
 {
     protected $fillable =[
         'catalog_zone_id','nit',
-        'name','description','phone','address','state'
+        'name','contact','description','phone','address','state'
     ];
     // un cliente pertenece a un solo tipo de cliente (belongsTo)
     public function zoneclient()

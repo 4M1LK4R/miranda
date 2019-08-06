@@ -31,6 +31,7 @@
                         <thead>
                             <tr>
                                 <td>Nombre</td>
+                                <td>Contacto</td>
                                 <td>Nit</td>
                                 <td>Descripción</td>
                                 <td>Teléfono</td>
@@ -74,7 +75,15 @@
                                 <div class="invalid-feedback">
                                     Dato necesario.
                                 </div>
-                            </div>  
+                            </div>
+                            <div class="md-form mb-3">
+                                <label for="nombre"><b>Contacto:</b></label>
+                                <input type="text" class="form-control" onkeyup="Mayus(this);" id="contact" name="contact" placeholder="Contacto"
+                                    required>
+                                <div class="invalid-feedback">
+                                    Dato necesario.
+                                </div>
+                            </div>   
                             <div class="md-form mb-3">
                                 <label for="nombre"><b>Nit:</b></label>
                                 <input type="text" class="form-control" onkeyup="Mayus(this);" id="nit" name="nit" placeholder="Nit"

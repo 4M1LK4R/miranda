@@ -26,8 +26,9 @@ class ClientRequest extends FormRequest
         return [
 
             'name'              => 'required|string|max:255',
-            'nit'               => 'required|integer',
+            'nit'               => 'required|string|max:255',
             'state'             => 'required|string|max:255',
+            'contact'           => 'required|string|max:255',  
             'catalog_zone_id'   => 'required|integer',
         ];
     }

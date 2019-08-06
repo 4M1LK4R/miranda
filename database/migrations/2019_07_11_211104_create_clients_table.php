@@ -16,8 +16,9 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('catalog_zone_id')->unsigned();// FOREING KEY ZONE
-            $table->integer('nit')->unique();
+            $table->string('nit')->unique();
             $table->string('name');
+            $table->mediumText('contact')->nullable();
             $table->mediumText('description')->nullable();
             $table->string('phone')->nullable();
             $table->mediumText('address')->nullable();

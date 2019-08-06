@@ -47,6 +47,7 @@ class TestTableSeeder extends Seeder
             'catalog_zone_id'=>10,
             'nit' => 7159779,
             'name' => 'FARMACENTER',
+            'contact'=>'CARLOS SANBRANA',
             'description' => 'CLIENTE DE TARIJA.',
             'phone' => '72954379',
             'address' => 'AEROPUERTO',
