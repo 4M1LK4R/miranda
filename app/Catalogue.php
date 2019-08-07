@@ -29,8 +29,6 @@ class Catalogue extends Model
     {
         return $this->hasMany(Provider::class);
     }
-
-
     public function industrybatchs()
     {
         return $this->hasMany(Batch::class);
@@ -43,9 +41,13 @@ class Catalogue extends Model
     {
         return $this->belongsTo(Batch::class);
     }
-    public function paymentstatu()
+    public function paymentstatubatch()
     {
         return $this->belongsTo(Batch::class);
+    }
+    public function paymentstatusale()
+    {
+        return $this->belongsTo(Sale::class);
     }
     public function paymenttype()
     {

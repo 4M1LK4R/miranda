@@ -28,7 +28,10 @@ class Batch extends Model
         'state'
 
     ];
-
+    public function details()
+    {
+        return $this->belongsToMany(DetailSaleProduct::class);
+    }
     public function product()
     {
         return $this->belongsTo(Product::class);

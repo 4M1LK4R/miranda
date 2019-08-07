@@ -184,6 +184,8 @@ function printDetails() {
 var Basket = [];
 var row_index = 1;
 var total = 0;
+var total_d = 0;
+var id_client = 0;
 //fecha de expiracion
 function DateTimePicker() {
     $('#datetimepicker1').datetimepicker({
@@ -200,8 +202,8 @@ function GenerateSelectDiscount() {
     return
 }
 
-function AddBasket(id, name, price) {
-    console.log(price);
+function AddBasket(id, name, price, stock) {
+    //console.log(price);
     var index = Basket.findIndex(item => item.id === id);
     if (index == -1) {
         var product = {
@@ -209,14 +211,15 @@ function AddBasket(id, name, price) {
             "name": name,
             "price": price,
             "subtotal": 1 * price,
-            "amount": 1
+            "amount": 1,
+            "stock" : stock
         };
         Basket.push(product);
         var code = '<tr id="tr' + row_index + '">';
         code += '<td>' + product.name + '</td>';
         code += '<td>' + product.price + '</td>';
         code += '<td id="td_subtotal' + row_index + '" class="text-danger"><b>' + product.subtotal + '</b></b>';
-        code += '<td><input id="amount' + row_index + '" type="number" onchange="AmountChange(' + row_index + ',' + product.id + ',\'' + product.name + '\');" class="form-control" min="1" max="1000" value="1" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"></td>';
+        code += '<td><input id="amount' + row_index + '" type="number" onchange="AmountChange(' + row_index + ',' + product.id + ',\'' + product.name + '\');" class="form-control" min="1" max="'+product.stock+'" value="1" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"></td>';
 
 
         code += '<td><a class="btn btn-xs btn-danger text-white" onclick="RemoveBasket(' + row_index + ',' + product.id + ')"><i class="icon-cart-arrow-down"></i></a></td>';
@@ -232,13 +235,24 @@ function AddBasket(id, name, price) {
 
 function AmountChange(row_index, id) {
     var idinput = "#amount" + row_index;
+    //Busca indice (index) del item en el array mediante el ID
     var index = Basket.findIndex(item => item.id === id);
-    Basket[index].amount = $(idinput).val();
-    Basket[index].subtotal = Basket[index].price * Basket[index].amount;
-    $('#td_subtotal' + row_index).html('<b>' + Basket[index].subtotal.toFixed(2) + '</b>');
-    ShowTotal();
-
+    var val_imput =  parseInt($(idinput).val());
+    console.log("valor input: "+val_imput);
+    console.log("valor stock en carrito: "+Basket[index].stock);
     console.log(Basket);
+    if (Basket[index].stock>=val_imput){     
+        Basket[index].amount = val_imput;
+        Basket[index].subtotal = Basket[index].price * Basket[index].amount;
+        $('#td_subtotal' + row_index).html('<b>' + Basket[index].subtotal.toFixed(2) + '</b>');
+        ShowTotal();
+    } 
+    else{
+        toastr.error('La cantidad no puede sobre pasar el stock del producto: '+Basket[index].stock);
+        $(idinput).val(Basket[index].stock);
+        AmountChange(row_index, id);
+    }
+    //console.log(Basket);
 }
 
 
@@ -248,9 +262,9 @@ function RemoveBasket(row_i, id) {
     Basket.splice(index, 1);
     ShowTotal();
 
-    console.log(Basket);
+    //console.log(Basket);
 }
-var id_client = 0;
+
 
 function SelectClient(id, name) {
     id_client = id;
@@ -259,43 +273,93 @@ function SelectClient(id, name) {
 
 function ShowTotal() {
     total = 0;
+    total_d = 0;
     for (let index = 0; index < Basket.length; index++) {
         total += Basket[index].subtotal;
     }
     total = total.toFixed(2);
-    var t_c = total - (total * $('#select_discount').val());
-    $('#total_c').html(t_c.toFixed(2));
+    total_d = total - (total * $('#select_discount').val());
+    total_d = total_d.toFixed(2);
+    $('#total_c').html(total_d);
     $('#total_s').html(total);
 }
 
 function SaveSale() {
-    var user_id = $('#user_id').val();
-    var client_id = id_client;
-    /*date
-    total
-    client_id	
-    seller_id	
-    user_id	discount	
-    expiration_discount	
-    total_discount	
-    state	
-    created_at	
-    updated_a*/
-    $.ajax({
-        url: "sale",
-        method: 'post',
-        data: data,
-        success: function (result) {
-            if (result.success) {
-                toastr.success(result.msg);
+    if(Basket.length == 0){
+        toastr.warning("Debe seleccionar almenos un productos antes de registrar la venta.");
+    }
+    else if (id_client != 0){
+        var d = new Date();
+        var currenDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+        var data = {
+            'date' : currenDate.toString(),
+            'total' : total,
+            'client_id' : id_client,
+            'seller_id' : $('#seller_id').val(),
+            'user_id' : $('#user_id').val(),
+            'discount' : $('#select_discount').val(),
+            'expiration_discount' : $('#expiration_discount').val(),
+            'total_discount' : total_d,
+            'payment_status_id' : 5, //5 PENDIENTE | 6 EN CURSO | 7 CANCELADO
+            'state' : 'ACTIVO',
+        };
+        //console.log(data);
+        $.ajax({
+            url: "sale",
+            method: 'post',
+            data: data,
+            success: function (result) {
+                if (result.success) {
+                    SaveDetails(result.sale_id);
+                    //toastr.success(result.msg);
+                    //console.log("ID VENTA REGISTRADA "+result.sale_id);
+    
+                } else {
+                    toastr.warning(result.msg);
+                }
+            },
+            error: function (result) {
+                console.log(result.responseJSON.message);
+                toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
+            },
+        });
+    }
+    else {
+        toastr.warning("Debe seleccionar un cliente antes de registrar la venta.");
+    }
 
-            } else {
-                toastr.warning(result.msg);
-            }
-        },
-        error: function (result) {
-            console.log(result.responseJSON.message);
-            toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
-        },
-    });
+}
+
+function SaveDetails(sale_id){
+
+    for (let index = 0; index < Basket.length; index++) {
+        var data = {
+            'name_product':Basket[index].name,	
+            'amount':Basket[index].amount,	
+            'subtotal':Basket[index].subtotal.toFixed(2),		
+            'sale_id':sale_id,
+            'batch_id':Basket[index].id,
+            'state':'ACTIVO',
+        };
+        console.log(data);
+        $.ajax({
+            url: "detail",
+            method: 'post',
+            data: data,
+            success: function (result) {
+                if (result.success) {
+                    console.log("registros de detalles guardados correctamente..");
+                    location.reload();
+                    //toastr.success(result.msg);
+    
+                } else {
+                    toastr.warning(result.msg);
+                }
+            },
+            error: function (result) {
+                console.log(result.responseJSON.message);
+                toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
+            },
+        });
+    }
 }

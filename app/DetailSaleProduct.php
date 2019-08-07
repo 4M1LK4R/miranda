@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class DetailSaleProduct extends Model
 {
     protected $fillable =[
-        'name_product','amount', 'subtotal','state','sale_id', 'product_id'
+        'name_product','amount', 'subtotal','state','sale_id', 'batch_id'
     ];
     public function sale()
     {
         return $this->belongsTo(Sale::class);
     }
-    public function product()
+    public function batch()
     {
-        return $this->belongsTo(product::class);
+        return $this->belongsTo(Batch::class);
     }
 }

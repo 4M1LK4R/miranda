@@ -2,8 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Sale;
+use App\Catalogue;
+use App\Batch;
+use App\User;
+use App\Client;
+use App\Seller;
+use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
+use App\Http\Requests\SaleRequest;
 use Validator;
+
+
 
 class SaleController extends Controller
 {
@@ -24,8 +34,8 @@ class SaleController extends Controller
             return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
         } 
         else{
-            Sale::create($request->all());
-            return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
+            $Sale = Sale::create($request->all());
+            return response()->json(['success'=>true,'msg'=>'Registro existoso.','sale_id'=>$Sale->id]);
         }
     }
     public function show($id)
@@ -45,8 +55,8 @@ class SaleController extends Controller
             return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
         } 
         else{
-            $Provider = Provider::find($request->id);
-            $Provider->update($request->all());
+            $Sale = Sale::find($request->id);
+            $Sale->update($request->all());
             return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
         }
     }

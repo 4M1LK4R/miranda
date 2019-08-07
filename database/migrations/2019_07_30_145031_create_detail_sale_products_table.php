@@ -21,14 +21,14 @@ class CreateDetailSaleProductsTable extends Migration
             $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
             $table->timestamps();
             $table->unsignedBigInteger('sale_id')->unsigned();
-            $table->unsignedBigInteger('product_id')->unsigned();
+            $table->unsignedBigInteger('batch_id')->unsigned();
             //RELACTIONS
 
             $table->foreign('sale_id')->references('id')->on('sales') //sale
             ->onDelete('cascade')
             ->onUpdate('cascade');
             
-            $table->foreign('product_id')->references('id')->on('products') //producto
+            $table->foreign('batch_id')->references('id')->on('batches') //producto
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });

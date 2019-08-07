@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
     protected $fillable =[
-        'date','total', 'client_id','seller_id','discount', 'expiration_discount','state'
+        
+        'date','total', 'client_id','user_id','seller_id','payment_status_id','discount', 'expiration_discount','total_discount','state'
     ];
     public function client()
     {
@@ -16,5 +17,9 @@ class Sale extends Model
     public function seller()
     {
         return $this->belongsTo(Seller::class);
+    }
+    public function payment_status()
+    {
+        return $this->belongsTo(Catalogue::class);
     }
 }

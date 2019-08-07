@@ -28,7 +28,7 @@ class ShopController extends Controller
         })
         ->addColumn('Shop', function ($item) {
             $product = Product::find($item->product_id);
-            return '<a class="btn btn-xs btn-success text-white" onclick="AddBasket('.$item->id.',\''.$product->name.'\',\''.$item->wholesaler_price.'\')"><i class="icon-cart-plus"></i></a>';
+            return '<a class="btn btn-xs btn-success text-white" onclick="AddBasket('.$item->id.',\''.$product->name.'\',\''.$item->wholesaler_price.'\',\''.$item->stock.'\')"><i class="icon-cart-plus"></i></a>';
         })
         ->rawColumns(['Detalle','Shop'])              
         ->toJson();
@@ -46,10 +46,9 @@ class ShopController extends Controller
         ->rawColumns(['SelectClient'])              
         ->toJson();
     }
-    
+
     public function detail(Request $request)
-    {
-        
+    {    
         $Batch = Batch::find($request->id)->with('product','user','provider','line','storage','industry','payment_status','payment_type')->first();
         return $Batch;
         //$Batch = Batch::find($request->id);
@@ -58,33 +57,8 @@ class ShopController extends Controller
         //ESTE PARA VENTAS 
         //Este funciona!
         //return Batch::with('product','user','provider','line','storage','industry','payment_status','payment_type')->get()->where('id',$request->id);
-
     }
-    public function create()
-    {
-        //
-    }
-    public function store(Request $request)
-    {
-        //
-    }
-    public function show($id)
-    {
-        //
-    }
-    public function edit($id)
-    {
-        //
-    }
-    public function update(Request $request, $id)
-    {
-        //
-    }
-    public function destroy($id)
-    {
-        //
-    }
-
+    
     public function shop()
     {
         return view('shop.shop');

@@ -16,16 +16,17 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('date'); // fecha de registro
-            $table->decimal('total');
+            $table->decimal('total',8,2); // total
             $table->unsignedBigInteger('client_id')->unsigned(); //cliente
+            $table->unsignedBigInteger('user_id')->unsigned()->nullable(); //usuario
             $table->unsignedBigInteger('seller_id')->unsigned(); //vendedor
-            $table->Integer('user_id'); //usuario
+            $table->unsignedBigInteger('payment_status_id')->unsigned()->nullable(); // estado de pago
 
             //DISCOUNTS
-            $table->decimal('discount')->nullable();
+            $table->decimal('discount',8,2)->nullable();; // descuento
             $table->date('expiration_discount')->nullable();// fecha de espiración del descuento
-            $table->decimal('total_discount');
-            $table->enum('state', ['PENDIENTE','EN PROCESO','CANCELADO'])->default('PENDIENTE'); // estado
+            $table->decimal('total_discount',8,2)->nullable();; // descuento
+            $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO'); // estado
             $table->timestamps();
 
             //RELACTIONS
@@ -35,6 +36,10 @@ class CreateSalesTable extends Migration
             ->onUpdate('cascade');
 
             $table->foreign('seller_id')->references('id')->on('sellers') //vendedor
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            
+            $table->foreign('payment_status_id')->references('id')->on('catalogues')// estado de pago catalogos
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });
