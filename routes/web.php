@@ -32,7 +32,7 @@ Route::get('/zone', 'CatalogueController@zone')->name('zone')->middleware('auth'
 //Catalogs Controllers
 Route::resource('catalogs', 'CatalogueController');
 Route::get('listcatalog', 'CatalogueController@list')->name('listcatalog')->middleware('auth');
-
+Route::get('verify', 'CatalogueController@verify')->name('verify')->middleware('auth');
 /////CLIENTS/////////
 
 Route::get('/clients', 'ClientController@client')->name('client')->middleware('auth');

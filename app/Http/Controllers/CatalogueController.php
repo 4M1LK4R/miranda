@@ -25,22 +25,50 @@ class CatalogueController extends Controller
         $this->middleware('permission:catalogs.edit')->only(['edit','update']);
         $this->middleware('permission:catalogs.destroy')->only('destroy');
     }
-
-    public function index(Request $request)
+    public function verify(Request $request)
     {
-        return datatables()->of(Catalogue::all()->where('type_catalog_id', $request->type_catalog_id)->where('state','ACTIVO'))
-        ->addColumn('Editar', function ($item) {
-            return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i></a>';
-        })
-        ->addColumn('Eliminar', function ($item) {
-            return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
-        })
-        ->rawColumns(['Editar','Eliminar']) 
-              
-        ->toJson();
-        
+        //$code_enable = "disabled";
+        $roles = auth()->user()->roles;
+        for ($i=0; $i < count($roles) ; $i++) { 
+            if ($roles[$i]->name=="Admin") {
+                return $roles;
+                return $roles[$i]->name;
+            }else{
+
+            }
+        }
         
     }
+    public function index(Request $request)
+    {
+        $roles = auth()->user()->roles;
+        for ($i=0; $i < count($roles) ; $i++) { 
+            //Preguntar el Rol si es admin o otro 
+            if ($roles[$i]->name=="Admin") {
+                return datatables()->of(Catalogue::all()->where('type_catalog_id', $request->type_catalog_id)->where('state','ACTIVO'))
+                ->addColumn('Editar', function ($item) {
+                    return '<a class="btn btn-xs btn-primary text-white disabled"  onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i></a>';
+                })
+                ->addColumn('Eliminar', function ($item) {
+                    return '<a class="btn btn-xs btn-danger text-white disabled"  onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
+                })
+                ->rawColumns(['Editar','Eliminar'])  
+                ->toJson();
+            }else{
+                return datatables()->of(Catalogue::all()->where('type_catalog_id', $request->type_catalog_id)->where('state','ACTIVO'))
+                ->addColumn('Editar', function ($item) {
+                    return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i></a>';
+                })
+                ->addColumn('Eliminar', function ($item) {
+                    return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
+                })
+                ->rawColumns(['Editar','Eliminar'])  
+                ->toJson();
+            }
+        }
+
+    }
+
     public function store(Request $request)
     {
         $rule = new CatalogueRequest();        
