@@ -94,20 +94,37 @@
                                     <a class="dropdown-item" href="#">Reporte</a>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown">
+                           
+                            <li class="nav-item dropdown">                               
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdministracion" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="icon-sliders"></i>Configuración
-                                </a>
+                                </a>                            
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownAdministracion">
+                                    @can('company')
                                     <a class="dropdown-item" href="#">Empresa</a>
+                                    @endcan
+                                    @can('user')
                                     <a class="dropdown-item" href="#">Usuarios</a>
+                                    @endcan
                                     <div class="dropdown-divider"></div>
+                                    @can('industry')
                                     <a class="dropdown-item" href="{{ route('industry') }}">Industrias</a>
+                                    @endcan
+
+                                    @can('deposit')
                                     <a class="dropdown-item" href="{{ route('deposit') }}">Almacenes</a>
-                                    <a class="dropdown-item" href="{{ route('zone') }}">Zonas</a>            
+                                    @endcan
+
+                                    @can('zone')
+                                    <a class="dropdown-item" href="{{ route('zone') }}">Zonas</a>
+                                   @endcan
+                                    @can('line')       
                                     <a class="dropdown-item" href="{{ route('line') }}">Lineas</a>
+                                   @endcan
                                 </div>
+                               
                             </li>
+                           
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

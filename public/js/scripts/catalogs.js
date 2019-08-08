@@ -114,9 +114,8 @@ function Edit(id) {
             show_data(result);
         },
         error: function (result) {
-            toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-
-            console.log(result);
+            toastr.error(result.responseText);
+            console.log(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
         },
 
     });
@@ -190,8 +189,8 @@ $("#btn_delete").click(function () {
             }
         },
         error: function (result) {
-            toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
-            console.log(result);
+            toastr.error(result.responseText);
+            console.log(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
         },
 
     });
@@ -261,3 +260,4 @@ function ClearInputs() {
     $("#form-data")[0].reset();
     id=0;
 };
+

@@ -10,14 +10,27 @@ use Yajra\DataTables\DataTables;
 use App\Http\Requests\CatalogueRequest;
 use Validator;
 
+use Caffeinated\Shinobi\Middleware\UserHasPermission;
+
 class CatalogueController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:industry')->only('industry');
+        $this->middleware('permission:line')->only('line');
+        $this->middleware('permission:deposit')->only('deposit');
+        $this->middleware('permission:zone')->only('zone');        
+
+        $this->middleware('permission:catalogs.store')->only('store');
+        $this->middleware('permission:catalogs.edit')->only(['edit','update']);
+        $this->middleware('permission:catalogs.destroy')->only('destroy');
+    }
 
     public function index(Request $request)
     {
         return datatables()->of(Catalogue::all()->where('type_catalog_id', $request->type_catalog_id)->where('state','ACTIVO'))
         ->addColumn('Editar', function ($item) {
-            return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
+            return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i></a>';
         })
         ->addColumn('Eliminar', function ($item) {
             return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
@@ -25,6 +38,8 @@ class CatalogueController extends Controller
         ->rawColumns(['Editar','Eliminar']) 
               
         ->toJson();
+        
+        
     }
     public function store(Request $request)
     {

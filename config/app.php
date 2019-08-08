@@ -176,6 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         //Datatable 
         Yajra\DataTables\DataTablesServiceProvider::class,
+        //shinobi
+        Caffeinated\Shinobi\ShinobiServiceProvider::class,
 
     ],
 
