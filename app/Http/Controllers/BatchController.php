@@ -15,6 +15,10 @@ use Validator;
 
 class BatchController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:batch')->only('batch'); 
+    }
     
     public function index()
     {

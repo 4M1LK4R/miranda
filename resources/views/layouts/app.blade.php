@@ -64,11 +64,19 @@
                                     <i class="icon-list-alt"></i>Administrar ventas
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmVentas">
+                                    @can('client')
                                     <a class="dropdown-item" href="{{ route('client') }}">Clientes</a>
+                                    @endcan
+                                    
                                     <a class="dropdown-item" href="#">Cotizaciones </a>
+                                    
+                                    
                                     <a class="dropdown-item" href="#">Ventas</a>
+                                    
                                     <!--<a class="dropdown-item" href="#">Devoluciones</a>-->
+                                    @can('seller')
                                     <a class="dropdown-item" href="{{ route('seller') }}">Vendedores</a>
+                                    @endcan
                                     <a class="dropdown-item" href="#">Facturas</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Cuentas por Cobrar</a>
@@ -79,9 +87,15 @@
                                     <i class="icon-box"></i>Administrar inventario
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmInventario">
+                                    @can('product')
                                     <a class="dropdown-item" href="{{ route('product') }}">Productos</a>
+                                    @endcan
+                                    @can('batch')
                                     <a class="dropdown-item" href="{{ route('batch') }}">Lotes (Compras)</a>
+                                    @endcan
+                                    @can('provider')
                                     <a class="dropdown-item" href="{{ route('provider') }}">Proveedores</a>
+                                    @endcan
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Cuentas por Pagar</a>         
                                 </div>
@@ -100,12 +114,11 @@
                                     <i class="icon-sliders"></i>Configuración
                                 </a>                            
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownAdministracion">
-                                    @can('company')
+                                    
                                     <a class="dropdown-item" href="#">Empresa</a>
-                                    @endcan
-                                    @can('user')
+                                    
                                     <a class="dropdown-item" href="#">Usuarios</a>
-                                    @endcan
+                                    
                                     <div class="dropdown-divider"></div>
                                     @can('industry')
                                     <a class="dropdown-item" href="{{ route('industry') }}">Industrias</a>

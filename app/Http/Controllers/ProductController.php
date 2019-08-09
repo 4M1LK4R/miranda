@@ -12,6 +12,10 @@ use Validator;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:product')->only('product'); 
+    }
     public function index()
     {
         return datatables()->of(Product::all()->where('state','ACTIVO'))

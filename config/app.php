@@ -177,7 +177,7 @@ return [
         //Datatable 
         Yajra\DataTables\DataTablesServiceProvider::class,
         //shinobi
-        Caffeinated\Shinobi\ShinobiServiceProvider::class,
+        //Caffeinated\Shinobi\ShinobiServiceProvider::class,
 
     ],
 

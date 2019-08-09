@@ -10,7 +10,10 @@ use Validator;
 
 class SellerController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('permission:seller')->only('seller'); 
+    }
     public function index()
     {
         return datatables()->of(Seller::all()->where('state','ACTIVO'))

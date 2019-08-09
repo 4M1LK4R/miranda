@@ -29,35 +29,36 @@ Route::get('/deposit', 'CatalogueController@deposit')->name('deposit')->middlewa
 Route::get('/industry', 'CatalogueController@industry')->name('industry')->middleware('auth');
 Route::get('/line', 'CatalogueController@line')->name('line')->middleware('auth');
 Route::get('/zone', 'CatalogueController@zone')->name('zone')->middleware('auth');
+
 //Catalogs Controllers
-Route::resource('catalogs', 'CatalogueController');
+Route::resource('catalogs', 'CatalogueController')->except(['create','show']);
 Route::get('listcatalog', 'CatalogueController@list')->name('listcatalog')->middleware('auth');
-Route::get('verify', 'CatalogueController@verify')->name('verify')->middleware('auth');
+//Route::get('verify', 'CatalogueController@verify')->name('verify')->middleware('auth');
 /////CLIENTS/////////
 
 Route::get('/clients', 'ClientController@client')->name('client')->middleware('auth');
-Route::resource('client', 'ClientController');
+Route::resource('client', 'ClientController')->except(['create','show']);
 Route::get('listclient', 'ClientController@list')->name('listclient')->middleware('auth');
 
 /////PRODUCTS/////////
 
 Route::get('/products', 'ProductController@product')->name('product')->middleware('auth');
-Route::resource('product', 'ProductController');
+Route::resource('product', 'ProductController')->except(['create','show']);
 Route::get('listproduct', 'ProductController@list')->name('listproduct')->middleware('auth');
 /////PROVIDER/////////
 
 Route::get('/providers', 'ProviderController@provider')->name('provider')->middleware('auth');
-Route::resource('provider', 'ProviderController');
+Route::resource('provider', 'ProviderController')->except(['create','show']);
 Route::get('listprovider', 'ProviderController@list')->name('listprovider')->middleware('auth');
 
 /////SELLER/////////
 Route::get('/sellers', 'SellerController@seller')->name('seller')->middleware('auth');
-Route::resource('seller','SellerController');
+Route::resource('seller','SellerController')->except(['create','show']);
 Route::get('listseller', 'SellerController@list')->name('listseller')->middleware('auth');
 
 /////BATCH/////////
 Route::get('/batches', 'BatchController@batch')->name('batch')->middleware('auth');
-Route::resource('batch','BatchController');
+Route::resource('batch','BatchController')->except(['create']);
 
 /////SHOP/////////
 Route::get('/shops', 'ShopController@shop')->name('shop')->middleware('auth');

@@ -12,6 +12,10 @@ use Validator;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:client')->only('client'); 
+    }
 
     public function index()
     {

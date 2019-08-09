@@ -6,11 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Caffeinated\Shinobi\Traits\ShinobiTrait;
+use Caffeinated\Shinobi\Concerns\HasRolesAndPermissions;
+
 
 class User extends Authenticatable
 {
-    use Notifiable, ShinobiTrait;
+    use Notifiable,HasRolesAndPermissions;
 
     protected $fillable = [
         'name', 'email', 'password',

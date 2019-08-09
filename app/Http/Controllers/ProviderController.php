@@ -13,6 +13,10 @@ use Validator;
 
 class ProviderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:provider')->only('provider'); 
+    }
     public function index()
     {
         return datatables()->of(Provider::all()->where('state','ACTIVO'))

@@ -2,20 +2,6 @@ var table;
 var id=0;
 var type_catalog_id=1;
 
-function VerifiryRole(){
-    $.ajax({
-        url: 'verify',
-        method: 'get',
-        success: function (result) {
-            console.log(result);
-        },
-        error: function (result) {
-            console.log(result);
-        },
-
-    });
-}
-
 $(document).ready(function(){
     $.ajaxSetup({
         headers: {
@@ -23,7 +9,6 @@ $(document).ready(function(){
         }
     });
     ListDatatable();
-    VerifiryRole();
     catch_parameters();
 
 });
