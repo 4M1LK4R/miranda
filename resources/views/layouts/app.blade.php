@@ -67,17 +67,14 @@
                                     @can('client')
                                     <a class="dropdown-item" href="{{ route('client') }}">Clientes</a>
                                     @endcan
-                                    
                                     <a class="dropdown-item" href="#">Cotizaciones </a>
-                                    
-                                    
                                     <a class="dropdown-item" href="#">Ventas</a>
-                                    
-                                    <!--<a class="dropdown-item" href="#">Devoluciones</a>-->
                                     @can('seller')
                                     <a class="dropdown-item" href="{{ route('seller') }}">Vendedores</a>
                                     @endcan
-                                    <a class="dropdown-item" href="#">Facturas</a>
+                                    @can('collector')
+                                    <a class="dropdown-item" href="{{ route('collector') }}">Cobradores</a>
+                                    @endcan
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Cuentas por Cobrar</a>
                                 </div>

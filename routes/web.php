@@ -33,7 +33,6 @@ Route::get('/zone', 'CatalogueController@zone')->name('zone')->middleware('auth'
 //Catalogs Controllers
 Route::resource('catalogs', 'CatalogueController')->except(['create','show']);
 Route::get('listcatalog', 'CatalogueController@list')->name('listcatalog')->middleware('auth');
-//Route::get('verify', 'CatalogueController@verify')->name('verify')->middleware('auth');
 /////CLIENTS/////////
 
 Route::get('/clients', 'ClientController@client')->name('client')->middleware('auth');
@@ -55,6 +54,12 @@ Route::get('listprovider', 'ProviderController@list')->name('listprovider')->mid
 Route::get('/sellers', 'SellerController@seller')->name('seller')->middleware('auth');
 Route::resource('seller','SellerController')->except(['create','show']);
 Route::get('listseller', 'SellerController@list')->name('listseller')->middleware('auth');
+
+/////COLLECTOR/////////
+
+Route::get('/collectors', 'CollectorController@collector')->name('collector')->middleware('auth');
+Route::resource('collector','CollectorController')->except(['create','show']);
+Route::get('listcollector', 'CollectorController@list')->name('listcollector')->middleware('auth');
 
 /////BATCH/////////
 Route::get('/batches', 'BatchController@batch')->name('batch')->middleware('auth');

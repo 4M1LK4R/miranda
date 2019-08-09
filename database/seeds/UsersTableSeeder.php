@@ -228,31 +228,31 @@ class UsersTableSeeder extends Seeder
         
         Permission::create([
             'name'        => 'Visualizar Cobradores',
-            'slug'        => 'collectors',
+            'slug'        => 'collector',
             'description' => 'Puede navegar en la vista de Cobradores',
         ]);
 
         Permission::create([
             'name'        => 'Crear registros en Cobradores',
-            'slug'        => 'collectors.store',
+            'slug'        => 'collector.store',
             'description' => 'Puede crear registros',
         ]);
 
         Permission::create([
             'name'        => 'Editar registro de Cobradores',
-            'slug'        => 'collectors.edit',
+            'slug'        => 'collector.edit',
             'description' => 'Puede editar registros',
         ]);
 
         /*Permission::create([
             'name'        => 'Actualizar registros de ProdCobradores',
-            'slug'        => 'collectors.update',
+            'slug'        => 'collector.update',
             'description' => 'Puede actualizar registros',
         ]);*/
 
         Permission::create([
             'name'        => 'Eliminar registros de Cobradores',
-            'slug'        => 'collectors.destroy',
+            'slug'        => 'collector.destroy',
             'description' => 'Puede eliminar registros',
         ]);
 
@@ -285,13 +285,13 @@ class UsersTableSeeder extends Seeder
         'provider','provider.store','provider.edit','provider.destroy',
         'seller','seller.store','seller.edit','seller.destroy',
         'client','client.store','client.edit','client.destroy',
-        'collectors','collectors.store','collectors.edit','collectors.destroy'
+        'collector','collector.store','collector.edit','collector.destroy'
         );
 
 
 
 
-        $guest->givePermissionTo('industry','line','zone','deposit','product','batch','provider','seller','client','collectors');
+        $guest->givePermissionTo('industry','line','zone','deposit','product','batch','provider','seller','client','collector');
         
 
         //CREA EL USUARIOS

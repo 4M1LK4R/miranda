@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientsTable extends Migration
+class CreateCollectorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,14 @@ class CreateClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('collectors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('catalog_zone_id')->unsigned();// FOREING KEY ZONE
-            $table->string('nit')->unique();
             $table->string('name');
-            $table->mediumText('contact')->nullable();
             $table->mediumText('description')->nullable();
             $table->string('phone')->nullable();
             $table->mediumText('address')->nullable();
             $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
             $table->timestamps();
-            //RELACTIONS
-            $table->foreign('catalog_zone_id')->references('id')->on('catalogues')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
         });
     }
 
@@ -38,6 +31,6 @@ class CreateClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('collectors');
     }
 }

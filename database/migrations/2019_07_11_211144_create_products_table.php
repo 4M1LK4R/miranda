@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('catalog_product_id')->unsigned();// FOREING KEY ZONE TYPE PRODUCT
             $table->string('name');
             $table->mediumText('description')->nullable();
-            $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
+            $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
             $table->timestamps();
             //RELACTIONS
             $table->foreign('catalog_product_id')->references('id')->on('catalogues')

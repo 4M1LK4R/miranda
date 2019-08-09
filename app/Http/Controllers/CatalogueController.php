@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 // importados
 use App\TypeCatalogue;
 use App\Catalogue;
+use App\User;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\CatalogueRequest;
 use Validator;
@@ -23,39 +24,16 @@ class CatalogueController extends Controller
         $this->middleware('permission:zone')->only('zone');   
         
     }
-    /*public function verify(Request $request)
-    {
-
-        $isAdmin = auth()->user()->hasRole('admin');
-        if ($isAdmin) {
-            return "true";
-        }
-        else {
-            return "false";
-        }
-        return $isEditor->toJson();
-        //$code_enable = "disabled";
-        $roles = auth()->user()->roles;
-        for ($i=0; $i < count($roles) ; $i++) { 
-            if ($roles[$i]->name=="Admin") {
-                return $roles;
-                return $roles[$i]->name;
-            }else{
-
-            }
-        }
-        
-    }*/
     public function index(Request $request)
     {
-        $isUser = auth()->user()->permissions;
+        $isUser = auth()->user()->can(['catalogs.edit', 'catalogs.destroy']);
         if ($isUser) {
             return datatables()->of(Catalogue::all()->where('type_catalog_id', $request->type_catalog_id)->where('state','ACTIVO'))
             ->addColumn('Editar', function ($item) {
-            return '<a class="btn btn-xs btn-primary text-white disabled" onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i></a>';
+            return '<a class="btn btn-xs btn-primary text-white " onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i></a>';
             })
             ->addColumn('Eliminar', function ($item) {
-            return '<a class="btn btn-xs btn-danger text-white disabled" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
+            return '<a class="btn btn-xs btn-danger text-white " onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
             })
             ->rawColumns(['Editar','Eliminar'])  
             ->toJson();
@@ -63,10 +41,10 @@ class CatalogueController extends Controller
         else {
             return datatables()->of(Catalogue::all()->where('type_catalog_id', $request->type_catalog_id)->where('state','ACTIVO'))
             ->addColumn('Editar', function ($item) {
-            return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i></a>';
+            return '<a class="btn btn-xs btn-primary text-white disabled" onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i></a>';
             })
             ->addColumn('Eliminar', function ($item) {
-            return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
+            return '<a class="btn btn-xs btn-danger text-white disabled" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
             })
             ->rawColumns(['Editar','Eliminar'])  
             ->toJson();

@@ -16,16 +16,32 @@ class SellerController extends Controller
     }
     public function index()
     {
-        return datatables()->of(Seller::all()->where('state','ACTIVO'))
-        ->addColumn('Editar', function ($item) {
-            return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
-        })
-        ->addColumn('Eliminar', function ($item) {
-            return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
-        })
-        ->rawColumns(['Editar','Eliminar']) 
-              
-        ->toJson();
+        $isUser = auth()->user()->can(['seller.edit', 'seller.destroy']);
+        if($isUser){
+            return datatables()->of(Seller::all()->where('state','ACTIVO'))
+            ->addColumn('Editar', function ($item) {
+                return '<a class="btn btn-xs btn-primary text-white " onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
+            })
+            ->addColumn('Eliminar', function ($item) {
+                return '<a class="btn btn-xs btn-danger text-white " onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
+            })
+            ->rawColumns(['Editar','Eliminar']) 
+                  
+            ->toJson();
+        }else{
+            return datatables()->of(Seller::all()->where('state','ACTIVO'))
+            ->addColumn('Editar', function ($item) {
+                return '<a class="btn btn-xs btn-primary text-white disabled" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
+            })
+            ->addColumn('Eliminar', function ($item) {
+                return '<a class="btn btn-xs btn-danger text-white disabled" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
+            })
+            ->rawColumns(['Editar','Eliminar']) 
+                  
+            ->toJson();
+        }
+
+
     }
     public function store(Request $request)
     {  
@@ -40,12 +56,6 @@ class SellerController extends Controller
             return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
         }
     }
-    public function show($id)
-    {
-        $Seller = Seller::find($id);
-        return $Seller->toJson();
-    }
-
     public function edit(Request $request)
     {
         $Seller = Seller::find($request->id);

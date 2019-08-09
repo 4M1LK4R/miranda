@@ -18,7 +18,7 @@ class CreateCataloguesTable extends Migration
             $table->unsignedBigInteger('type_catalog_id')->unsigned();// FOREING KEY
             $table->string('name');
             $table->mediumText('description')->nullable();
-            $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
+            $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
             $table->timestamps();
             //RELACTIONS
             $table->foreign('type_catalog_id')->references('id')->on('type_catalogs')

@@ -34,7 +34,7 @@ class CreateBatchesTable extends Migration
             $table->decimal('wholesaler_price',8,2); // precio para mayoristas
             $table->date('entry_date'); // fecha de entrada en deposito
             $table->date('expiration_date');// fecha de espiración del lote
-            $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO'); // estado
+            $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO'); // estado
             $table->timestamps();
             //RELACTIONS
 

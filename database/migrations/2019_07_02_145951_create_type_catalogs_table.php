@@ -17,7 +17,7 @@ class CreateTypeCatalogsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 128)->unique();
             $table->mediumText('description')->nullable();
-            $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
+            $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
             $table->timestamps();
         });
     }

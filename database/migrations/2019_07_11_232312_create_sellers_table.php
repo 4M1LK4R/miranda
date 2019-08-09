@@ -19,7 +19,7 @@ class CreateSellersTable extends Migration
             $table->mediumText('description')->nullable();
             $table->string('phone')->nullable();
             $table->mediumText('address')->nullable();
-            $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
+            $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
             $table->timestamps();
         });
     }

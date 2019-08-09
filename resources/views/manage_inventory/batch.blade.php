@@ -11,9 +11,11 @@
                         <h5 class="card-title text-primary">Lista de Lotes</h5>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
+                        @can('batch.store')
                         <button class="btn btn-outline-success" id="btn-agregar">
                             <i class="icon-plus"></i>&nbsp;Agregar Lote
                         </button>
+                        @endcan
                     </div>
                 </div>
                 <div class="row p-2">

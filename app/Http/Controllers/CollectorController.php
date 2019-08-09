@@ -2,29 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Collector;
 use Illuminate\Http\Request;
-use App\Catalogue;
-use App\TypeCatalog;
-use App\Product;
 use Yajra\DataTables\DataTables;
-use App\Http\Requests\ProductRequest;
+use App\Http\Requests\CollectorRequest;
 use Validator;
 
-class ProductController extends Controller
+class CollectorController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:product')->only('product'); 
+        $this->middleware('permission:collector')->only('collector'); 
     }
     public function index()
     {
-        $isUser = auth()->user()->can(['product.edit', 'product.destroy']);
+        $isUser = auth()->user()->can(['collector.edit', 'collector.destroy']);
         if($isUser){
-            return datatables()->of(Product::all()->where('state','ACTIVO'))
-            ->addColumn('catalog_product_id', function ($item) {
-                $catalog_product_id = Catalogue::find($item->catalog_product_id);
-                return  $catalog_product_id->name;
-            })
+            return datatables()->of(Collector::all()->where('state','ACTIVO'))
             ->addColumn('Editar', function ($item) {
                 return '<a class="btn btn-xs btn-primary text-white " onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
             })
@@ -32,14 +26,10 @@ class ProductController extends Controller
                 return '<a class="btn btn-xs btn-danger text-white " onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
             })
             ->rawColumns(['Editar','Eliminar']) 
-                
+                  
             ->toJson();
         }else{
-            return datatables()->of(Product::all()->where('state','ACTIVO'))
-            ->addColumn('catalog_product_id', function ($item) {
-                $catalog_product_id = Catalogue::find($item->catalog_product_id);
-                return  $catalog_product_id->name;
-            })
+            return datatables()->of(Collector::all()->where('state','ACTIVO'))
             ->addColumn('Editar', function ($item) {
                 return '<a class="btn btn-xs btn-primary text-white disabled" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
             })
@@ -47,72 +37,65 @@ class ProductController extends Controller
                 return '<a class="btn btn-xs btn-danger text-white disabled" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
             })
             ->rawColumns(['Editar','Eliminar']) 
-                
+                  
             ->toJson();
         }
-        
     }
+
     public function store(Request $request)
     {
-        $rule = new ProductRequest();        
+        $rule = new CollectorRequest();        
         $validator = Validator::make($request->all(), $rule->rules());
         if ($validator->fails())
         {
             return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
         } 
         else{
-            Product::create($request->all());
+            Collector::create($request->all());
             return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
         }
     }
-    public function show($id)
-    {
-        $Product = Product::find($id);
-        return $Product->toJson();
-    }
-
     public function edit(Request $request)
     {
-        $Product = Product::find($request->id);
-        return $Product->toJson();
+        $Collector = Collector::find($request->id);
+        return $Collector->toJson();
     }
     public function update(Request $request)
     {
-        $rule = new ProductRequest();        
+        $rule = new CollectorRequest();        
         $validator = Validator::make($request->all(), $rule->rules());
         if ($validator->fails())
         {
             return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
         } 
         else{
-            $Product = Product::find($request->id);
-            $Product->update($request->all());
+            $Collector = Collector::find($request->id);
+            $Collector->update($request->all());
             return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
         }
     }
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $Product = Product::find($request->id);
-        $Product->delete();
+        $Collector = Collector::find($request->id);
+        $Collector->delete();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
 
+
+    public function collector()
+    {
+        return view('manage_sales.collector');
+    }
     public function list(Request $request)
     {
         switch ($request->by)
         {
             case 'all':
-                $list=Product::All()->where('state','ACTIVO');
+                $list=Collector::All()->where('state','ACTIVO');
                 return $list;
             break;         
             default:
             break;
         }
-    }
-
-    // Return Views
-    public function product()
-    {
-        return view('manage_inventory.product');
     }
 }

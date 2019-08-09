@@ -10,9 +10,11 @@
                         <h5 class="card-title text-primary">Lista de Clientes</h5>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
+                        @can('client.store')
                         <button class="btn btn-outline-success" id="btn-agregar">
                             <i class="icon-plus"></i>&nbsp;Agregar
                         </button>
+                        @endcan
                     </div>
                 </div>
                 <div class="row p-2">

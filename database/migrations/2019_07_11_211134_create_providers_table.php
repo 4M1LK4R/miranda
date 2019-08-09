@@ -21,7 +21,7 @@ class CreateProvidersTable extends Migration
             $table->mediumText('contact')->nullable();
             $table->string('phone')->nullable();
             $table->mediumText('address')->nullable();
-            $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
+            $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
             $table->timestamps();
             //RELACTIONS
             $table->foreign('catalog_zone_id')->references('id')->on('catalogues')
