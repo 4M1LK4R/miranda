@@ -19,6 +19,12 @@ Route::get('/', function () {
 //Auth
 Auth::routes();
 
+///USERS///////
+
+Route::get('/users', 'UserController@user')->name('user')->middleware('auth');
+//Route::resource('client', 'ClientController')->except(['create','show']);
+//Route::get('listclient', 'ClientController@list')->name('listclient')->middleware('auth');
+
 //HOME
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -33,6 +39,8 @@ Route::get('/zone', 'CatalogueController@zone')->name('zone')->middleware('auth'
 //Catalogs Controllers
 Route::resource('catalogs', 'CatalogueController')->except(['create','show']);
 Route::get('listcatalog', 'CatalogueController@list')->name('listcatalog')->middleware('auth');
+
+
 /////CLIENTS/////////
 
 Route::get('/clients', 'ClientController@client')->name('client')->middleware('auth');

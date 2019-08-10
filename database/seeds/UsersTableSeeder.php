@@ -256,6 +256,43 @@ class UsersTableSeeder extends Seeder
             'description' => 'Puede eliminar registros',
         ]);
 
+
+        ////PERMISOS DE USUARIOS
+
+        Permission::create([
+            'name'        => 'Visualizar Usuarios',
+            'slug'        => 'user',
+            'description' => 'Puede navegar en la vista de Usuarios',
+        ]);
+
+        Permission::create([
+            'name'        => 'Crear registros en Usuarios',
+            'slug'        => 'user.store',
+            'description' => 'Puede crear registros',
+        ]);
+
+        Permission::create([
+            'name'        => 'Editar registro de Usuarios',
+            'slug'        => 'user.edit',
+            'description' => 'Puede editar registros',
+        ]);
+
+        /*Permission::create([
+            'name'        => 'Actualizar registros de ProdUsuarios',
+            'slug'        => 'user.update',
+            'description' => 'Puede actualizar registros',
+        ]);*/
+
+        Permission::create([
+            'name'        => 'Eliminar registros de Usuarios',
+            'slug'        => 'user.destroy',
+            'description' => 'Puede eliminar registros',
+        ]);
+
+
+
+
+
         ///////////////////////////////////////
         ////////////////////////////////////////    
 

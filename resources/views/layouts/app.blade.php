@@ -113,9 +113,9 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownAdministracion">
                                     
                                     <a class="dropdown-item" href="#">Empresa</a>
-                                    
-                                    <a class="dropdown-item" href="#">Usuarios</a>
-                                    
+                                    @can('user')
+                                    <a class="dropdown-item" href="{{ route('user') }}">Usuarios</a>
+                                    @endcan
                                     <div class="dropdown-divider"></div>
                                     @can('industry')
                                     <a class="dropdown-item" href="{{ route('industry') }}">Industrias</a>
