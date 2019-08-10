@@ -39,6 +39,7 @@
                                 <td>Producto</td>
                                 <td>Precio de Venta</td>
                                 <td>Stock</td>
+                                <td>Estado</td>
                                 <td>Detalle</td>
                                 <td>Editar</td>
                                 <td>Eliminar</td>

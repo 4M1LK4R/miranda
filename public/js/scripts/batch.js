@@ -52,6 +52,19 @@ function ListDatatable() {
             {
                 data: 'stock'
             },
+            { data: 'state',
+            "render": function (data, type, row) {
+                    if (row.state === 'ACTIVO') {
+                        return '<center><p class="bg-success text-white"><b>ACTIVO</b></p></center>';
+                    }
+                    else if (row.state === 'INACTIVO') {          
+                        return '<center><p class="bg-warning text-white"><b>INACTIVO</b></p></center>';
+                    }
+                    else if (row.state === 'ELIMINADO') {          
+                        return '<center><p class="bg-danger text-white"><b>ELIMINADO</b></p></center>';
+                    }
+                }
+            },
             {
                 data: 'Detalle',
                 orderable: false,
