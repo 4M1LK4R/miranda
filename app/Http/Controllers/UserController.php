@@ -97,7 +97,8 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $User = User::find($request->id);
-        $User->delete();
+        $User->state = "ELIMINADO";
+        $User->update();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
     public function user()
