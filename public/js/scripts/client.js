@@ -101,7 +101,7 @@ function Save() {
             }
         },
         error: function (result) {
-            console.log(result.responseJSON.message);
+            //console.log(result.responseJSON.message);
             toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
         },
     });
