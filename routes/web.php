@@ -79,11 +79,11 @@ Route::resource('shop','ShopController');
 Route::get('/dt_clients', 'ShopController@dt_clients')->name('dt_clients')->middleware('auth');
 
 /////SALE/////////
-Route::get('/sale', 'SaleController@sale')->name('sale')->middleware('auth');
+Route::get('/sales', 'SaleController@sale')->name('sale')->middleware('auth');
 Route::resource('sale','SaleController');
 
 /////Detail/////////
-Route::get('/Detail', 'DetailSaleProductController@detail')->name('sale')->middleware('auth');
+Route::get('/Detail', 'DetailSaleProductController@detail')->name('detail')->middleware('auth');
 Route::resource('detail','DetailSaleProductController');
 
 

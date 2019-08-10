@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h5 class="card-title text-primary">Lista de Proveedores</h5>
+                        <h2 class="card-title text-primary">Lista de Proveedores</h2>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
                         @can('provider.store')

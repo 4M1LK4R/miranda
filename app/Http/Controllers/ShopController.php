@@ -24,7 +24,7 @@ class ShopController extends Controller
             return  $product->name;
         })
         ->addColumn('Detalle', function ($item) {
-            return '<a class="btn btn-xs btn-success text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
+            return '<a class="btn btn-xs btn-info text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
         })
         ->addColumn('Shop', function ($item) {
             $product = Product::find($item->product_id);

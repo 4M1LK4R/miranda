@@ -36,12 +36,9 @@ class SellerController extends Controller
             ->addColumn('Eliminar', function ($item) {
                 return '<a class="btn btn-xs btn-danger text-white disabled" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
             })
-            ->rawColumns(['Editar','Eliminar']) 
-                  
+            ->rawColumns(['Editar','Eliminar'])                  
             ->toJson();
         }
-
-
     }
     public function store(Request $request)
     {  
@@ -61,7 +58,6 @@ class SellerController extends Controller
         $Seller = Seller::find($request->id);
         return $Seller->toJson();
     }
-
     public function update(Request $request)
     {
         $rule = new SellerRequest();        
@@ -76,17 +72,11 @@ class SellerController extends Controller
             return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
         }
     }
-
     public function destroy(Request $request)
     {
         $Seller = Seller::find($request->id);
         $Seller->delete();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
-    }
-
-    public function seller()
-    {
-        return view('manage_sales.seller');
     }
     public function list(Request $request)
     {
@@ -99,5 +89,9 @@ class SellerController extends Controller
             default:
             break;
         }
+    }
+    public function seller()
+    {
+        return view('manage_sales.seller');
     }
 }

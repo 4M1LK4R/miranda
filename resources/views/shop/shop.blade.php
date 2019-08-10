@@ -8,7 +8,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 d-flex justify-content-center">
-                        <h3 class="card-title text-primary">REGISTRAR VENTA</h3>
+                        <h2 class="card-title text-primary">REGISTRAR VENTA</h2>
                     </div>
                 </div>
             </div>

@@ -7,14 +7,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2 class="card-title text-primary">Lista de Almacénes</h2>
-                    </div>
-                    <div class="col-sm-6 d-flex justify-content-end">
-                        @can('catalogs.store')
-                        <button class="btn btn-outline-success" id="btn-agregar">
-                            <i class="icon-plus"></i>&nbsp;Agregar
-                        </button>
-                        @endcan
+                        <h2 class="card-title text-primary">Lista de Ventas</h2>
                     </div>
                 </div>
                 <div class="row p-2">
@@ -32,10 +25,19 @@
                     <table id="table" class="table table-striped ">
                         <thead>
                             <tr>
-                                <td>Nombre</td>
+                                <td>Cod. Venta</td>
+                                <td>Usuario</td>
+                                <td>Cliente</td>
+                                <td>Vendedor</td>
+                                <td>Fecha</td>
+                                <td>Total</td>
+                                <td>Total con descuento</td>
+                                <td>Descuento</td>
+                                <td>Fecha exp. Descuento</td>
+                                <td>Estado de pago</td>
                                 <td>Estado</td>
-                                <td>Descripción</td>
-                                <td>Editar</td>
+                                <td>Detalles</td>
+                                <td>Nota de venta</td>
                                 <td>Eliminar</td>
                             </tr>
                         </thead>
@@ -72,13 +74,43 @@
                                 <div class="invalid-feedback">
                                     Dato necesario.
                                 </div>
-                            </div>  
+                            </div>
+                            <div class="md-form mb-3">
+                                <label for="nombre"><b>Contacto:</b></label>
+                                <input type="text" class="form-control" onkeyup="Mayus(this);" id="contact" name="contact" placeholder="Contacto"
+                                    required>
+                                <div class="invalid-feedback">
+                                    Dato necesario.
+                                </div>
+                            </div>   
+                            <div class="md-form mb-3">
+                                <label for="nombre"><b>Nit:</b></label>
+                                <input type="text" class="form-control" onkeyup="Mayus(this);" id="nit" name="nit" placeholder="Nit"
+                                    required>
+                                <div class="invalid-feedback">
+                                    Dato necesario.
+                                </div>
+                            </div>
                             
                             <div class="md-form mb-3">
                                 <label for="nombre"><b>Descripción:</b></label>
                                 <textarea  type="text" class="form-control" onkeyup="Mayus(this);" rows="4" id="description" name="description" ></textarea>  
+                            </div>
+
+                            <div class="md-form mb-3">
+                                <label for="nombre"><b>Teléfono:</b></label>
+                                <input type="text" class="form-control" onkeyup="Mayus(this);" id="phone" name="phone" placeholder="Teléfono"
+                                    required>
+                                <div class="invalid-feedback">
+                                    Dato necesario.
+                                </div>   
                             </div> 
                             
+                            <div class="md-form mb-3">
+                                <label for="nombre"><b>Dirección:</b></label>
+                                <input type="text" class="form-control" onkeyup="Mayus(this);" id="address" name="address" placeholder="Dirección">   
+                            </div>
+                            <div class="md-form mb-3" id="select_zone"></div>  
                             <div class="md-form mb-3">
                                     <label for="state"><b>Estado:</b></label>
                                 <div class="custom-control custom-radio">
@@ -128,9 +160,5 @@
 
 @endsection
 @section('scripts')
-<script src="{{ URL::asset('js/scripts/catalogs.js') }}"></script>
-<script>
-type_catalog_id=2;
-title_modal_data="Registrar Nuevo Almacén";
-</script>
+<script src="{{ URL::asset('js/scripts/sale.js') }}"></script>
 @endsection

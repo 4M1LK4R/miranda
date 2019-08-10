@@ -18,7 +18,7 @@ class CreateDetailSaleProductsTable extends Migration
             $table->string('name_product');// nombre del producto
             $table->integer('amount')->nullable();// cantidad
             $table->decimal('subtotal',8,2); // subtotal
-            $table->enum('state', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
+            $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
             $table->timestamps();
             $table->unsignedBigInteger('sale_id')->unsigned();
             $table->unsignedBigInteger('batch_id')->unsigned();

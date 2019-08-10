@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Sale;
-use App\Catalogue;
-use App\Batch;
+
 use App\User;
 use App\Client;
 use App\Seller;
+
+use App\Catalogue;
+use App\Sale;
+
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaleRequest;
@@ -17,59 +19,35 @@ class SaleController extends Controller
 {
     public function index()
     {
-        /*
-            ID
-            USER
-            CLIENTE
-            VENDEDOR
-            FECHA
-            TOTAL
-            ESTADO DE PAGO
-            ESTADO
+        return datatables()->of(Sale::all())
+        ->addColumn('user_name', function ($item) {
+            $user_name = User::find($item->user_id);
+            return  $user_name->name;
+        })
+        ->addColumn('client_name', function ($item) {
+            $client_name = Client::find($item->client_id);
+            return  $client_name->name;
+        })
+        ->addColumn('seller_name', function ($item) {
+            $seller_name = Seller::find($item->seller_id);
+            return  $seller_name->name;
+        })
+        ->addColumn('payment_status', function ($item) {
+            $payment_status = Catalogue::find($item->payment_status_id);
+            return  $payment_status->name;
+        })
+        ->addColumn('Detalles', function ($item) {
+            return '<a class="btn btn-xs btn-info text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
+        })
+        ->addColumn('NotaVenta', function ($item) {
+            return '<a class="btn btn-xs btn-dark text-white" onclick="SaleNote(\''.$item->id.'\')"><i class="icon-print"></i></a>';
+        })
+        ->addColumn('Eliminar', function ($item) {
+            return '<a class="btn btn-xs btn-danger text-white" onclick="Delete('.$item->id.')"><i class="icon-trash"></i></a>';
+        })
+        ->rawColumns(['Detalles','NotaVenta','Eliminar'])            
+        ->toJson();
 
-            DESCUENTO
-            EXPORACIÓN DESCUENTO
-            TOTAL CON DESCUENTO
-        */
-
-
-
-        $isUser = auth()->user()->can(['batch.edit', 'batch.destroy']);
-        if($isUser){
-            return datatables()->of(Batch::all()->where('state','!=','ELIMINADO'))
-            ->addColumn('product_name', function ($item) {
-                $product_name = Product::find($item->product_id);
-                return  $product_name->name;
-            })
-            ->addColumn('Detalle', function ($item) {
-                return '<a class="btn btn-xs btn-success text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
-            })
-            ->addColumn('Editar', function ($item) {
-                return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
-            })
-            ->addColumn('Eliminar', function ($item) {
-                return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
-            })
-            ->rawColumns(['Detalle','Editar','Eliminar'])            
-            ->toJson();
-        }else{
-            return datatables()->of(Batch::all()->where('state','ACTIVO'))
-            ->addColumn('product_name', function ($item) {
-                $product_name = Product::find($item->product_id);
-                return  $product_name->name;
-            })
-            ->addColumn('Detalle', function ($item) {
-                return '<a class="btn btn-xs btn-success text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
-            })
-            ->addColumn('Editar', function ($item) {
-                return '<a class="btn btn-xs btn-primary text-white disabled" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
-            })
-            ->addColumn('Eliminar', function ($item) {
-                return '<a class="btn btn-xs btn-danger text-white disabled" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
-            })
-            ->rawColumns(['Detalle','Editar','Eliminar'])            
-            ->toJson();
-        }
         
     }
     public function create()
@@ -117,6 +95,6 @@ class SaleController extends Controller
     }
     public function sale()
     {
-        return view('sale.sale');
+        return view('manage_sales.sale');
     }
 }

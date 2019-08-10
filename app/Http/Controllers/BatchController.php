@@ -30,7 +30,7 @@ class BatchController extends Controller
                 return  $product_name->name;
             })
             ->addColumn('Detalle', function ($item) {
-                return '<a class="btn btn-xs btn-success text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
+                return '<a class="btn btn-xs btn-info text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
             })
             ->addColumn('Editar', function ($item) {
                 return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
@@ -47,7 +47,7 @@ class BatchController extends Controller
                 return  $product_name->name;
             })
             ->addColumn('Detalle', function ($item) {
-                return '<a class="btn btn-xs btn-success text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
+                return '<a class="btn btn-xs btn-info text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
             })
             ->addColumn('Editar', function ($item) {
                 return '<a class="btn btn-xs btn-primary text-white disabled" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';

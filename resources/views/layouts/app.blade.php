@@ -68,7 +68,7 @@
                                     <a class="dropdown-item" href="{{ route('client') }}">Clientes</a>
                                     @endcan
                                     <a class="dropdown-item" href="#">Cotizaciones </a>
-                                    <a class="dropdown-item" href="#">Ventas</a>
+                                    <a class="dropdown-item" href="{{ route('sale') }}">Ventas</a>
                                     @can('seller')
                                     <a class="dropdown-item" href="{{ route('seller') }}">Vendedores</a>
                                     @endcan
