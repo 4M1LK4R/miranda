@@ -297,16 +297,16 @@ class UsersTableSeeder extends Seeder
         ////////////////////////////////////////    
 
         // ROLES//
-        $superadmin = Role::create([
+        $root = Role::create([
             'name'   => 'Administrador del Sitio',
-            'slug'   => 'superadmin',
-            'description' =>'puede hacer todo en el sistema',
+            'slug'   => 'root',
+            'description' =>'Todos los privilegios',
             'special'=> 'all-access'
         ]);
         $manager = Role::create([
             'name'   => 'Manager',
             'slug'   => 'manager',
-            'description' =>'administrador general menor'
+            'description' =>'Administrador general menor'
         ]);
         $guest = Role::create([
             'name'   => 'Invitado',
@@ -335,6 +335,7 @@ class UsersTableSeeder extends Seeder
         $bytemo = App\User::create([
             'name' => 'bytemo',
             'email'=> 'bytemo@bytemo.com',
+            'estate' => 'ACTIVO',
             'email_verified_at' => now(),
             'password' => bcrypt('bytemo'),
             'remember_token' => str_random(10)            
@@ -343,22 +344,24 @@ class UsersTableSeeder extends Seeder
         $admin = App\User::create([
             'name' => 'administrador',
             'email'=> 'admin@admin.com',
+            'estate' => 'ACTIVO',
             'email_verified_at' => now(),
-            'password' => bcrypt('admin'),
+            'password' => encrypt('admin'),
             'remember_token' => str_random(10)            
         ]);
 
         $invited = App\User::create([
             'name' => 'invitado',
-            'email'=> 'winecod3@gmail.com',
+            'email'=> 'invitado@invitado.com',
+            'estate' => 'ACTIVO',
             'email_verified_at' => now(),
-            'password' => bcrypt('invitado'),
+            'password' => encrypt('invitado'),
             'remember_token' => str_random(10)            
         ]);
 
 
         //ASIGNACION DE ROLES
-        $bytemo->assignRoles('superadmin');
+        $bytemo->assignRoles('root');
         $admin->assignRoles('manager');
         $invited->assignRoles('guest');
 
