@@ -18,28 +18,20 @@ class UserController extends Controller
     public function index()
     {
         $isUser = auth()->user()->can(['user.edit', 'user.destroy']);
-        if ($isUser) {
+        //Variable para la visiblidad
+        $visibility = "";
+        if (!$isUser) {$visibility="disabled";}
             return datatables()->of(User::all()->where('state','!=','ELIMINADO')->where('name','!=','bytemo'))
-            ->addColumn('Editar', function ($item) {
-                return '<a class="btn btn-xs btn-primary text-white" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
+            //use para usar varible externa
+            ->addColumn('Editar', function ($item) use ($visibility) {
+                $item->v=$visibility;
+            return '<a class="btn btn-xs btn-primary text-white '.$item->v.'" onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i></a>';
             })
             ->addColumn('Eliminar', function ($item) {
-                return '<a class="btn btn-xs btn-danger text-white" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
+            return '<a class="btn btn-xs btn-danger text-white '.$item->v.'" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
             })
             ->rawColumns(['Editar','Eliminar'])              
             ->toJson();
-        }
-        else{
-            return datatables()->of(User::all()->where('state','!=','ELIMINADO')->where('name','!=','bytemo'))
-            ->addColumn('Editar', function ($item) {
-                return '<a class="btn btn-xs btn-primary text-white disabled" onclick="Edit('.$item->id.')"><i class="icon-pencil"></i></a>';
-            })
-            ->addColumn('Eliminar', function ($item) {
-                return '<a class="btn btn-xs btn-danger text-white disabled" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
-            })
-            ->rawColumns(['Editar','Eliminar'])              
-            ->toJson();
-        }
     }
     public function store(Request $request)
     {
