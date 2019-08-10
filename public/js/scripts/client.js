@@ -197,7 +197,7 @@ $("#btn_delete").click(function () {
         },
         success: function (result) {
             if (result.success) {
-                toastr.success(result.msg,{"progressBar": true,"closeButton": true});
+                toastr.success(result.msg);
             } else {
                 toastr.warning(result.msg);
             }

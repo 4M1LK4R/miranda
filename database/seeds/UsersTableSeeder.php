@@ -346,7 +346,7 @@ class UsersTableSeeder extends Seeder
             'email'=> 'admin@admin.com',
             'state' => 'ACTIVO',
             'email_verified_at' => now(),
-            'password' => encrypt('admin'),
+            'password' => bcrypt('admin'),
             'remember_token' => str_random(10)            
         ]);
 
@@ -355,7 +355,7 @@ class UsersTableSeeder extends Seeder
             'email'=> 'invitado@invitado.com',
             'state' => 'ACTIVO',
             'email_verified_at' => now(),
-            'password' => encrypt('invitado'),
+            'password' => bcrypt('invitado'),
             'remember_token' => str_random(10)            
         ]);
 

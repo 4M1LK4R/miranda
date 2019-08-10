@@ -16,34 +16,20 @@
 </div>
 <br>
 <div class="row">
-    <div class="col-md-6">
-        <div class="card shadow">
+<div class="col-md-6">
+        <div class="card bg-dark text-white shadow">
             <div class="card-body">
-                <h4 class="card-title text-primary"><i class="icon-user"></i>Lista de Usuarios Registrados</h4>
-                <div class="table-responsive">
-                    <table id="table" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <td>Nombre</td>
-                                <td>Email</td>
-                                <td>Detalle</td>
-                                <td>Eliminar</td>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card shadow">
-            <div class="card-body">
-                <h4 class="card-title text-primary"><i class="icon-id-badge"></i>Registrar Usuario</h4>
-                <div class="md-form mb-3" id="select_seller"></div>
-                <hr>
-                <h3 class="card-title text-primary"><i class="icon-user"></i>Cliente:&nbsp;<b><span id="name_client" class="text-success"></span></b></h3>
+                <h3 class="card-title"><i class="icon-id-badge"></i>Registrar Usuario</h3>
                 <div class="table-responsive">
                     <form class="form-data" id="form-data" novalidate>
+                        <div class="form-group">
+                                <label for="email">Nombre:</label>
+                                <input type="text" class="form-control" id="name" placeholder="Nombre" name="name" 
+                                    required>
+                            <div class="invalid-feedback">
+                                Dato necesario.
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="email">Email:</label>
                             <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" 
@@ -54,10 +40,23 @@
                         </div>
                         <div class="form-group">
                             <label for="pwd">Password:</label>
-                            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" 
+                            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" 
                                 required>
                             <div class="invalid-feedback">
                                 Dato necesario.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="state"><b>Estado:</b></label>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="estado_activo" name="state" class="custom-control-input bg-danger"
+                                    value="ACTIVO" checked>
+                                <label class="custom-control-label" for="estado_activo">Activo</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="estado_inactivo" name="state" class="custom-control-input"
+                                    value="INACTIVO">
+                                <label class="custom-control-label" for="estado_inactivo">Inactivo</label>
                             </div>
                         </div>
                         <div class="footer">
@@ -68,14 +67,33 @@
                 </div>
             </div>
         </div>
-    </div>   
+    </div>  
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body">
+                <h4 class="card-title text-primary"><i class="icon-user"></i>Lista de Usuarios Registrados</h4>
+                <div class="table-responsive">
+                    <table id="table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>Nombre</td>
+                                <td>Email</td>
+                                <td>Estado</td>
+                                <td>Editar</td>
+                                <td>Eliminar</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <br>
 
 <!-- Modals-->
-<!-- Modal Datos -->
 
-<div class="modal fade bd-example-modal-lg" id="modal_datos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<!--<div class="modal fade bd-example-modal-lg" id="modal_datos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -93,48 +111,21 @@
                         <div class="modal-body">
                             <div class="md-form mb-3">
                                 <label for="nombre"><b>Nombre:</b></label>
-                                <input type="text" class="form-control" onkeyup="Mayus(this);" id="name" name="name" placeholder="Nombre"
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
                                     required>
                                 <div class="invalid-feedback">
                                     Dato necesario.
                                 </div>
-                            </div>
-                            <div class="md-form mb-3">
-                                <label for="nombre"><b>Contacto:</b></label>
-                                <input type="text" class="form-control" onkeyup="Mayus(this);" id="contact" name="contact" placeholder="Contacto"
-                                    required>
-                                <div class="invalid-feedback">
-                                    Dato necesario.
-                                </div>
-                            </div>   
-                            <div class="md-form mb-3">
-                                <label for="nombre"><b>Nit:</b></label>
-                                <input type="text" class="form-control" onkeyup="Mayus(this);" id="nit" name="nit" placeholder="Nit"
-                                    required>
-                                <div class="invalid-feedback">
-                                    Dato necesario.
-                                </div>
-                            </div>
+                            </div>  
                             
                             <div class="md-form mb-3">
-                                <label for="nombre"><b>Descripción:</b></label>
-                                <textarea  type="text" class="form-control" onkeyup="Mayus(this);" rows="4" id="description" name="description" ></textarea>  
-                            </div>
-
-                            <div class="md-form mb-3">
-                                <label for="nombre"><b>Teléfono:</b></label>
-                                <input type="text" class="form-control" onkeyup="Mayus(this);" id="phone" name="phone" placeholder="Teléfono"
+                                <label for="nombre"><b>Password:</b></label>
+                                <input  type="password" class="form-control" rows="4" id="password" name="password" 
                                     required>
                                 <div class="invalid-feedback">
                                     Dato necesario.
-                                </div>   
+                                </div> 
                             </div> 
-                            
-                            <div class="md-form mb-3">
-                                <label for="nombre"><b>Dirección:</b></label>
-                                <input type="text" class="form-control" onkeyup="Mayus(this);" id="address" name="address" placeholder="Dirección">   
-                            </div>
-                            <div class="md-form mb-3" id="select_zone"></div>  
                             <div class="md-form mb-3">
                                     <label for="state"><b>Estado:</b></label>
                                 <div class="custom-control custom-radio">
@@ -158,7 +149,7 @@
             </form>
         </div>
     </div>
-</div>
+</div>-->
 
 <!-- Modal Eliminar -->
 <div class="modal fade bd-example-modal-lg" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
