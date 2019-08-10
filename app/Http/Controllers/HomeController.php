@@ -23,6 +23,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $User = auth()->user();
+        if ($User->state=="ACTIVO"){
+            return view('home');
+        }else{
+            auth()->logout();
+            return view('inactive');
+        }
+
+        
     }
 }

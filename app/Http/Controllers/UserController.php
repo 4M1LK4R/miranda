@@ -54,7 +54,10 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'state' => $request->state,
+                'email_verified_at' => now(),
                 'password' => bcrypt($request->password),
+                'remember_token' => str_random(10) 
+
             ]);
             return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
         }
@@ -79,34 +82,26 @@ class UserController extends Controller
         } 
         else{
             $User = User::find($request->id);
-            $User->update($request->all());
+            $User->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'state' => $request->state,
+                'email_verified_at' => now(),
+                'password' => bcrypt($request->password),
+                'remember_token' => str_random(10) 
+
+            ]);
             return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
         }
     }
     public function destroy(Request $request)
     {
         $User = User::find($request->id);
-        $User->state = "ELIMINADO";
-        $User->update();
+        $User->delete();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
-
-    public function list(Request $request)
-    {
-        switch ($request->by)
-        {
-            case 'all':
-                $list=User::All()->where('state','ACTIVO')->where('name','!=','bytemo')->where('name','!=',auth()->user()->name);
-                return $list;
-            break;         
-            default:
-            break;
-        }
-    }
-    // Return Views
     public function user()
     {
         return view ('configuration.user');
     }
-
 }
