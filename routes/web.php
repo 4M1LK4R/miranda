@@ -22,7 +22,7 @@ Auth::routes();
 ///USERS///////
 
 Route::get('/users', 'UserController@user')->name('user')->middleware('auth');
-//Route::resource('client', 'ClientController')->except(['create','show']);
+Route::resource('user', 'UserController')->except(['create']);
 //Route::get('listclient', 'ClientController@list')->name('listclient')->middleware('auth');
 
 //HOME
