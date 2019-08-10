@@ -335,7 +335,7 @@ class UsersTableSeeder extends Seeder
         $bytemo = App\User::create([
             'name' => 'bytemo',
             'email'=> 'bytemo@bytemo.com',
-            'estate' => 'ACTIVO',
+            'state' => 'ACTIVO',
             'email_verified_at' => now(),
             'password' => bcrypt('bytemo'),
             'remember_token' => str_random(10)            
@@ -344,7 +344,7 @@ class UsersTableSeeder extends Seeder
         $admin = App\User::create([
             'name' => 'administrador',
             'email'=> 'admin@admin.com',
-            'estate' => 'ACTIVO',
+            'state' => 'ACTIVO',
             'email_verified_at' => now(),
             'password' => encrypt('admin'),
             'remember_token' => str_random(10)            
@@ -353,7 +353,7 @@ class UsersTableSeeder extends Seeder
         $invited = App\User::create([
             'name' => 'invitado',
             'email'=> 'invitado@invitado.com',
-            'estate' => 'ACTIVO',
+            'state' => 'ACTIVO',
             'email_verified_at' => now(),
             'password' => encrypt('invitado'),
             'remember_token' => str_random(10)            
