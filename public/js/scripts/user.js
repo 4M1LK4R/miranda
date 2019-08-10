@@ -160,6 +160,7 @@ function Update() {
             success: function (result) {
                 if (result.success) {
                     toastr.success(result.msg);
+                    ClearInputs();
     
                 } else {
                     toastr.warning(result.msg);
@@ -195,7 +196,7 @@ $("#btn_delete").click(function () {
             }
         },
         error: function (result) {
-            toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            toastr.error(result.responseJSON.message +' CONTACTE A SU PROVEEDOR POR FAVOR.');
             //console.log(result);
         },
 
@@ -225,13 +226,6 @@ function catch_parameters()
     return data;
     
 }
-
-// muestra el modal
-$("#btn-agregar").click(function () {
-    ClearInputs();
-    $("#title-modal").html(title_modal_data);
-    $("#modal_datos").modal("show");
-});
 
 // metodo de bootstrap para validar campos
 

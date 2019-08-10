@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\UserRequest;
-use App\Http\Requests\UserUpdateRequest;
+use Illuminate\Validation\Rule;
 use Validator;
 
 class UserController extends Controller
@@ -56,7 +56,6 @@ class UserController extends Controller
                 'state' => $request->state,
                 'password' => bcrypt($request->password),
             ]);
-            //User::create($request->all());
             return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
         }
     }
@@ -66,9 +65,14 @@ class UserController extends Controller
         return $User->toJson();
     }
     public function update(Request $request)
-    {
-        $rule = new UserUpdateRequest();        
-        $validator = Validator::make($request->all(), $rule->rules());
+    {   
+        $validator = Validator::make($request->all(), [
+            'name'     => 'required|string|max:255',
+            'email'  => 'string|email|max:255',
+            'email' => ['required',Rule::unique('users')->ignore($request->id),],
+            'state'    => 'required|string',
+            'password' => 'required|string|min:5',
+        ]);
         if ($validator->fails())
         {
             return response()->json(['success'=>false,'msg'=>$validator->errors()->all()]);
