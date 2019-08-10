@@ -93,7 +93,8 @@ class ProductController extends Controller
     public function destroy(Request $request)
     {
         $Product = Product::find($request->id);
-        $Product->delete();
+        $Product->state = "ELIMINADO";
+        $Product->update();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
 

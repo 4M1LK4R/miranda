@@ -93,7 +93,8 @@ class CatalogueController extends Controller
     public function destroy(Request $request)
     {
         $Catalogue = Catalogue::find($request->id);
-        $Catalogue->delete();
+        $Catalogue->Catalogue = "ELIMINADO";
+        $Catalogue->update();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
 

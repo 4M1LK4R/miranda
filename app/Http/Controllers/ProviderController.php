@@ -111,7 +111,8 @@ class ProviderController extends Controller
     public function destroy(Request $request)
     {
         $Provider = Provider::find($request->id);
-        $Provider->delete();
+        $Provider->state = "ELIMINADO";
+        $Provider->update();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
 

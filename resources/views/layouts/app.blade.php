@@ -67,14 +67,13 @@
                                     @can('client')
                                     <a class="dropdown-item" href="{{ route('client') }}">Clientes</a>
                                     @endcan
-                                    <a class="dropdown-item" href="#">Cotizaciones </a>
+
                                     <a class="dropdown-item" href="{{ route('sale') }}">Ventas</a>
+
                                     @can('seller')
                                     <a class="dropdown-item" href="{{ route('seller') }}">Vendedores</a>
                                     @endcan
-                                    @can('collector')
-                                    <a class="dropdown-item" href="{{ route('collector') }}">Cobradores</a>
-                                    @endcan
+
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Cuentas por Cobrar</a>
                                 </div>
@@ -99,10 +98,15 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownReportes" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="icon-chart-bar"></i>Reportes
+                                    <i class="icon-money"></i>Cobranzas
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
-                                    <a class="dropdown-item" href="#">Reporte</a>
+                                    
+                                    <a class="dropdown-item" href="{{ route('payment') }}">Pagos</a>
+
+                                    @can('collector')
+                                    <a class="dropdown-item" href="{{ route('collector') }}">Cobradores</a>
+                                    @endcan
                                 </div>
                             </li>
                            

@@ -86,11 +86,27 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $User = User::find($request->id);
-        $User->delete();
+        $User->state = "ELIMINADO";
+        $User->update();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
+
+    public function list(Request $request)
+    {
+        switch ($request->by)
+        {
+            case 'all':
+                $list=User::All()->where('state','ACTIVO')->where('name','!=','bytemo')->where('name','!=',auth()->user()->name);
+                return $list;
+            break;         
+            default:
+            break;
+        }
+    }
+    // Return Views
     public function user()
     {
         return view ('configuration.user');
     }
+
 }

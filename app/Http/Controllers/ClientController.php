@@ -94,7 +94,8 @@ class ClientController extends Controller
     public function destroy(Request $request)
     {
         $Client = Client::find($request->id);
-        $Client->delete();
+        $Client->state = "ELIMINADO";
+        $Client->update();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
     public function list(Request $request)

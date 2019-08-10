@@ -50,10 +50,6 @@ class SaleController extends Controller
 
         
     }
-    public function create()
-    {
-
-    }
     public function store(Request $request)
     {
         $rule = new SaleRequest();        
@@ -66,14 +62,6 @@ class SaleController extends Controller
             $Sale = Sale::create($request->all());
             return response()->json(['success'=>true,'msg'=>'Registro existoso.','sale_id'=>$Sale->id]);
         }
-    }
-    public function show($id)
-    {
-        //
-    }
-    public function edit($id)
-    {
-        //
     }
     public function update(Request $request)
     {

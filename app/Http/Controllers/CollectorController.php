@@ -77,14 +77,15 @@ class CollectorController extends Controller
     public function destroy($id)
     {
         $Collector = Collector::find($request->id);
-        $Collector->delete();
+        $Collector->state = "ELIMINADO";
+        $Collector->update();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
 
 
     public function collector()
     {
-        return view('manage_sales.collector');
+        return view('collections.collector');
     }
     public function list(Request $request)
     {

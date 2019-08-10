@@ -75,7 +75,8 @@ class SellerController extends Controller
     public function destroy(Request $request)
     {
         $Seller = Seller::find($request->id);
-        $Seller->delete();
+        $Seller->state = "ELIMINADO";
+        $Seller->update();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
     public function list(Request $request)

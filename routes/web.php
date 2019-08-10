@@ -22,13 +22,11 @@ Auth::routes();
 ///USERS///////
 
 Route::get('/users', 'UserController@user')->name('user')->middleware('auth');
-Route::resource('user', 'UserController')->except(['create']);
-//Route::get('listclient', 'ClientController@list')->name('listclient')->middleware('auth');
+Route::resource('user', 'UserController')->except(['create','show']);
+Route::get('listuser', 'UserController@list')->name('listuser')->middleware('auth');
 
 //HOME
 Route::get('/home', 'HomeController@index')->name('home');
-
-
 /////CATALOGUES/////////
 //Catalogs views
 Route::get('/deposit', 'CatalogueController@deposit')->name('deposit')->middleware('auth');
@@ -75,7 +73,7 @@ Route::resource('batch','BatchController')->except(['create']);
 
 /////SHOP/////////
 Route::get('/shops', 'ShopController@shop')->name('shop')->middleware('auth');
-Route::resource('shop','ShopController');
+Route::resource('shop','ShopController')->except('create','edit','update','show','destroy');
 Route::get('/dt_clients', 'ShopController@dt_clients')->name('dt_clients')->middleware('auth');
 
 /////SALE/////////
@@ -84,6 +82,9 @@ Route::resource('sale','SaleController');
 
 /////Detail/////////
 Route::get('/Detail', 'DetailSaleProductController@detail')->name('detail')->middleware('auth');
-Route::resource('detail','DetailSaleProductController');
+Route::resource('detail','DetailSaleProductController')->except('create','show','edit');
+
+/////PAYMENT///////
+Route::get('/payments', 'PaymentController@payment')->name('payment')->middleware('auth');
 
 

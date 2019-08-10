@@ -102,7 +102,8 @@ class BatchController extends Controller
     public function destroy(Request $request)
     {
         $Batch = Batch::find($request->id);
-        $Batch->delete();
+        $Batch->state = "ELIMINADO";
+        $Batch->update();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
     public function batch()
