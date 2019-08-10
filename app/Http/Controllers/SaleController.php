@@ -75,7 +75,7 @@ class SaleController extends Controller
     {
         //
     }
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $rule = new SaleRequest();        
         $validator = Validator::make($request->all(), $rule->rules());
@@ -89,9 +89,12 @@ class SaleController extends Controller
             return response()->json(['success'=>true,'msg'=>'Se actualizo existosamente.']);
         }
     }
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $Sale = Sale::find($request->id);
+        $Sale->state = "ELIMINADO";
+        $Sale->update();
+        return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
     public function sale()
     {

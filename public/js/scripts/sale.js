@@ -102,103 +102,56 @@ function ListDatatable()
     });
 };
 
-
-
-
-// guarda los datos nuevos
-function Save() {
+// detalle de lote
+function Detail(id) {
     $.ajax({
-        url: "seller",
-        method: 'post',
-        data: catch_parameters(),
-        success: function (result) {
-            if (result.success) {
-                toastr.success(result.msg);
-
-            } else {
-                toastr.warning(result.msg);
-            }
-        },
-        error: function (result) {
-            console.log(result.responseJSON.message);
-            toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
-        },
-    });
-    table.ajax.reload();
-}
-
-
-
-// captura los datos
-function Edit(id) {
-    $.ajax({
-        url: "seller/{seller}/edit",
+        url: "sale/{sale}",
         method: 'get',
         data: {
             id: id
         },
         success: function (result) {
-            show_data(result);
+            show_detail(result);
         },
         error: function (result) {
             toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-
             console.log(result);
         },
 
     });
 };
-
-/// muestra la vista con los datos capturados
-var data_old;
-function show_data(obj) {
-    ClearInputs();
-    console.log(obj)
-    obj = JSON.parse(obj);
-    id= obj.id;
-    $("#name").val(obj.name);
-    $("#description").val(obj.description);
-    $("#phone").val(obj.phone);
-    $("#address").val(obj.address);
-    if (obj.state == "ACTIVO") {
-        $('#estado_activo').prop('checked', true);
+//muestra el detalle
+function show_detail(obj) {
+    var string = "";
+    //console.log(obj);
+    //DATOS DE PRODUCTO
+    string += "<p><h5><b>USUARIO</b></h5></p>";
+    string += "<p><b>Registrado por:</b>&nbsp;" + obj.user.name + "</p>";
+    string += "<hr>";
+    string += "<p><h5><b>DATOS DE PRODUCTO</b></h5></p>";
+    string += "<p><b>Código de lote:</b>&nbsp;" + obj.code + "</p>";
+    string += "<p><b>Producto:</b>&nbsp;" + obj.product.name + "</p>";
+    string += "<p><b>Stock:</b>&nbsp;" + obj.stock + "</p>";
+    string += "<p><b>Línea:</b>&nbsp;" + obj.line.name + "</p>";
+    string += "<p><b>Registro sanitario:</b>&nbsp;" + obj.sanitary_registration + "</p>";
+    string += "<p><b>Fecha de expiración:</b>&nbsp;" + obj.expiration_date + "</p>";
+    string += "<p><b>Industria:</b>&nbsp;" + obj.industry.name + "</p>";
+    string += "<p><b>Proveedor:</b>&nbsp;" + obj.provider.name + "</p>";
+    string += "<p><b>Estado:</b>&nbsp;" + obj.state + "</p>";
+    if (obj.description != null) {
+        string += "<p><b>Descripción:</b>&nbsp;" + obj.description + "</p>";
+    } else {
+        string += "<p><b>Descripción:</p>";
     }
-    if (obj.state == "INACTIVO") {
-        $('#estado_inactivo').prop('checked', true);
-    }
-    $("#title-modal").html("Editar Registro");
-
-    data_old = $(".form-data").serialize();
-
-    $('#modal_datos').modal('show');
+    string += "<hr>";
+    //DATOS DE INVENTARIO
+    string += "<p><h5><b>DATOS DE INVENTARIO</b></h5></p>";
+    string += "<p><b>Almacén:</b>&nbsp;" + obj.storage.name + "</p>";
+    string += "<p><b>Precio de venta:</b>&nbsp;" + obj.wholesaler_price + "</p>";
+    $("#title-modal-detalle").html("Detalle de Lote");
+    $('#content_detalle').html(string);
+    $('#modal_detalle').modal('show');
 };
-
-// actualiza los datos
-function Update() {
-    var data_new = $(".form-data").serialize();
-    if (data_old != data_new) {
-        $.ajax({
-            url: "seller/{seller}",
-            method: 'put',
-            data: catch_parameters(),
-            success: function (result) {
-                if (result.success) {
-                    toastr.success(result.msg);
-    
-                } else {
-                    toastr.warning(result.msg);
-                }
-            },
-            error: function (result) {
-                console.log(result.responseJSON.message);
-                toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
-            },
-        });
-        table.ajax.reload();
-        
-    }
-}
-
 //funcion para eliminar valor seleccionado
 function Delete(id_) {
     id= id_;
@@ -206,7 +159,7 @@ function Delete(id_) {
 }
 $("#btn_delete").click(function () {
     $.ajax({
-        url: "seller/{seller}",
+        url: "sale/{sale}",
         method: 'delete',
         data: {
             id: id
