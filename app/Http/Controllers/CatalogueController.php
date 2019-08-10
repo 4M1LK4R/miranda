@@ -26,44 +26,24 @@ class CatalogueController extends Controller
     }
     public function index(Request $request)
     {
+        //Variable para la visiblidad
+        $visibility = "";
         $isUser = auth()->user()->can(['catalogs.edit', 'catalogs.destroy']);
+        //Evaluar los permisos para la visibilidad
+        if (!$isUser) {$visibility="disabled";}
 
-        $DT=datatables()->of(Catalogue::all()->where('type_catalog_id', $request->type_catalog_id)->where('state','ACTIVO'));
-        if ($isUser) {
-            $DT=$DT->addColumn('Editar', function ($item,$a) {
-            return '<a class="btn btn-xs btn-primary text-white " onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i></a>';
-            })
-            ->addColumn('Eliminar', function ($item) {
-            return '<a class="btn btn-xs btn-danger text-white " onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
-            });
-        }
-        else {
-            $DT=$DT->addColumn('Editar', function ($item) {
-            return '<a class="btn btn-xs btn-primary text-white disabled" onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i></a>';
-            })
-            ->addColumn('Eliminar', function ($item) {
-            return '<a class="btn btn-xs btn-danger text-white disabled" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
-            })
-            ->rawColumns(['Editar','Eliminar'])  
-            ->toJson();
-        }
-        $DT=$DT->rawColumns(['Editar','Eliminar'])  
+
+
+        return datatables()->of(Catalogue::all()->where('type_catalog_id', $request->type_catalog_id)->where('state','ACTIVO'))
+        ->addColumn('Editar', function ($item) use ($visibility) {
+            $item->v=$visibility;
+        return '<a class="btn btn-xs btn-primary text-white '.$item->v.'" onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i>'.$item->v.'</a>';
+        })
+        ->addColumn('Eliminar', function ($item) {
+        return '<a class="btn btn-xs btn-danger text-white '.$item->v.'" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';
+        })
+        ->rawColumns(['Editar','Eliminar'])  
         ->toJson();
-
-
-        return $DT;
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
