@@ -93,7 +93,7 @@
                                     <a class="dropdown-item" href="{{ route('provider') }}">Proveedores</a>
                                     @endcan
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Cuentas por Pagar</a>         
+                                    <a class="dropdown-item" href="{{ route('debtstopay') }}">Cuentas por Pagar</a>         
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
