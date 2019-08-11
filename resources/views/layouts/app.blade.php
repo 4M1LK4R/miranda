@@ -9,19 +9,20 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
     <!-- Styles  tadatable -->
     <!--<link rhref="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" el="stylesheet" >-->
-    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/toastr.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/toastr.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fontello.css') }}">
 
     <!-- Iconos para tempusdominus -->
     <!-- Tempusdominus DateTime Picker-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    <link rel="stylesheet" href="{{ asset('css/tempusdominus-bootstrap-4.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
 </head>
@@ -167,28 +168,23 @@
             @yield('content')
         </main>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+    <script src="{{ asset('js/assets/jquery-3.3.1.js') }}"></script>
+    <script src="{{ asset('js/assets/popper.min.js') }}"></script>
+    <script src="{{ asset('js/assets/bootstrap.min.js') }}"></script>
     <!--Alert-->
     <script src="{{ asset('js/assets/toastr.js') }}"></script>
     <!--Date Tables-->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('js/assets/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/assets/dataTables.bootstrap4.min.js') }}"></script>
     <!--Export Print DateTables-->
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
-
+    <script src="{{ asset('js/assets/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/assets/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/assets/jszip.min.js') }}"></script>
+    <script src="{{ asset('js/assets/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('js/assets/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/assets/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('js/assets/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('js/assets/buttons.colVis.min.js') }}"></script>
     <!--Tempusdominus DateTime Picker-->
     <script src="{{ asset('js/assets/moment.js') }}"></script>
     <script src="{{ asset('js/assets/es.js') }}"></script>
