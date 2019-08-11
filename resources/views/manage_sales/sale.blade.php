@@ -20,7 +20,16 @@
     <div class="col-md-12">
         <div class="container">
             <div class="card border-primary p-2">
-                <center><h2><b>NOTA DE ENTREGA</b></h2></center>
+                <div class="row">
+                    <div class="col align-self-start">
+                        <h3><b>IMPORTADORA MIRANDA</b></h3>
+                        Av. Gran Chacho #542 - Palmarcito<br>
+                        Tel: 66-31611 Fax: 66-31611
+                    </div>
+                </div>
+
+                <center><h3><b>NOTA DE ENTREGA</b></h3></center>
+
                 <div class="row">
                     <div class="col-md-6">
                         <br>
@@ -38,10 +47,14 @@
                         <br>
                         <b>Vendedor: </b> Farmacia nombre texto texto texto texto
                     </div>
+                </div>
+                <br>
+                <div class="row">
                     <div class="col-md-12">
-                        <table class="table table-striped">
-                            <thead>
+                        <table class="table">
+                            <thead class="bg-secondary">
                                 <tr>
+                                    <td><b>Nro</b></td>
                                     <td><b>Descripcón</b></td>
                                     <td><b>Cod. Lote</b></td>
                                     <td><b>Reg. Sanitario</b></td>
@@ -53,14 +66,48 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><b>28181</b></td>
-                                    <td><b>Descripcón</b></td>
-                                    <td><b>Cantidad</b></td>
-                                    <td><b>Precio unitario</b></td>
-                                    <td><b>Subtotal</b></td>
+                                    <td>1</td>
+                                    <td>Aspirinias de 100 gr.</td>
+                                    <td>1545412</td>
+                                    <td>RS/264646</td>
+                                    <td>24/01/2019</td>
+                                    <td>121.00</td>
+                                    <td>120.00</td>
+                                    <td>120.00</td>
                                 </tr>  
+                                <tr>
+                                    <td>1</td>
+                                    <td>Aspirinias de 100 gr.</td>
+                                    <td>1545412</td>
+                                    <td>RS/264646</td>
+                                    <td>24/01/2019</td>
+                                    <td>121.00</td>
+                                    <td>120.00</td>
+                                    <td>120.00</td>
+                                </tr>  
+                                <tr>
+                                    <td>1</td>
+                                    <td>Aspirinias de 100 gr.</td>
+                                    <td>1545412</td>
+                                    <td>RS/264646</td>
+                                    <td>24/01/2019</td>
+                                    <td>121.00</td>
+                                    <td>120.00</td>
+                                    <td>120.00</td>
+                                </tr>                                  
                             </tbody>
                         </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <b></b>
+                        Descuento: <b>0.5</b><br>
+                        Vencimiento del descuento: <b>24/08/2019</b><br>
+                        Total con descuento: <b>12500.00</b><br>
+                        <hr>
+                        Total: <b>12500.00</b><br>
+                        Total: <b>12500.00</b><br>
                     </div>
                 </div>
             </div>
