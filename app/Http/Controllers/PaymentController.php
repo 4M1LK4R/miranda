@@ -18,19 +18,16 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        return datatables()->of(Sale::all())
+        return datatables()->of(Sale::all()->where('payment_status_id',6))
         ->addColumn('client_name', function ($item) {
             $client_name = Client::find($item->client_id);
             return  $client_name->name;
         })
-        ->addColumn('Detalle', function ($item) {
-            return '<a class="btn btn-xs btn-info text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
-        })
         ->addColumn('Agregar', function ($item) {
-            return '<a class="btn btn-xs btn-info text-white" onclick="AddSale('.$item->id.')"><i class="icon-plus-squared"></i></a>';
+            return '<a class="btn btn-xs btn-success text-white" onclick="AddSale('.$item->id.')"><i class="icon-ok-circled"></i></a>';
         })
 
-        ->rawColumns(['Detalle','Agregar'])            
+        ->rawColumns(['Agregar'])            
         ->toJson();
     }
     public function create()
