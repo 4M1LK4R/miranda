@@ -89,4 +89,7 @@ Route::get('/details_of_sale', 'DetailSaleProductController@details_of_sale')->n
 /////PAYMENT///////
 Route::get('/payments', 'PaymentController@payment')->name('payment')->middleware('auth');
 
+/////DEBTS TO PAY//////
+Route::get('/debtstopays', 'DebtsToPayController@debtstopay')->name('debtstopay')->middleware('auth');
+
 
