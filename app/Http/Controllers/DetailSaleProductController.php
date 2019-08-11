@@ -29,4 +29,21 @@ class DetailSaleProductController extends Controller
             return response()->json(['success'=>true,'msg'=>'Registro existoso.']);
         }
     }
+    public function show(Request $request)
+    {
+        $Detail = DetailSaleProduct::find($request->id)->first();
+
+        $Sale = Sale::find($Detail->sale_id)->with('client','payment_status','seller')->first();
+        $Detail->Sale = $Sale;
+
+        $Batch = Batch::find($Detail->batch_id)->with('product','user','provider','line','storage','industry','payment_status','payment_type')->first();
+        $Detail->Batch = $Batch;
+
+        return $Detail;
+    }
+    public function details_of_sale(Request $request)
+    {
+        $Details = DetailSaleProduct::all()->where('sale_id',$request->id);
+        return $Details;
+    }
 }

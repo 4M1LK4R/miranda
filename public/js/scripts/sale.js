@@ -8,8 +8,6 @@ $(document).ready(function(){
         }
     });
     ListDatatable();
-    catch_parameters();
-    
 });
 // datatable catalogos
 function ListDatatable()
@@ -23,10 +21,8 @@ function ListDatatable()
             "url": "/js/assets/Spanish.json"
         },
         ajax: {
-            url: '/sale'
-            
+            url: '/sale'         
         },
-
         columns: [
             { data: 'id'},
             { data: 'user_name'},
@@ -102,8 +98,12 @@ function ListDatatable()
     });
 };
 
+var string = "";
 // detalle de lote
 function Detail(id) {
+    string = "";
+
+    //Metodo para traer datos de la venta
     $.ajax({
         url: "sale/{sale}",
         method: 'get',
@@ -111,18 +111,68 @@ function Detail(id) {
             id: id
         },
         success: function (result) {
-            show_detail(result);
+            console.log(result);
+            //show_detail(result);
+
         },
         error: function (result) {
             toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
             console.log(result);
         },
-
     });
+
+
+
+    //Metodo para traer todos los detalles de la venta
+    $.ajax({
+        url: "/details_of_sale",
+        method: 'get',
+        data: {
+            id: id
+        },
+        success: function (result) {
+            console.log(result);
+            $.each(result, function (key, value) {
+                //show_detail(value);
+                //console.log(value);
+                //Metodo para traer todos los datos de un detalle
+                $.ajax({
+                    url: "detail/{detail}",
+                    method: 'get',
+                    data: {
+                        id: value.id
+                    },
+                    success: function (result) {
+                        console.log(result);
+                        //show_detail(result);
+            
+                    },
+                    error: function (result) {
+                        toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
+                        console.log(result);
+                    },
+                });
+
+
+
+
+
+            });
+            //show_detail(result);
+        },
+        error: function (result) {
+            toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            console.log(result);
+        },
+    });
+
+
 };
+
+
 //muestra el detalle
 function show_detail(obj) {
-    var string = "";
+
     //console.log(obj);
     //DATOS DE PRODUCTO
     string += "<p><h5><b>USUARIO</b></h5></p>";
@@ -192,23 +242,6 @@ $("#btn_delete").click(function () {
 function Mayus(e) {
     e.value = e.value.toUpperCase();
 }
-
-// obtiene los datos del formulario
-function catch_parameters()
-{
-    var data = $(".form-data").serialize();
-    data += "&id="+id;
-    console.log(data);
-    return data;
-    
-}
-
-// muestra el modal
-$("#btn-agregar").click(function () {
-    ClearInputs();
-    $("#title-modal").html(title_modal_data);
-    $("#modal_datos").modal("show");
-});
 
 // metodo de bootstrap para validar campos
 

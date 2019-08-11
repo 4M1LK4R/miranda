@@ -63,6 +63,10 @@ class SaleController extends Controller
             return response()->json(['success'=>true,'msg'=>'Registro existoso.','sale_id'=>$Sale->id]);
         }
     }
+    public function show(Request $request)
+    {
+        return Sale::find($request->id)->with('client','payment_status','seller')->first();;
+    }
     public function update(Request $request)
     {
         $rule = new SaleRequest();        

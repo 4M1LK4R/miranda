@@ -81,8 +81,10 @@ Route::get('/sales', 'SaleController@sale')->name('sale')->middleware('auth');
 Route::resource('sale','SaleController');
 
 /////Detail/////////
-Route::get('/Detail', 'DetailSaleProductController@detail')->name('detail')->middleware('auth');
-Route::resource('detail','DetailSaleProductController')->except('create','show','edit');
+Route::get('/details', 'DetailSaleProductController@detail')->name('detail')->middleware('auth');
+Route::resource('detail','DetailSaleProductController');
+Route::get('/details_of_sale', 'DetailSaleProductController@details_of_sale')->name('details_of_sale')->middleware('auth');
+
 
 /////PAYMENT///////
 Route::get('/payments', 'PaymentController@payment')->name('payment')->middleware('auth');

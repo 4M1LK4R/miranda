@@ -17,6 +17,55 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="container">
+            <div class="card border-primary p-2">
+                <center><h2><b>NOTA DE ENTREGA</b></h2></center>
+                <div class="row">
+                    <div class="col-md-6">
+                        <br>
+                        <b>Cliente: </b>texto texto texto texto texto texto
+                        <br>
+                        <b>Dirección: </b>texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
+                        <br>
+                        <b>Telefono: </b>texto textotexto texto texto texto
+                    </div>
+                    <div class="col-md-6">
+                        <br>
+                        <b>Nro: </b>texto texto texto texto
+                        <br>
+                        <b>Fecha: </b> Farmacia nombre texto texto texto texto
+                        <br>
+                        <b>Vendedor: </b> Farmacia nombre texto texto texto texto
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td><b>Descripcón</b></td>
+                                    <td><b>Cod. Lote</b></td>
+                                    <td><b>Reg. Sanitario</b></td>
+                                    <td><b>Vencimiento</b></td>
+                                    <td><b>Cantidad</b></td>
+                                    <td><b>Precio unitario</b></td>
+                                    <td><b>Subtotal</b></td>
+                                </tr>   
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>28181</b></td>
+                                    <td><b>Descripcón</b></td>
+                                    <td><b>Cantidad</b></td>
+                                    <td><b>Precio unitario</b></td>
+                                    <td><b>Subtotal</b></td>
+                                </tr>  
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <br>
     <div class="col-md-12">
         <div class="card">
