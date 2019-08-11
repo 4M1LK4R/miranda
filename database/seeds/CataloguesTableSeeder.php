@@ -50,12 +50,6 @@ class CataloguesTableSeeder extends Seeder
             'state' => 'ACTIVO'
         ]);
         App\Catalogue::create([
-            'name' => 'EN CURSO',
-            'type_catalog_id'=>7,
-            'description' => 'ESTADO DE PAGO EN CURSO.',
-            'state' => 'ACTIVO'
-        ]);
-        App\Catalogue::create([
             'name' => 'CANCELADO',
             'type_catalog_id'=>7,
             'description' => 'ESTADO DE PAGO CANCELADO.',
@@ -251,6 +245,20 @@ class CataloguesTableSeeder extends Seeder
             'name' => 'ENTRE RIOS-TARIJA',
             'type_catalog_id'=>3,
             'description' => 'ZONA DE TARIJA.',
+            'state' => 'ACTIVO'
+        ]);
+        // ALMACÉN
+        App\Catalogue::create([
+            'name' => 'ALMACÉN PRINCIPAL',
+            'type_catalog_id'=>2,
+            'description' => 'ALMACÉN PRINCIPA.',
+            'state' => 'ACTIVO'
+        ]);
+        // LÍNEA
+        App\Catalogue::create([
+            'name' => 'INTI',
+            'type_catalog_id'=>4,
+            'description' => 'INTI.',
             'state' => 'ACTIVO'
         ]);
         

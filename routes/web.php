@@ -88,8 +88,13 @@ Route::get('/details_of_sale', 'DetailSaleProductController@details_of_sale')->n
 
 /////PAYMENT///////
 Route::get('/payments', 'PaymentController@payment')->name('payment')->middleware('auth');
+Route::resource('payment','PaymentController');
 
 /////DEBTS TO PAY//////
 Route::get('/debtstopays', 'DebtsToPayController@debtstopay')->name('debtstopay')->middleware('auth');
 
+
+/////ACCOUNTS RECEIVABLE//////
+
+Route::get('/accountsreceivables', 'AccountsReceivableController@accountsReceivable')->name('accountsreceivable')->middleware('auth');
 

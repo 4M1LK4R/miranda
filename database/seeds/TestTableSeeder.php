@@ -11,20 +11,7 @@ class TestTableSeeder extends Seeder
      */
     public function run()
     {
-        // ALMACÉN
-        App\Catalogue::create([
-            'name' => 'ALMACÉN PRINCIPAL',
-            'type_catalog_id'=>2,
-            'description' => 'ALMACÉN PRINCIPA.',
-            'state' => 'ACTIVO'
-        ]);
-        // LÍNEA
-        App\Catalogue::create([
-            'name' => 'INTI',
-            'type_catalog_id'=>4,
-            'description' => 'INTI.',
-            'state' => 'ACTIVO'
-        ]);
+        
         // PRODUCTO
         App\Product::create([
             'name' => 'ASPIRINA PRUEBA 100 gr.',
@@ -74,10 +61,10 @@ class TestTableSeeder extends Seeder
             'product_id' => '1',
             'user_id' => '1',
             'provider_id' => '1',
-            'line_id' => '39',
+            'line_id' => '38',
             'storage_id' => '38',
             'industry_id' => '11',
-            'payment_status_id' => '6',
+            'payment_status_id' => '5',
             'payment_type_id' => '8',
             'code' => '707466',
             'sanitary_registration' => 'RH25/89',
@@ -94,10 +81,10 @@ class TestTableSeeder extends Seeder
             'product_id' => '2',
             'user_id' => '1',
             'provider_id' => '1',
-            'line_id' => '39',
+            'line_id' => '38',
             'storage_id' => '38',
             'industry_id' => '11',
-            'payment_status_id' => '6',
+            'payment_status_id' => '5',
             'payment_type_id' => '8',
             'code' => '707466',
             'sanitary_registration' => 'RH25/89',
