@@ -79,7 +79,9 @@
                                     <a class="dropdown-item" href="{{ route('seller') }}">Vendedores</a>
                                     @endcan
                                     <div class="dropdown-divider"></div>
+                                    @can('salecompleted')
                                     <a class="dropdown-item" href="{{ route('salecompleted') }}">Finalizar Ventas</a>
+                                    @endcan
                                     <!--<a class="dropdown-item" href="{{ route('debtstopay') }}">Cuentas por Cobrar</a>-->
                                 </div>
                             </li>

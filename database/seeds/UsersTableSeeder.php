@@ -494,7 +494,10 @@ class UsersTableSeeder extends Seeder
         'collector',
         'charge',
         'sale','sale.show',
-        'shop'
+        'shop',
+        'payment',
+        'salecompleted'
+
         );
         $guest->givePermissionTo('industry','line','zone','deposit','product','batch','provider','seller','client','collector');
 

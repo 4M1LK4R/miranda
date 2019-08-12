@@ -20,7 +20,7 @@ class SaleCompletedController extends Controller
 
     public function __construct()
     {
-        //$this->middleware('permission:salecompleted')->only('salecompleted'); 
+        $this->middleware('permission:salecompleted')->only('salecompleted'); 
     }
     public function index()
     {
