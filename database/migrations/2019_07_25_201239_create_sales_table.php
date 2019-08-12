@@ -26,6 +26,7 @@ class CreateSalesTable extends Migration
             $table->decimal('discount',8,2)->nullable();; // descuento
             $table->date('expiration_discount')->nullable();// fecha de espiración del descuento
             $table->decimal('total_discount',8,2)->nullable();; // descuento
+            $table->decimal('receive',8,2)->nullable();; // descuento
             $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
             $table->timestamps();
 

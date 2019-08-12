@@ -10,4 +10,8 @@ class Collector extends Model
         'name', 'description','phone',
         'address','state'
     ];
+    public function sale()
+    {
+        return $this->belongsTo('');
+    }
 }

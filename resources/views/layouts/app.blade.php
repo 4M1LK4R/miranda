@@ -108,6 +108,8 @@
                                     @can('collector')
                                     <a class="dropdown-item" href="{{ route('collector') }}">Cobradores</a>
                                     @endcan
+
+                                    <a class="dropdown-item" href="{{ route('charge') }}">Cobros</a>
                                 </div>
                             </li>
                            

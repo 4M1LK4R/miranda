@@ -1,6 +1,7 @@
 var table;
-var id = 0;
-var id_collector = 0;
+var count = 0;
+var result = 0;
+var amount = 0;
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -8,10 +9,8 @@ $(document).ready(function () {
         }
     });
     ListDatatable();
-    //ListDatatableClients();
+    ListDatatablePayments();
     SelectCollector();
-    //Collector();
-    //catch_parameters();
 });
 
 
@@ -45,16 +44,58 @@ function ListDatatable() {
                 data: 'discount'
             },
             {
+                data: 'receive'
+            },
+            {
                 data: 'expiration_discount'
             },
             {
-                data: 'Agregar',
+                data: 'SelectSale',
                 orderable: false,
                 searchable: false
             },
         ]
     });
 };
+
+
+
+function ListDatatablePayments() {
+    table = $('#tablepayment').DataTable({
+        dom: 'lfrtip',
+        processing: true,
+        serverSide: true,
+        "paging": true,
+        language: {
+            "url": "/js/assets/Spanish.json"
+        },
+        ajax: {
+            url: 'charge'
+
+        },
+        columns: [{
+                data: 'sale_id'
+            },
+            {
+                data: 'collector_name'
+            },
+            {
+                data: 'payment'
+            },
+            {
+                data: 'entry_date'
+            },
+            {
+                data: 'Eliminar',
+                orderable: false,
+                searchable: false
+            },
+        ]
+    });
+};
+
+
+
 
 //seleccionar cobrador
 
@@ -81,32 +122,134 @@ function SelectCollector() {
     });
     Collector();
 }
+var id_collector = 0;
+var id_sale = 0;
+
+function Save() {
+    if($("#payment").val()== 0){
+        toastr.warning("Debe introducir un monto que cobro.");
+    }
+     else if(id_sale==0){
+        toastr.warning("Debe seleccionar una venta.");
+    }
+    
+    else if (id_collector != null){
+        var d = new Date();
+        var currenDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+        var data = {
+            'collector_id' : id_collector,
+            'sale_id' : id_sale,
+            'state' : 'ACTIVO',
+            'payment' : $("#payment").val(),
+            'entry_date':currenDate.toString(),
+        };
+        console.log(data);
+        Get(id_sale);
+        $.ajax({
+            url: "payment",
+            method: 'post',
+            data: data,
+            success: function (result) {
+                if (result.success) {
+                    toastr.success(result.msg);
+                    ClearInputs();
+                } else {
+                    toastr.warning(result.msg);
+                }
+            },
+            error: function (result) {
+                console.log(result.responseJSON.message);
+                toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
+                ClearInputs();
+            },
+        });
+    }
+    else {
+        toastr.warning("Debe seleccionar un cobrador.");
+    }
+    table.ajax.reload();
+    
+
+}
+
+
+function SaleUpdate(data){
+        
+        var data = {
+            'receive':data,
+            'id':id_sale,
+        };
+        console.log(data);
+        $.ajax({
+            url: "payment/{payment}",
+            method: 'put',
+            data: data,
+            success: function (result) {
+                if (result.success) {
+                    console.log(result.msg);
+    
+                } else {
+                    console.log(result.msg);
+                }
+            },
+            error: function (result) {
+                console.log(result.responseJSON.message);
+                toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
+            },       
+        });
+        table.ajax.reload();
+}
+
 
 
 ////////////////////////////////////////
 // METODOS NECESARIOS
-
-// obtiene los datos del formulario
-function catch_parameters() {
-    var data = $(".form-data").serialize();
-    data += "&id=" + id;
-    return data;
-
+function Collector() {
+    var cod = $( "#collector_id" ).val();
+    id_collector = cod;
+    var name=$("#collector_id  option:selected").text();
+    $("#name_collector").html(name);
 }
 
-function Collector() {
-  //  var cod = $('#collector_id').val();
-  //  var name =$('#collector_id').text();
-  //  console.log(cod);
-  //  console.log(name);
-  //  id_collector = cod;
- 
+function SelectSale(id){
+    id_sale=id;
+    console.log(id_sale);
+    $("#code_sale").html(id);
+    
+    
+}
+function ClearInputs() {
+    
+    //$("#name_collector").text().empty();
+    //$("#code_sale").text().empty();
+    //$("#payment").text().empty();
+};
 
+function Get(id) {
+    $.ajax({
+        url: "sale/{sale}",
+        method: 'get',
+        data: {
+            id: id
+        },
+        success: function (result) {
+            console.log(result.receive);
+            count=result.receive;
+            conver();
 
+        },
+        error: function (result) {
+            toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            console.log(result);
+        },
+    });
+}
+function conver()
+{   
+    result = parseFloat(count);
+    amount = parseFloat($("#payment").val());
+    result = result + amount;
+    console.log(result);
+    SaleUpdate(result);
 
-   $("#collector_id").change(function() {
-     var name=$('#collector_id option:selected').html()
-     console.log(name);
-     $("#name_collector").html(name);
-});
 }

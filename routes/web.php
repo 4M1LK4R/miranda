@@ -90,6 +90,10 @@ Route::get('/details_of_sale', 'DetailSaleProductController@details_of_sale')->n
 Route::get('/payments', 'PaymentController@payment')->name('payment')->middleware('auth');
 Route::resource('payment','PaymentController');
 
+/////CHARGES///////
+Route::get('/charges', 'ChargeController@charges')->name('charge')->middleware('auth');
+Route::resource('charge','ChargeController');
+
 /////DEBTS TO PAY//////
 Route::get('/debtstopays', 'DebtsToPayController@debtstopay')->name('debtstopay')->middleware('auth');
 

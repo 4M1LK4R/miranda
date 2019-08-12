@@ -10,6 +10,7 @@
                     <div class="col-sm-12 d-flex justify-content-center">
                         <h2 class="card-title text-primary">REGISTRO DE COBRANZAS</h2>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -20,10 +21,30 @@
     <div class="col-md-12">
         <div class="card shadow">
             <div class="card-body">
+                <h3 class="text-primary"><i></i>Cobrador Seleccionado:&nbsp;<b><span id="name_collector" class="text-success"></span></b></h3>
+                <h3 class="text-primary"><i></i>Venta Seleccionada:&nbsp;<b><span id="code_sale" class="text-success"></span></b></h3>
+                <div class="row w-25 p-3">
+                        <div class="col-xs-6">
+                            <h3 class="text-primary">Pago:&nbsp;</h3>
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="text" min="0" value="0" step="any" id="payment" class="form-control" placeholder="Pago" 
+                            required>
+                            <div class="invalid-feedback">
+                                    Dato necesario.
+                            </div>
+                        </div>
+                </div>
+                <hr>
                 <h4 class="card-title text-primary"><i class="icon-id-badge"></i>Cobradores</h4>
                 <div class="md-form mb-3" id="select_collector"></div>
                 <hr>
-                <h3 class="card-title text-primary"><i class="icon-user"></i>Cobrador:&nbsp;<b><span id="name_collector" class="text-success"></span></b></h3>
+
+                <div class="col-sm-12 d-flex justify-content-end"> 
+                    <button class="btn btn-outline-success" onclick="Save();">
+                        <i class="icon-floppy"></i>&nbsp;Asignar
+                    </button>
+                </div>
                 <h4 class="card-title text-primary"><i class="icon-box"></i>Ventas</h4>
                 <div class="table-responsive">
                     <table id="table" class="table table-striped">
@@ -34,6 +55,7 @@
                                 <td>Total</td>
                                 <td>Total con descuento</td>
                                 <td>Descuento</td>
+                                <td>Monto Cobrado</td>
                                 <td>Fecha</td>
                                 <td>Agregar</td>
                             </tr>

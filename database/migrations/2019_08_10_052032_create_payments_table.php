@@ -15,7 +15,20 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('collector_id')->unsigned();
+            $table->unsignedBigInteger('sale_id')->unsigned();
+            $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
+            $table->decimal('payment',8,2); // cantida cobrada
+            $table->date('entry_date'); // fecha de entrada en deposito
             $table->timestamps();
+            //RELACTIONS
+            $table->foreign('collector_id')->references('id')->on('collectors') //sale
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            
+            $table->foreign('sale_id')->references('id')->on('sales') //producto
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 
