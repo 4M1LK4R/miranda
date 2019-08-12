@@ -176,7 +176,7 @@ function getSale(id) {
             //string += "<div class='col-md-6'>";
 
             //string += "</div>";
-            
+
             //FIN DATOS DE VENTA
             //TABLA DETALLES
             string += "<br>";
@@ -262,19 +262,21 @@ function getCompleteDetails(ArrayDetails) {
                     string += "<div class='row'>";
                     string += "<div class='col-md-12 text-right'>";
                     string += "<b></b>";
-                    string += "Descuento: <b>" + sale.discount*100 + " %</b><br>";
+                    string += "Descuento: <b>" + sale.discount * 100 + " %</b><br>";
                     string += "Vencimiento del descuento: <b>" + sale.expiration_discount + "</b><br>";
                     string += "Total con descuento: <b>" + sale.total_discount + "</b><br>";
                     string += "<hr>";
                     string += "Total: <b>" + sale.total + "</b><br>";
-                    var nl= numeroALetras(sale.total, {
-                        plural: "BOLIVIANOS",
-                        singular: "BOLIVIANO",
-                        centPlural: "CENTAVOS",
-                        centSingular: "CENTAVO"
+                    
+                    var nl = numeroALetras(parseInt(sale.total), {
+                        plural: " ",
+                        singular: " ",
+                        centPlural: " ",
+                        centSingular: " "
                     });
-
-                    string += nl;
+                    string += nl+" "+((sale.total-parseInt(sale.total)).toFixed(2))*100+"/100 BOLIVIANOS";
+                    string += "<br><br><br><br><table class='table table-borderless text-center'><tr><td>________________</td><td>________________</td><td>________________</td></tr><tr><td>Despachado por</td><td>Entregue Conforme</td><td>Recibi Conforme</td></tr></table>";
+                    //string += "<br><br><br><br><table class='table table-borderless text-center'><tr><td><hr class='bg-dark'></td><td><hr class='bg-dark'></td><td><hr class='bg-dark'></td></tr><tr><td>Despachado por</td><td>Entregue Conforme</td><td>Recibi Conforme</td></tr></table>";
                     string += "</div>";
                     string += "</div>";
                     //string += "</div>";
@@ -415,7 +417,7 @@ function printNote() {
 
 
 //Numero A Letras
-var numeroALetras = (function() {
+var numeroALetras = (function () {
     // Código basado en el comentario de @sapienman
     // Código basado en https://gist.github.com/alfchee/e563340276f89b22042a
     function Unidades(num) {
@@ -467,29 +469,29 @@ var numeroALetras = (function() {
                     default:
                         return 'DIECI' + Unidades(unidad);
                 }
-            case 2:
-                switch (unidad) {
+                case 2:
+                    switch (unidad) {
+                        case 0:
+                            return 'VEINTE';
+                        default:
+                            return 'VEINTI' + Unidades(unidad);
+                    }
+                    case 3:
+                        return DecenasY('TREINTA', unidad);
+                    case 4:
+                        return DecenasY('CUARENTA', unidad);
+                    case 5:
+                        return DecenasY('CINCUENTA', unidad);
+                    case 6:
+                        return DecenasY('SESENTA', unidad);
+                    case 7:
+                        return DecenasY('SETENTA', unidad);
+                    case 8:
+                        return DecenasY('OCHENTA', unidad);
+                    case 9:
+                        return DecenasY('NOVENTA', unidad);
                     case 0:
-                        return 'VEINTE';
-                    default:
-                        return 'VEINTI' + Unidades(unidad);
-                }
-            case 3:
-                return DecenasY('TREINTA', unidad);
-            case 4:
-                return DecenasY('CUARENTA', unidad);
-            case 5:
-                return DecenasY('CINCUENTA', unidad);
-            case 6:
-                return DecenasY('SESENTA', unidad);
-            case 7:
-                return DecenasY('SETENTA', unidad);
-            case 8:
-                return DecenasY('OCHENTA', unidad);
-            case 9:
-                return DecenasY('NOVENTA', unidad);
-            case 0:
-                return Unidades(unidad);
+                        return Unidades(unidad);
         }
     } //Unidades()
 
@@ -590,7 +592,7 @@ var numeroALetras = (function() {
         };
 
         if (data.centavos > 0) {
-            data.letrasCentavos = 'CON ' + (function() {
+            data.letrasCentavos = 'CON ' + (function () {
                 if (data.centavos == 1)
                     return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
                 else

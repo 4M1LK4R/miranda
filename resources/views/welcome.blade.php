@@ -76,7 +76,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    bytemo
+                    Miranda
                 </div>
                 <p class="text-center">Sistema de Almacenamiento Digital</p>
             </div>
