@@ -31,14 +31,8 @@ class DetailSaleProductController extends Controller
     }
     public function show(Request $request)
     {
-        $Detail = DetailSaleProduct::find($request->id)->first();
-
-        $Sale = Sale::find($Detail->sale_id)->with('client','payment_status','seller')->first();
-        $Detail->Sale = $Sale;
-
-        $Batch = Batch::find($Detail->batch_id)->with('product','user','provider','line','storage','industry','payment_status','payment_type')->first();
-        $Detail->Batch = $Batch;
-
+        //return "llegando";        
+        $Detail = DetailSaleProduct::where('id',$request->id)->with('sale','batch')->get();
         return $Detail;
     }
     public function details_of_sale(Request $request)

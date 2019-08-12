@@ -18,7 +18,7 @@ class ShopController extends Controller
 
     public function index()
     {
-        return datatables()->of(Batch::all()->where('stock','>',0))
+        return datatables()->of(Batch::all()->where('stock','>',0)->where('state','ACTIVO'))
         ->addColumn('product_name', function ($item) {
             $product = Product::find($item->product_id);
             return  $product->name;

@@ -1,7 +1,7 @@
 var table;
-var id=0;
+var id = 0;
 var title_modal_data = "Registrar Nuevo Cliente";
-$(document).ready(function(){
+$(document).ready(function () {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -10,8 +10,7 @@ $(document).ready(function(){
     ListDatatable();
 });
 // datatable catalogos
-function ListDatatable()
-{
+function ListDatatable() {
     table = $('#table').DataTable({
         dom: 'lfBrtip',
         processing: true,
@@ -21,39 +20,64 @@ function ListDatatable()
             "url": "/js/assets/Spanish.json"
         },
         ajax: {
-            url: '/sale'         
+            url: '/sale'
         },
-        columns: [
-            { data: 'id'},
-            { data: 'user_name'},
-            { data: 'client_name'},
-            { data: 'seller_name'},
-            { data: 'date'},
-            { data: 'total'},
-            { data: 'total_discount'},
-            { data: 'discount'},
-            { data: 'expiration_discount'},
-            { data: 'payment_status'},
-            { data: 'state',
-            "render": function (data, type, row) {
-                if (row.state === 'ACTIVO') {
-                    return '<center><p class="bg-success text-white"><b>ACTIVO</b></p></center>';
-                }
-                else if (row.state === 'INACTIVO') {          
-                    return '<center><p class="bg-warning text-white"><b>INACTIVO</b></p></center>';
-                }
-                else if (row.state === 'ELIMINADO') {          
-                    return '<center><p class="bg-danger text-white"><b>ELIMINADO</b></p></center>';
-                }
-            }
-        },
-            { data: 'Detalles',   orderable: false, searchable: false },
-            { data: 'NotaVenta',   orderable: false, searchable: false },
-            { data: 'Eliminar', orderable: false, searchable: false }
-        ],
-        
-        buttons: [
+        columns: [{
+                data: 'id'
+            },
             {
+                data: 'user_name'
+            },
+            {
+                data: 'client_name'
+            },
+            {
+                data: 'seller_name'
+            },
+            {
+                data: 'date'
+            },
+            {
+                data: 'total'
+            },
+            {
+                data: 'total_discount'
+            },
+            {
+                data: 'discount'
+            },
+            {
+                data: 'expiration_discount'
+            },
+            {
+                data: 'payment_status'
+            },
+            {
+                data: 'state',
+                "render": function (data, type, row) {
+                    if (row.state === 'ACTIVO') {
+                        return '<center><p class="bg-success text-white"><b>ACTIVO</b></p></center>';
+                    } else if (row.state === 'INACTIVO') {
+                        return '<center><p class="bg-warning text-white"><b>INACTIVO</b></p></center>';
+                    } else if (row.state === 'ELIMINADO') {
+                        return '<center><p class="bg-danger text-white"><b>ELIMINADO</b></p></center>';
+                    }
+                }
+            },
+            //{ data: 'Detalles',   orderable: false, searchable: false },
+            {
+                data: 'NotaVenta',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'Eliminar',
+                orderable: false,
+                searchable: false
+            }
+        ],
+
+        buttons: [{
                 text: '<i class="icon-eye"></i> ',
                 className: 'rounded btn-dark m-2',
                 titleAttr: 'Columnas',
@@ -99,11 +123,13 @@ function ListDatatable()
 };
 
 var string = "";
+var details = [];
+var sale;
 // detalle de lote
-function Detail(id) {
-    string = "";
 
-    //Metodo para traer datos de la venta
+function getSale(id) {
+    //Metodo para traer datos de la venta con detalles
+
     $.ajax({
         url: "sale/{sale}",
         method: 'get',
@@ -111,53 +137,72 @@ function Detail(id) {
             id: id
         },
         success: function (result) {
-            console.log(result);
-            //show_detail(result);
+            //console.log("llegando..");
+            //console.log(result[0]);
+            //console.log(result[0].details);
 
-        },
-        error: function (result) {
-            toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-            console.log(result);
-        },
-    });
+            sale = result[0];
+            console.log(sale);
+            //DATOS DE VENTA
+
+            string += "<div class='row card border-dark'>";
+            string += "<div class='col-md-12'>";
+
+            string += "<table class='table'>";
+            string += "<tr>";
+            string += "<td>";
+            string += "<b>Cliente: </b>" + sale.client.name;
+            string += "<br>";
+            string += "<b>NIT: </b>" + sale.client.nit;
+            string += "<br>";
+            string += "<b>Dirección: </b>" + sale.client.address;
+            string += "<br>";
+            string += "<b>Telefono: </b>" + sale.client.phone;
+            string += "</td>";
+            string += "<td>";
+            string += "<b>Nro.: </b>" + sale.id;
+            string += "<br>";
+            string += "<b>Fecha: </b>" + sale.date;
+            string += "<br>";
+            string += "<b>Vendedor: </b>" + sale.seller.name;
+            string += "</td>";
+            string += "</tr>";
+            string += "</table>";
+            string += "</div>";
+            string += "</div>";
 
 
+            //string += "</div>";
+            //string += "<div class='col-md-6'>";
 
-    //Metodo para traer todos los detalles de la venta
-    $.ajax({
-        url: "/details_of_sale",
-        method: 'get',
-        data: {
-            id: id
-        },
-        success: function (result) {
-            console.log(result);
-            $.each(result, function (key, value) {
-                //show_detail(value);
-                //console.log(value);
-                //Metodo para traer todos los datos de un detalle
-                $.ajax({
-                    url: "detail/{detail}",
-                    method: 'get',
-                    data: {
-                        id: value.id
-                    },
-                    success: function (result) {
-                        console.log(result);
-                        //show_detail(result);
+            //string += "</div>";
             
-                    },
-                    error: function (result) {
-                        toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-                        console.log(result);
-                    },
-                });
+            //FIN DATOS DE VENTA
+            //TABLA DETALLES
+            string += "<br>";
+            string += "<div class='row'>";
+            string += "<div class='col-md-12 '>";
+            string += "<table class='table table-bordered'>";
+            string += "<thead class='bg-secondary'>";
+            string += "<tr>";
+            string += "<td><b>Nro</b></td>";
+            string += "<td><b>Descripcón</b></td>";
+            string += "<td><b>Cod. Lote</b></td>";
+            string += "<td><b>Reg. Sanitario</b></td>";
+            string += "<td><b>Vencimiento</b></td>";
+            string += "<td><b>Cantidad</b></td>";
+            string += "<td><b>Precio unitario</b></td>";
+            string += "<td><b>Subtotal</b></td>";
+            string += "</tr>";
+            string += "</thead>";
+            string += "<tbody>";
 
-
-
-
-
-            });
+            getCompleteDetails(sale.details);
+            //console.log(string);
+            //console.log(string);
+            //sale = result;
+            //return result;
+            //console.log(sale);
             //show_detail(result);
         },
         error: function (result) {
@@ -165,46 +210,124 @@ function Detail(id) {
             console.log(result);
         },
     });
+}
+
+function getCompleteDetails(ArrayDetails) {
+    //Metodo para traer todos todos los datos del detalle
+    $.each(ArrayDetails, function (key, value) {
+        //show_detail(value);
+        //console.log(value);
+        //Metodo para traer todos los datos de un detalle
+
+        $.ajax({
+            url: "detail/{detail}",
+            method: 'get',
+            data: {
+                id: value.id
+            },
+            success: function (result) {
+                //console.log(result[0]);
+                //details.push(result[0]);
+                //console.log(details);
+                //DETALLES
+                string += "<tr>";
+                //NRO
+                string += "<td>" + (key + 1) + "</td>";
+                //NOMBRE PRODUCTO (descripcion)
+                string += "<td>" + result[0].name_product + "</td>";
+                //Codigo lote
+                string += "<td>" + result[0].batch.code + "</td>";
+                //Registro sanitario
+                string += "<td>" + result[0].batch.sanitary_registration + "</td>";
+                //Vencimiento
+                string += "<td>" + result[0].batch.expiration_date + "</td>";
+                //Cantidad
+                string += "<td>" + result[0].amount + "</td>";
+                //Precio unitario
+                string += "<td>" + result[0].batch.wholesaler_price + "</td>";
+                //Sub total
+                string += "<td>" + result[0].subtotal + "</td>";
+                string += "</tr>";
 
 
+                if ((key + 1) == ArrayDetails.length) {
+                    //console.log("si es");
+                    string += "</tbody>";
+                    string += "</table>";
+                    string += "</div>";
+                    string += "</div>";
+                    //FIN TABLA DETALLES
+
+                    //TOTALES VENTA
+                    string += "<div class='row'>";
+                    string += "<div class='col-md-12 text-right'>";
+                    string += "<b></b>";
+                    string += "Descuento: <b>" + sale.discount*100 + " %</b><br>";
+                    string += "Vencimiento del descuento: <b>" + sale.expiration_discount + "</b><br>";
+                    string += "Total con descuento: <b>" + sale.total_discount + "</b><br>";
+                    string += "<hr>";
+                    string += "Total: <b>" + sale.total + "</b><br>";
+                    var nl= numeroALetras(sale.total, {
+                        plural: "BOLIVIANOS",
+                        singular: "BOLIVIANO",
+                        centPlural: "CENTAVOS",
+                        centSingular: "CENTAVO"
+                    });
+
+                    string += nl;
+                    string += "</div>";
+                    string += "</div>";
+                    //string += "</div>";
+                    //string += "</div>";
+                    //FIN TOTALES VENTA
+                }
+                //FIN DETALLES  
+                //details.push(result);
+                //var detail = result;
+
+                //console.log(result);
+                //show_detail(result);
+                //console.log(string);
+                $("#nota_venta").html(string);
+
+
+            }
+        });
+    });
+
+}
+var ss;
+
+function SaleNote(id) {
+    details = [];
+    sale = null;
+    string = "";
+    //string += "<div class='container'>";
+    //string += "<div class='p-2'>";
+    string += "<div class='row p-4'>";
+    string += "<div class='col-md-12 align-self-start'>";
+    string += "<h3><b>IMPORTADORA MIRANDA</b></h3>";
+    string += "Av. Gran Chacho #542 - Palmarcito<br>";
+    string += "Tel: 66-31611 Fax: 66-31611";
+    string += "</div>";
+    string += "</div>";
+
+    string += "<center><h3><b>NOTA DE ENTREGA</b></h3></center>";
+
+
+
+    getSale(id);
+
+    //printNote();
+    //console.log(sale);
+    //getDetails(id);
+    //printNote();
 };
 
 
-//muestra el detalle
-function show_detail(obj) {
-
-    //console.log(obj);
-    //DATOS DE PRODUCTO
-    string += "<p><h5><b>USUARIO</b></h5></p>";
-    string += "<p><b>Registrado por:</b>&nbsp;" + obj.user.name + "</p>";
-    string += "<hr>";
-    string += "<p><h5><b>DATOS DE PRODUCTO</b></h5></p>";
-    string += "<p><b>Código de lote:</b>&nbsp;" + obj.code + "</p>";
-    string += "<p><b>Producto:</b>&nbsp;" + obj.product.name + "</p>";
-    string += "<p><b>Stock:</b>&nbsp;" + obj.stock + "</p>";
-    string += "<p><b>Línea:</b>&nbsp;" + obj.line.name + "</p>";
-    string += "<p><b>Registro sanitario:</b>&nbsp;" + obj.sanitary_registration + "</p>";
-    string += "<p><b>Fecha de expiración:</b>&nbsp;" + obj.expiration_date + "</p>";
-    string += "<p><b>Industria:</b>&nbsp;" + obj.industry.name + "</p>";
-    string += "<p><b>Proveedor:</b>&nbsp;" + obj.provider.name + "</p>";
-    string += "<p><b>Estado:</b>&nbsp;" + obj.state + "</p>";
-    if (obj.description != null) {
-        string += "<p><b>Descripción:</b>&nbsp;" + obj.description + "</p>";
-    } else {
-        string += "<p><b>Descripción:</p>";
-    }
-    string += "<hr>";
-    //DATOS DE INVENTARIO
-    string += "<p><h5><b>DATOS DE INVENTARIO</b></h5></p>";
-    string += "<p><b>Almacén:</b>&nbsp;" + obj.storage.name + "</p>";
-    string += "<p><b>Precio de venta:</b>&nbsp;" + obj.wholesaler_price + "</p>";
-    $("#title-modal-detalle").html("Detalle de Lote");
-    $('#content_detalle').html(string);
-    $('#modal_detalle').modal('show');
-};
 //funcion para eliminar valor seleccionado
 function Delete(id_) {
-    id= id_;
+    id = id_;
     $('#modal_eliminar').modal('show');
 }
 $("#btn_delete").click(function () {
@@ -216,13 +339,16 @@ $("#btn_delete").click(function () {
         },
         success: function (result) {
             if (result.success) {
-                toastr.success(result.msg,{"progressBar": true,"closeButton": true});
+                toastr.success(result.msg, {
+                    "progressBar": true,
+                    "closeButton": true
+                });
             } else {
                 toastr.warning(result.msg);
             }
         },
         error: function (result) {
-            toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            toastr.error(result.msg + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
             console.log(result);
         },
 
@@ -238,45 +364,246 @@ $("#btn_delete").click(function () {
 //////////////////////////////////////////////
 
 // METODOS NECESARIOS
-// funcion para volver mayusculas
-function Mayus(e) {
-    e.value = e.value.toUpperCase();
+
+
+
+function printNote1() {
+    //var divToPrint = document.getElementById("nota_venta");
+    newWin = window.open("");
+    newWin.document.write('<html><head><title></title>');
+    newWin.document.write('<link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.css" />');
+    newWin.document.write('</head><body>');
+    newWin.document.write('AMILKAR');
+    newWin.document.write(string);
+    newWin.document.write('</body></html>');
+    newWin.print();
+    newWin.close();
 }
 
-// metodo de bootstrap para validar campos
-
-(function () {
-    'use strict';
-    window.addEventListener('load', function () {
-        var forms = document.getElementsByClassName('form-data');
-        var validation = Array.prototype.filter.call(forms, function (form) {
-            form.addEventListener('submit', function (event) {
-                if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                } else {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    if (id == 0) {
-                        Save();
-                    } else {
-                        Update();
-                    }
-                    $('#modal_datos').modal('hide');
-                }
-                form.classList.add('was-validated');
-            }, false);
-        });
-    }, false);
-})();
-
-/// limpi campos despues de utilizar el modal
-function ClearInputs() {
-    var forms = document.getElementsByClassName('form-data');
-    Array.prototype.filter.call(forms, function (form) {
-        form.classList.remove('was-validated');
+function printNote() {
+    var frame1 = $('<iframe />');
+    frame1[0].name = "frame1";
+    frame1.css({
+        "position": "absolute",
+        "top": "-1000000px"
     });
-    //__Clean values of inputs
-    $("#form-data")[0].reset();
-    id=0;
-};
+    $("body").append(frame1);
+    var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
+    frameDoc.document.open();
+    //Create a new HTML document.
+    frameDoc.document.write('<html><head><title>Title</title>');
+    frameDoc.document.write('</head><body>');
+    //Append the external CSS file.
+    frameDoc.document.write('<link href="http://localhost:8000/css/theme.css" rel="stylesheet" type="text/css" />');
+
+    var source = 'bootstrap.min.js';
+    var script = document.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('src', source);
+    //Append the DIV contents.
+    frameDoc.document.write(string);
+    frameDoc.document.write('</body></html>');
+    frameDoc.document.close();
+    setTimeout(function () {
+        window.frames["frame1"].focus();
+        window.frames["frame1"].print();
+        frame1.remove();
+    }, 500);
+}
+
+
+
+
+//Numero A Letras
+var numeroALetras = (function() {
+    // Código basado en el comentario de @sapienman
+    // Código basado en https://gist.github.com/alfchee/e563340276f89b22042a
+    function Unidades(num) {
+
+        switch (num) {
+            case 1:
+                return 'UN';
+            case 2:
+                return 'DOS';
+            case 3:
+                return 'TRES';
+            case 4:
+                return 'CUATRO';
+            case 5:
+                return 'CINCO';
+            case 6:
+                return 'SEIS';
+            case 7:
+                return 'SIETE';
+            case 8:
+                return 'OCHO';
+            case 9:
+                return 'NUEVE';
+        }
+
+        return '';
+    } //Unidades()
+
+    function Decenas(num) {
+
+        let decena = Math.floor(num / 10);
+        let unidad = num - (decena * 10);
+
+        switch (decena) {
+            case 1:
+                switch (unidad) {
+                    case 0:
+                        return 'DIEZ';
+                    case 1:
+                        return 'ONCE';
+                    case 2:
+                        return 'DOCE';
+                    case 3:
+                        return 'TRECE';
+                    case 4:
+                        return 'CATORCE';
+                    case 5:
+                        return 'QUINCE';
+                    default:
+                        return 'DIECI' + Unidades(unidad);
+                }
+            case 2:
+                switch (unidad) {
+                    case 0:
+                        return 'VEINTE';
+                    default:
+                        return 'VEINTI' + Unidades(unidad);
+                }
+            case 3:
+                return DecenasY('TREINTA', unidad);
+            case 4:
+                return DecenasY('CUARENTA', unidad);
+            case 5:
+                return DecenasY('CINCUENTA', unidad);
+            case 6:
+                return DecenasY('SESENTA', unidad);
+            case 7:
+                return DecenasY('SETENTA', unidad);
+            case 8:
+                return DecenasY('OCHENTA', unidad);
+            case 9:
+                return DecenasY('NOVENTA', unidad);
+            case 0:
+                return Unidades(unidad);
+        }
+    } //Unidades()
+
+    function DecenasY(strSin, numUnidades) {
+        if (numUnidades > 0)
+            return strSin + ' Y ' + Unidades(numUnidades)
+
+        return strSin;
+    } //DecenasY()
+
+    function Centenas(num) {
+        let centenas = Math.floor(num / 100);
+        let decenas = num - (centenas * 100);
+
+        switch (centenas) {
+            case 1:
+                if (decenas > 0)
+                    return 'CIENTO ' + Decenas(decenas);
+                return 'CIEN';
+            case 2:
+                return 'DOSCIENTOS ' + Decenas(decenas);
+            case 3:
+                return 'TRESCIENTOS ' + Decenas(decenas);
+            case 4:
+                return 'CUATROCIENTOS ' + Decenas(decenas);
+            case 5:
+                return 'QUINIENTOS ' + Decenas(decenas);
+            case 6:
+                return 'SEISCIENTOS ' + Decenas(decenas);
+            case 7:
+                return 'SETECIENTOS ' + Decenas(decenas);
+            case 8:
+                return 'OCHOCIENTOS ' + Decenas(decenas);
+            case 9:
+                return 'NOVECIENTOS ' + Decenas(decenas);
+        }
+
+        return Decenas(decenas);
+    } //Centenas()
+
+    function Seccion(num, divisor, strSingular, strPlural) {
+        let cientos = Math.floor(num / divisor)
+        let resto = num - (cientos * divisor)
+
+        let letras = '';
+
+        if (cientos > 0)
+            if (cientos > 1)
+                letras = Centenas(cientos) + ' ' + strPlural;
+            else
+                letras = strSingular;
+
+        if (resto > 0)
+            letras += '';
+
+        return letras;
+    } //Seccion()
+
+    function Miles(num) {
+        let divisor = 1000;
+        let cientos = Math.floor(num / divisor)
+        let resto = num - (cientos * divisor)
+
+        let strMiles = Seccion(num, divisor, 'UN MIL', 'MIL');
+        let strCentenas = Centenas(resto);
+
+        if (strMiles == '')
+            return strCentenas;
+
+        return strMiles + ' ' + strCentenas;
+    } //Miles()
+
+    function Millones(num) {
+        let divisor = 1000000;
+        let cientos = Math.floor(num / divisor)
+        let resto = num - (cientos * divisor)
+
+        let strMillones = Seccion(num, divisor, 'UN MILLON DE', 'MILLONES DE');
+        let strMiles = Miles(resto);
+
+        if (strMillones == '')
+            return strMiles;
+
+        return strMillones + ' ' + strMiles;
+    } //Millones()
+
+    return function NumeroALetras(num, currency) {
+        currency = currency || {};
+        let data = {
+            numero: num,
+            enteros: Math.floor(num),
+            centavos: (((Math.round(num * 100)) - (Math.floor(num) * 100))),
+            letrasCentavos: '',
+            letrasMonedaPlural: currency.plural || 'PESOS CHILENOS', //'PESOS', 'Dólares', 'Bolívares', 'etcs'
+            letrasMonedaSingular: currency.singular || 'PESO CHILENO', //'PESO', 'Dólar', 'Bolivar', 'etc'
+            letrasMonedaCentavoPlural: currency.centPlural || 'CHIQUI PESOS CHILENOS',
+            letrasMonedaCentavoSingular: currency.centSingular || 'CHIQUI PESO CHILENO'
+        };
+
+        if (data.centavos > 0) {
+            data.letrasCentavos = 'CON ' + (function() {
+                if (data.centavos == 1)
+                    return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
+                else
+                    return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural;
+            })();
+        };
+
+        if (data.enteros == 0)
+            return 'CERO ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+        if (data.enteros == 1)
+            return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.letrasCentavos;
+        else
+            return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+    };
+
+})();

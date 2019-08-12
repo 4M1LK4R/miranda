@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Client;
 use App\Seller;
+use App\DetailSaleProduct;
+
 
 use App\Catalogue;
 use App\Sale;
@@ -40,7 +42,7 @@ class SaleController extends Controller
             return '<a class="btn btn-xs btn-info text-white" onclick="Detail('.$item->id.')"><i class="icon-list-bullet"></i></a>';
         })
         ->addColumn('NotaVenta', function ($item) {
-            return '<a class="btn btn-xs btn-dark text-white" onclick="SaleNote(\''.$item->id.'\')"><i class="icon-print"></i></a>';
+            return '<a class="btn btn-xs btn-info text-white" onclick="SaleNote(\''.$item->id.'\')"><i class="icon-doc-text"></i></a>';
         })
         ->addColumn('Eliminar', function ($item) {
             return '<a class="btn btn-xs btn-danger text-white" onclick="Delete('.$item->id.')"><i class="icon-trash"></i></a>';
@@ -65,7 +67,22 @@ class SaleController extends Controller
     }
     public function show(Request $request)
     {
-        return Sale::find($request->id)->with('client','payment_status','seller')->first();;
+        //return $Details = DetailSaleProduct::where('sale_id',5)->get();
+
+        $Sale = Sale::where('id',$request->id)->with('client','payment_status','seller','details')->get();
+        return $Sale;
+        //$Details = DetailSaleProduct::where('sale_id',$Sale[0]->id)->with('batch')->get();
+        //return $Sale->details=$Details;
+        ///return $Sale;
+        /*
+        $Detail = DetailSaleProduct::where('id',$request->id)->get();
+
+        $Sale = Sale::where('id',$Detail->sale_id)->with('client','payment_status','seller')->get();
+        $Detail->Sale = $Sale;
+
+        $Batch = Batch::where('id',$Detail->batch_id)->with('product','user','provider','line','storage','industry','payment_status','payment_type')->get();
+        $Detail->Batch = $Batch;*/
+
     }
     public function update(Request $request)
     {

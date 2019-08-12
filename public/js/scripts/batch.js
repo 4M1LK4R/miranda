@@ -150,6 +150,7 @@ function Save() {
 }
 // detalle de lote
 function Detail(id) {
+    console.log(id);
     $.ajax({
         url: "batch/{batch}",
         method: 'get',
@@ -157,7 +158,10 @@ function Detail(id) {
             id: id
         },
         success: function (result) {
-            show_detail(result);
+            console.log("resultado");
+            //console.log(result);
+            //console.log(result[0]);
+            show_detail(result[0]);
         },
         error: function (result) {
             toastr.error(result + 'CONTACTE A SU PROVEEDOR POR FAVOR.');
@@ -168,6 +172,7 @@ function Detail(id) {
 };
 //muestra el detalle
 function show_detail(obj) {
+    //console.log(obj);
     var string = "";
     //console.log(obj);
     //DATOS DE PRODUCTO
@@ -196,7 +201,7 @@ function show_detail(obj) {
     string += "<p><b>Estado de pago:</b>&nbsp;" + obj.payment_status.name + "</p>";
     string += "<p><b>Tipo de pago:</b>&nbsp;" + obj.payment_type.name + "</p>";
     string += "<p><b>Precio de compra del lote:</b>&nbsp;" + obj.batch_price + "</p>";
-    string += "<p><b>Stock inicial:</b>&nbsp;" + obj.initial_stock + "</p>";
+    string += "<p><b>Stock iniciaaal:</b>&nbsp;" + obj.initial_stock + "</p>";
     string += "<p><b>Fecha de entrada:</b>&nbsp;" + obj.entry_date + "</p>";
     string += "<hr>";
     //DATOS DE INVENTARIO

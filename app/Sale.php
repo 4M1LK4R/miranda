@@ -22,4 +22,8 @@ class Sale extends Model
     {
         return $this->belongsTo(Catalogue::class);
     }
+    public function details()
+    {
+        return $this->hasMany(DetailSaleProduct::class);
+    }
 }

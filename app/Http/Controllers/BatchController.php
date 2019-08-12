@@ -61,7 +61,7 @@ class BatchController extends Controller
     }
     public function show(Request $request)
     {
-        $Batch = Batch::find($request->id)->with('product','user','provider','line','storage','industry','payment_status','payment_type')->first();
+        $Batch = Batch::where('id',$request->id)->with('product','user','provider','line','storage','industry','payment_status','payment_type')->get();
         return $Batch;
     }
 

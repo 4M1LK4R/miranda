@@ -114,7 +114,9 @@ function Detail(id) {
             id: id
         },
         success: function (result) {
-            show_detail(result);
+            //console.log(result);
+            show_detail(result[0]);
+            //show_detail(result);
         },
         error: function (result) {
             toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
@@ -150,6 +152,7 @@ function show_detail(obj) {
     //DATOS DE INVENTARIO
     string += "<p><h5><b>DATOS DE INVENTARIO</b></h5></p>";
     string += "<p><b>Almacén:</b>&nbsp;" + obj.storage.name + "</p>";
+    string += "<p><b>Stock inicial:</b>&nbsp;" + obj.initial_stock + "</p>";
     string += "<p><b>Precio de venta:</b>&nbsp;" + obj.wholesaler_price + "</p>";
     $("#title-modal-detalle").html("Detalle de Lote");
     $('#content_detalle').html(string);
@@ -349,7 +352,7 @@ function SaveDetails(sale_id){
             success: function (result) {
                 if (result.success) {
                     console.log("registros de detalles guardados correctamente..");
-                    location.reload();
+                    //
                     //toastr.success(result.msg);
     
                 } else {
@@ -362,4 +365,6 @@ function SaveDetails(sale_id){
             },
         });
     }
+    toastr.success("Venta registrada correctamente");
+    //location.reload();
 }

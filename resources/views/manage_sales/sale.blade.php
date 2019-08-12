@@ -10,110 +10,10 @@
                         <h2 class="card-title text-primary">Lista de Ventas</h2>
                     </div>
                 </div>
-                <div class="row p-2">
-                    <div class="col-sm-12" id="msg-global">
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-12">
-        <div class="container">
-            <div class="card border-primary p-2">
-                <div class="row">
-                    <div class="col align-self-start">
-                        <h3><b>IMPORTADORA MIRANDA</b></h3>
-                        Av. Gran Chacho #542 - Palmarcito<br>
-                        Tel: 66-31611 Fax: 66-31611
-                    </div>
-                </div>
 
-                <center><h3><b>NOTA DE ENTREGA</b></h3></center>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <br>
-                        <b>Cliente: </b>texto texto texto texto texto texto
-                        <br>
-                        <b>Dirección: </b>texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
-                        <br>
-                        <b>Telefono: </b>texto textotexto texto texto texto
-                    </div>
-                    <div class="col-md-6">
-                        <br>
-                        <b>Nro: </b>texto texto texto texto
-                        <br>
-                        <b>Fecha: </b> Farmacia nombre texto texto texto texto
-                        <br>
-                        <b>Vendedor: </b> Farmacia nombre texto texto texto texto
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table">
-                            <thead class="bg-secondary">
-                                <tr>
-                                    <td><b>Nro</b></td>
-                                    <td><b>Descripcón</b></td>
-                                    <td><b>Cod. Lote</b></td>
-                                    <td><b>Reg. Sanitario</b></td>
-                                    <td><b>Vencimiento</b></td>
-                                    <td><b>Cantidad</b></td>
-                                    <td><b>Precio unitario</b></td>
-                                    <td><b>Subtotal</b></td>
-                                </tr>   
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Aspirinias de 100 gr.</td>
-                                    <td>1545412</td>
-                                    <td>RS/264646</td>
-                                    <td>24/01/2019</td>
-                                    <td>121.00</td>
-                                    <td>120.00</td>
-                                    <td>120.00</td>
-                                </tr>  
-                                <tr>
-                                    <td>1</td>
-                                    <td>Aspirinias de 100 gr.</td>
-                                    <td>1545412</td>
-                                    <td>RS/264646</td>
-                                    <td>24/01/2019</td>
-                                    <td>121.00</td>
-                                    <td>120.00</td>
-                                    <td>120.00</td>
-                                </tr>  
-                                <tr>
-                                    <td>1</td>
-                                    <td>Aspirinias de 100 gr.</td>
-                                    <td>1545412</td>
-                                    <td>RS/264646</td>
-                                    <td>24/01/2019</td>
-                                    <td>121.00</td>
-                                    <td>120.00</td>
-                                    <td>120.00</td>
-                                </tr>                                  
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-right">
-                        <b></b>
-                        Descuento: <b>0.5</b><br>
-                        Vencimiento del descuento: <b>24/08/2019</b><br>
-                        Total con descuento: <b>12500.00</b><br>
-                        <hr>
-                        Total: <b>12500.00</b><br>
-                        Total: <b>12500.00</b><br>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
@@ -132,8 +32,7 @@
                                 <td>Fecha exp. Descuento</td>
                                 <td>Estado de pago</td>
                                 <td>Estado</td>
-                                <td>Detalles</td>
-                                <td>Nota de venta</td>
+                                <td>Nota de venta / Detalles</td>
                                 <td>Eliminar</td>
                             </tr>
                         </thead>
@@ -144,6 +43,101 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="container p-2">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-12" id="nota_venta">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 p-4 text-right">
+        <div class="container">
+            <a class="btn btn-info" onclick="printNote();" id="btn-agregar">
+                <i class="icon-print"></i> Imprimir
+            </a>
+        </div>  
+    </div>
+        </div>  
+        <div class="col-md-12" hidden>
+            <div class="container" id="nota">
+                <div class="card border-primary p-2">
+                    <div class="row">
+                        <div class="col align-self-start">
+                            <h3><b>IMPORTADORA MIRANDA</b></h3>
+                            Av. Gran Chacho #542 - Palmarcito<br>
+                            Tel: 66-31611 Fax: 66-31611
+                        </div>
+                    </div>
+    
+                    <center><h3><b>NOTA DE ENTREGA</b></h3></center>
+    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <br>
+                            <b>Cliente: </b>texto texto texto texto texto texto
+                            <br>
+                            <b>Dirección: </b>texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
+                            <br>
+                            <b>Telefono: </b>texto textotexto texto texto texto
+                        </div>
+                        <div class="col-md-6">
+                            <br>
+                            <b>Nro: </b>texto texto texto texto
+                            <br>
+                            <b>Fecha: </b> Farmacia nombre texto texto texto texto
+                            <br>
+                            <b>Vendedor: </b> Farmacia nombre texto texto texto texto
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead class="bg-secondary">
+                                    <tr>
+                                        <td><b>Nro</b></td>
+                                        <td><b>Descripcón</b></td>
+                                        <td><b>Cod. Lote</b></td>
+                                        <td><b>Reg. Sanitario</b></td>
+                                        <td><b>Vencimiento</b></td>
+                                        <td><b>Cantidad</b></td>
+                                        <td><b>Precio unitario</b></td>
+                                        <td><b>Subtotal</b></td>
+                                    </tr>   
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Aspirinias de 100 gr.</td>
+                                        <td>1545412</td>
+                                        <td>RS/264646</td>
+                                        <td>24/01/2019</td>
+                                        <td>121.00</td>
+                                        <td>120.00</td>
+                                        <td>120.00</td>
+                                    </tr>                          
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <b></b>
+                            Descuento: <b>0.5</b><br>
+                            Vencimiento del descuento: <b>24/08/2019</b><br>
+                            Total con descuento: <b>12500.00</b><br>
+                            <hr>
+                            Total: <b>12500.00</b><br>
+                            Doce mil quinientos 00/100 Bs.<br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+</div>
 <!-- Modals-->
 <!-- Modal Datos -->
 
