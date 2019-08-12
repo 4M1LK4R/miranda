@@ -27,7 +27,7 @@ class ChargeController extends Controller
         $visibility = "";
         if (!$isUser) {$visibility="disabled";}
 
-        return datatables()->of(Payment::all())
+        return datatables()->of(Payment::all()->where('state','!=','ELIMINADO'))
         ->addColumn('collector_name', function ($item) {
             $collector_name = Collector::find($item->collector_id);
             return  $collector_name->name;
@@ -63,9 +63,15 @@ class ChargeController extends Controller
     {
         //
     }
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $Payment = Payment::find($request->id);
+        $Sale = Sale::find($Payment->sale_id);
+        $Sale->receive =$Sale->receive-$Payment->payment;
+        $Sale->update();
+        $Payment->state = "ELIMINADO";
+        $Payment->update();
+        return response()->json(['success'=>true,'msg'=>'Registro borrado.']);
     }
     public function charges()
     {
