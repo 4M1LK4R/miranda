@@ -27,7 +27,7 @@ class BatchController extends Controller
         $visibility = "";
         if (!$isUser) {$visibility="disabled";}
     
-        return datatables()->of(Batch::all()->where('state','ACTIVO'))
+        return datatables()->of(Batch::all()->where('state','!=','ELIMINADO'))
         ->addColumn('product_name', function ($item) {
             $product_name = Product::find($item->product_id);
             return  $product_name->name;

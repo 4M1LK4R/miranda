@@ -21,7 +21,7 @@ class SellerController extends Controller
         $visibility = "";
         if (!$isUser) {$visibility="disabled";}
 
-            return datatables()->of(Seller::all()->where('state','ACTIVO'))
+            return datatables()->of(Seller::all()->where('state','!=','ELIMINADO'))
             //use para usar varible externa
             ->addColumn('Editar', function ($item) use ($visibility) {
                 $item->v=$visibility;

@@ -32,7 +32,7 @@ class CatalogueController extends Controller
         $visibility = "";
         if (!$isUser) {$visibility="disabled";}
 
-        return datatables()->of(Catalogue::all()->where('type_catalog_id', $request->type_catalog_id)->where('state','ACTIVO'))
+        return datatables()->of(Catalogue::all()->where('type_catalog_id', $request->type_catalog_id)->where('state','!=','ELIMINADO'))
         //use para usar varible externa
         ->addColumn('Editar', function ($item) use ($visibility) {
             $item->v=$visibility;

@@ -512,7 +512,7 @@ class UsersTableSeeder extends Seeder
             'email'=> 'vendedores@miranda.com',
             'state' => 'ACTIVO',
             'email_verified_at' => now(),
-            'password' => bcrypt('mirandacobradores'),
+            'password' => bcrypt('vendedoresmiranda'),
             'remember_token' => str_random(10)            
         ]);
         

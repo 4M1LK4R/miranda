@@ -23,7 +23,7 @@ class ProductController extends Controller
         $visibility = "";
         if (!$isUser) {$visibility="disabled";}
 
-            return datatables()->of(Product::all()->where('state','ACTIVO'))
+            return datatables()->of(Product::all()->where('state','!=','ELIMINADO'))
             ->addColumn('catalog_product_id', function ($item) {
                 $catalog_product_id = Catalogue::find($item->catalog_product_id);
                 return  $catalog_product_id->name;

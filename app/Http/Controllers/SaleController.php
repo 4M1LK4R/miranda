@@ -19,8 +19,17 @@ use Validator;
 
 class SaleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:batch')->only('batch'); 
+    }
     public function index()
     {
+        $isUser = auth()->user()->can(['client.edit', 'client.destroy']);
+        //Variable para la visiblidad
+        $visibility = "";
+        if (!$isUser) {$visibility="disabled";}
+        
         return datatables()->of(Sale::all())
         ->addColumn('user_name', function ($item) {
             $user_name = User::find($item->user_id);
@@ -44,8 +53,9 @@ class SaleController extends Controller
         ->addColumn('NotaVenta', function ($item) {
             return '<a class="btn btn-xs btn-info text-white" onclick="SaleNote(\''.$item->id.'\')"><i class="icon-doc-text"></i></a>';
         })
-        ->addColumn('Eliminar', function ($item) {
-            return '<a class="btn btn-xs btn-danger text-white" onclick="Delete('.$item->id.')"><i class="icon-trash"></i></a>';
+        ->addColumn('Eliminar', function ($item)  use ($visibility){
+            $item->v=$visibility;
+            return '<a class="btn btn-xs btn-danger text-white '.$item->v.'" onclick="Delete('.$item->id.')"><i class="icon-trash"></i></a>';
         })
         ->rawColumns(['Detalles','NotaVenta','Eliminar'])            
         ->toJson();

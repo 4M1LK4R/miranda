@@ -24,7 +24,7 @@ class ClientController extends Controller
         $visibility = "";
         if (!$isUser) {$visibility="disabled";}
         
-        return datatables()->of(Client::all()->where('state','ACTIVO'))
+        return datatables()->of(Client::all()->where('state','!=','ELIMINADO'))
         ->addColumn('catalog_zone_name', function ($item) {
             $catalog_zone_name = Catalogue::find($item->catalog_zone_id);
             return  $catalog_zone_name->name;
