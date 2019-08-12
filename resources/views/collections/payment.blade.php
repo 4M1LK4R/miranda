@@ -41,9 +41,11 @@
                 <hr>
 
                 <div class="col-sm-12 d-flex justify-content-end"> 
+                    @can('payment.store')
                     <button class="btn btn-outline-success" onclick="Save();">
                         <i class="icon-floppy"></i>&nbsp;Asignar
                     </button>
+                    @endcan
                 </div>
                 <h4 class="card-title text-primary"><i class="icon-box"></i>Ventas</h4>
                 <div class="table-responsive">
