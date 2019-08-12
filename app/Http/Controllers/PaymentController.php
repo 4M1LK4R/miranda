@@ -37,7 +37,7 @@ class PaymentController extends Controller
         ->addColumn('SelectSale', function ($item) use ($visibility) {
             //$item->a=$aa;
             $item->v=$visibility;
-            return '<a class="btn btn-xs btn-success text-white '.$item->v.'" onclick="SelectSale('.$item->id.')" ><i class="icon-ok-circled"></i></a>';
+            return '<a class="btn btn-xs btn-success text-white '.$item->v.'" onclick="SelectSale('.$item->id.',\''.$item->receive.'\')" ><i class="icon-ok-circled"></i></a>';
         })
         ->rawColumns(['SelectSale'])                     
         ->toJson();

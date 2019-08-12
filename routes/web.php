@@ -94,11 +94,15 @@ Route::resource('payment','PaymentController');
 Route::get('/charges', 'ChargeController@charges')->name('charge')->middleware('auth');
 Route::resource('charge','ChargeController');
 
+////SALE COMPLETED//////
+
+Route::get('/salecompleteds', 'SaleCompletedController@salecompleted')->name('salecompleted')->middleware('auth');
+Route::resource('salecompleted','SaleCompletedController');
+
+////REPORTS////////
 /////DEBTS TO PAY//////
 Route::get('/debtstopays', 'DebtsToPayController@debtstopay')->name('debtstopay')->middleware('auth');
 
-
 /////ACCOUNTS RECEIVABLE//////
-
 Route::get('/accountsreceivables', 'AccountsReceivableController@accountsReceivable')->name('accountsreceivable')->middleware('auth');
 

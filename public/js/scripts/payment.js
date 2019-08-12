@@ -1,7 +1,4 @@
 var table;
-var count = 0;
-var result = 0;
-var amount = 0;
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -9,7 +6,6 @@ $(document).ready(function () {
         }
     });
     ListDatatable();
-    ListDatatablePayments();
     SelectCollector();
 });
 
@@ -54,48 +50,19 @@ function ListDatatable() {
                 orderable: false,
                 searchable: false
             },
-        ]
+        ],
+        buttons: [
+            //btn Refresh
+            {
+                text: '<i class="icon-arrows-cw"></i>',
+                className: 'rounded btn-info m-2',
+                action: function () {
+                    table.ajax.reload();
+                }
+            }
+        ],
     });
 };
-
-
-
-function ListDatatablePayments() {
-    table = $('#tablepayment').DataTable({
-        dom: 'lfrtip',
-        processing: true,
-        serverSide: true,
-        "paging": true,
-        language: {
-            "url": "/js/assets/Spanish.json"
-        },
-        ajax: {
-            url: 'charge'
-
-        },
-        columns: [{
-                data: 'sale_id'
-            },
-            {
-                data: 'collector_name'
-            },
-            {
-                data: 'payment'
-            },
-            {
-                data: 'entry_date'
-            },
-            {
-                data: 'Eliminar',
-                orderable: false,
-                searchable: false
-            },
-        ]
-    });
-};
-
-
-
 
 //seleccionar cobrador
 
@@ -110,6 +77,7 @@ function SelectCollector() {
             var code = '<select class="form-control border-primary" name="collector_id" id="collector_id" onchange="Collector();" required>';
             $.each(result, function (key, value) {
                 code += '<option selected value="' + value.id + '">' + value.name + '</option>';
+                code += '<option disabled value="" selected>(Seleccionar)</option>';
             });
             code += '</select>';
             $("#select_collector").html(code);     
@@ -124,6 +92,9 @@ function SelectCollector() {
 }
 var id_collector = 0;
 var id_sale = 0;
+var amount = 0;
+var result = 0;
+var count = 0;
 
 function Save() {
     if($("#payment").val()== 0){
@@ -144,7 +115,7 @@ function Save() {
             'entry_date':currenDate.toString(),
         };
         console.log(data);
-        Get(id_sale);
+        conver();
         $.ajax({
             url: "payment",
             method: 'post',
@@ -152,6 +123,7 @@ function Save() {
             success: function (result) {
                 if (result.success) {
                     toastr.success(result.msg);
+                    table.ajax.reload();    
                     ClearInputs();
                 } else {
                     toastr.warning(result.msg);
@@ -167,8 +139,7 @@ function Save() {
     else {
         toastr.warning("Debe seleccionar un cobrador.");
     }
-    table.ajax.reload();
-    
+    table.ajax.reload();    
 
 }
 
@@ -197,7 +168,6 @@ function SaleUpdate(data){
                 toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
             },       
         });
-        table.ajax.reload();
 }
 
 
@@ -211,38 +181,14 @@ function Collector() {
     $("#name_collector").html(name);
 }
 
-function SelectSale(id){
+function SelectSale(id,receive){
     id_sale=id;
+    count = receive;
     console.log(id_sale);
+    console.log(count);
     $("#code_sale").html(id);
     
     
-}
-function ClearInputs() {
-    
-    //$("#name_collector").text().empty();
-    //$("#code_sale").text().empty();
-    //$("#payment").text().empty();
-};
-
-function Get(id) {
-    $.ajax({
-        url: "sale/{sale}",
-        method: 'get',
-        data: {
-            id: id
-        },
-        success: function (result) {
-            console.log(result.receive);
-            count=result.receive;
-            conver();
-
-        },
-        error: function (result) {
-            toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-            console.log(result);
-        },
-    });
 }
 function conver()
 {   
@@ -250,6 +196,12 @@ function conver()
     amount = parseFloat($("#payment").val());
     result = result + amount;
     console.log(result);
-    SaleUpdate(result);
+   SaleUpdate(result);
 
+}
+function ClearInputs()
+{
+    $('#name_collector').empty();
+    $('#code_sale').empty();
+    $('#payment').val("");
 }

@@ -78,9 +78,9 @@
                                     @can('seller')
                                     <a class="dropdown-item" href="{{ route('seller') }}">Vendedores</a>
                                     @endcan
-
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('debtstopay') }}">Cuentas por Cobrar</a>
+                                    <a class="dropdown-item" href="{{ route('salecompleted') }}">Finalizar Ventas</a>
+                                    <!--<a class="dropdown-item" href="{{ route('debtstopay') }}">Cuentas por Cobrar</a>-->
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -98,7 +98,7 @@
                                     <a class="dropdown-item" href="{{ route('provider') }}">Proveedores</a>
                                     @endcan
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('debtstopay') }}">Cuentas por Pagar</a>         
+                                    <!--<a class="dropdown-item" href="{{ route('debtstopay') }}">Cuentas por Pagar</a> -->        
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -107,7 +107,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
                                     @can('payment')
-                                    <a class="dropdown-item" href="{{ route('payment') }}">Pagos</a>
+                                    <a class="dropdown-item" href="{{ route('payment') }}">Registro de Cobranzas</a>
                                     @endcan
                                     @can('collector')
                                     <a class="dropdown-item" href="{{ route('collector') }}">Cobradores</a>

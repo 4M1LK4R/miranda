@@ -414,6 +414,26 @@ class UsersTableSeeder extends Seeder
             'description' => 'Puede crear registros',
         ]);
 
+        ////PERMISOS DE SALECOMPLETED
+
+        Permission::create([
+            'name'        => 'Visualizar las ventas concluidas',
+            'slug'        => 'salecompleted',
+            'description' => 'Puede navegar en la vista de ventas concluidas',
+        ]);
+
+
+
+
+
+
+
+
+
+
+
+
+
         ///////////////////////////////////////
         ////////////////////////////////////////    
 
@@ -459,7 +479,8 @@ class UsersTableSeeder extends Seeder
         'payment','payment.store','payment.edit','payment.update','payment.destroy',
         'charge','charge.edit','charge.update','charge.destroy',
         'sale','sale.show','sale.update','sale.destroy',
-        'shop','shop.store'
+        'shop','shop.store',
+        'salecompleted'
         );
 
         $consultant->givePermissionTo('batch','product','sale');

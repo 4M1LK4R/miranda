@@ -21,11 +21,11 @@ class SaleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:batch')->only('batch'); 
+        $this->middleware('permission:sale')->only('sale'); 
     }
     public function index()
     {
-        $isUser = auth()->user()->can(['client.edit', 'client.destroy']);
+        $isUser = auth()->user()->can(['sale.destroy']);
         //Variable para la visiblidad
         $visibility = "";
         if (!$isUser) {$visibility="disabled";}
