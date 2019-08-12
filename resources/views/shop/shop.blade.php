@@ -133,7 +133,7 @@
                         <h2 class="card-title text-warning">TOTAL CON DESCUENTO <b id="total_c">0</b> Bs.</h2>
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
-                        @can('show.store')
+                        @can('shop.store')
                         <button class="btn btn-outline-success" onclick="SaveSale();">
                             <i class="icon-floppy"></i>&nbsp;Registrar Venta
                         </button>
