@@ -8,7 +8,7 @@ class Sale extends Model
 {
     protected $fillable =[
         
-        'date','total', 'client_id','user_id','seller_id','payment_status_id','discount', 'expiration_discount','total_discount','state'
+        'date','total', 'client_id','user_id','seller_id','payment_status_id','discount', 'receive','expiration_discount','total_discount','state'
     ];
     public function client()
     {

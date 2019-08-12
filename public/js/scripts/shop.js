@@ -305,6 +305,7 @@ function SaveSale() {
             'total_discount' : total_d,
             'payment_status_id' : 5, //5 PENDIENTE | 6 EN CURSO | 7 CANCELADO
             'state' : 'ACTIVO',
+            'receive': 0,
         };
         //console.log(data);
         $.ajax({
