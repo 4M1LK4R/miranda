@@ -52,13 +52,17 @@
                             </li>
                         @else
                             <li class="nav-item dropdown">
+                                @can('shop')
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTienda" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="icon-tags"></i>Tienda
                                 </a>
+                                
+
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownTienda">
                                     <a class="dropdown-item" href="{{ route('shop') }}">Registrar venta</a>
                                     <!--<a class="dropdown-item" href="#">Registrar cotización</a>-->
                                 </div>
+                                @endcan
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdmVentas" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,9 +72,9 @@
                                     @can('client')
                                     <a class="dropdown-item" href="{{ route('client') }}">Clientes</a>
                                     @endcan
-
+                                    @can('sale')
                                     <a class="dropdown-item" href="{{ route('sale') }}">Ventas</a>
-
+                                    @endcan
                                     @can('seller')
                                     <a class="dropdown-item" href="{{ route('seller') }}">Vendedores</a>
                                     @endcan
@@ -102,14 +106,15 @@
                                     <i class="icon-money"></i>Cobranzas
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
-                                    
+                                    @can('payment')
                                     <a class="dropdown-item" href="{{ route('payment') }}">Pagos</a>
-
+                                    @endcan
                                     @can('collector')
                                     <a class="dropdown-item" href="{{ route('collector') }}">Cobradores</a>
                                     @endcan
-
+                                    @can('charge')
                                     <a class="dropdown-item" href="{{ route('charge') }}">Cobros</a>
+                                    @endcan
                                 </div>
                             </li>
                            
@@ -118,8 +123,9 @@
                                     <i class="icon-sliders"></i>Configuración
                                 </a>                            
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownAdministracion">
-                                    
+                                    @can('company')
                                     <a class="dropdown-item" href="#">Empresa</a>
+                                    @endcan
                                     @can('user')
                                     <a class="dropdown-item" href="{{ route('user') }}">Usuarios</a>
                                     @endcan

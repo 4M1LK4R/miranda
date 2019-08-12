@@ -400,9 +400,19 @@ class UsersTableSeeder extends Seeder
             'description' => 'Puede eliminar registros',
         ]);
 
+          ////PERMISOS DE SHOP
 
+          Permission::create([
+            'name'        => 'Visualizar el formulario de la Venta',
+            'slug'        => 'shop',
+            'description' => 'Puede navegar en la vista de Venta',
+        ]);
 
-
+        Permission::create([
+            'name'        => 'Crear registros en Venta',
+            'slug'        => 'shop.store',
+            'description' => 'Puede crear registros',
+        ]);
 
         ///////////////////////////////////////
         ////////////////////////////////////////    
@@ -445,10 +455,11 @@ class UsersTableSeeder extends Seeder
         'seller','seller.store','seller.edit','seller.destroy',
         'client','client.store','client.edit','client.destroy',
         'collector','collector.store','collector.edit','collector.destroy',
-        'user','user.store','user.update','user.destroy',
+        //'user','user.store','user.update','user.destroy',
         'payment','payment.store','payment.edit','payment.update','payment.destroy',
         'charge','charge.edit','charge.update','charge.destroy',
-        'sale','sale.show','sale.update','sale.destroy'
+        'sale','sale.show','sale.update','sale.destroy',
+        'shop','shop.store'
         );
 
         $consultant->givePermissionTo('batch','product','sale');
@@ -460,9 +471,9 @@ class UsersTableSeeder extends Seeder
         'seller',
         'client',
         'collector',
-        'payment',
         'charge',
-        'sale','sale.show'
+        'sale','sale.show',
+        'shop'
         );
         $guest->givePermissionTo('industry','line','zone','deposit','product','batch','provider','seller','client','collector');
 
