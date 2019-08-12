@@ -254,13 +254,7 @@ class CataloguesTableSeeder extends Seeder
             'description' => 'ALMACÉN PRINCIPA.',
             'state' => 'ACTIVO'
         ]);
-        // LÍNEA
-        App\Catalogue::create([
-            'name' => 'INTI',
-            'type_catalog_id'=>4,
-            'description' => 'INTI.',
-            'state' => 'ACTIVO'
-        ]);
+
         
         
     }

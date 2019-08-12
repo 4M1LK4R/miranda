@@ -45,7 +45,6 @@ class TestTableSeeder extends Seeder
             'phone' => '72954379',
             'address' => 'AEROPUERTO',
             'state' => 'ACTIVO'
-
         ]);
         // VENDEDOR
         App\Seller::create([
