@@ -78,7 +78,7 @@
                 <div class="title m-b-md">
                     Miranda
                 </div>
-                <p class="text-center">Sistema de Almacenamiento Digital</p>
+                <p class="text-center">Sistema de Almacenamiento Digital Benito 🐱‍👤</p>
             </div>
         </div>
     </body>
