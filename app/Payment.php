@@ -10,9 +10,14 @@ class Payment extends Model
         'collector_id','sale_id','state','payment','entry_date'
     ];
 
-    public function collectors()
+    public function collector()
+    {
+        return $this->belongsToMany(Collector::class);
+    }
+    public function sale()
     {
         return $this->belongsToMany(Sale::class);
     }
+    
 
 }

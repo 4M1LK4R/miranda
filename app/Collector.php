@@ -10,8 +10,9 @@ class Collector extends Model
         'name', 'description','phone',
         'address','state'
     ];
-    public function sale()
+    public function payments()
     {
-        return $this->belongsTo('');
+        return $this->hasMany(Payment::class);
     }
+
 }
