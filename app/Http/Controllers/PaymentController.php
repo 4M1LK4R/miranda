@@ -15,15 +15,29 @@ use Validator;
 
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:payment')->only('payment'); 
+    }
     public function index()
     {
+        //Evaluar los permisos para la visibilidad
+        $isUser = auth()->user()->can(['payment.store']);
+        //Variable para la visiblidad
+        $visibility = "";
+
+        if (!$isUser) {$visibility="disabled";}
+
+
         return datatables()->of(Sale::all()->where('payment_status_id',5))
         ->addColumn('client_name', function ($item) {
             $client_name = Client::find($item->client_id);
             return  $client_name->name;
         })
-        ->addColumn('SelectSale', function ($item) {
-            return '<a class="btn btn-xs btn-success text-white circle" onclick="SelectSale('.$item->id.')"><i class="icon-ok-circled"></i></a>';
+        ->addColumn('SelectSale', function ($item) use ($visibility) {
+            //$item->a=$aa;
+            $item->v=$visibility;
+            return '<a class="btn btn-xs btn-success text-white '.$item->v.'" onclick="SelectSale('.$item->id.')" ><i class="icon-ok-circled"></i></a>';
         })
         ->rawColumns(['SelectSale'])                     
         ->toJson();

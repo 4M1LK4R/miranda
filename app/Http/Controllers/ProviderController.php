@@ -32,7 +32,7 @@ class ProviderController extends Controller
             //use para usar varible externa
             ->addColumn('Editar', function ($item) use ($visibility) {
                 $item->v=$visibility;
-            return '<a class="btn btn-xs btn-primary text-white '.$item->v.'" onclick="Edit('.$item->id.')" type="hidden"><i class="icon-pencil"></i></a>';
+            return '<a class="btn btn-xs btn-primary text-white '.$item->v.'" onclick="Edit('.$item->id.')" ><i class="icon-pencil"></i></a>';
             })
             ->addColumn('Eliminar', function ($item) {
             return '<a class="btn btn-xs btn-danger text-white '.$item->v.'" onclick="Delete(\''.$item->id.'\')"><i class="icon-trash"></i></a>';

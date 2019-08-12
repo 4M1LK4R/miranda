@@ -271,21 +271,132 @@ class UsersTableSeeder extends Seeder
             'description' => 'Puede crear registros',
         ]);
 
-        Permission::create([
+        /*Permission::create([
             'name'        => 'Editar registro de Usuarios',
             'slug'        => 'user.edit',
             'description' => 'Puede editar registros',
-        ]);
+        ]);*/
 
-        /*Permission::create([
+        Permission::create([
             'name'        => 'Actualizar registros de ProdUsuarios',
             'slug'        => 'user.update',
             'description' => 'Puede actualizar registros',
-        ]);*/
+        ]);
 
         Permission::create([
             'name'        => 'Eliminar registros de Usuarios',
             'slug'        => 'user.destroy',
+            'description' => 'Puede eliminar registros',
+        ]);
+
+
+
+        ////PERMISOS DE PAGOS
+
+        Permission::create([
+            'name'        => 'Visualizar Pagos',
+            'slug'        => 'payment',
+            'description' => 'Puede navegar en la vista de Pagos',
+        ]);
+
+        Permission::create([
+            'name'        => 'Crear registros en Pagos',
+            'slug'        => 'payment.store',
+            'description' => 'Puede crear registros',
+        ]);
+
+        Permission::create([
+            'name'        => 'Editar registro de Pagos',
+            'slug'        => 'payment.edit',
+            'description' => 'Puede editar registros',
+        ]);
+
+        Permission::create([
+            'name'        => 'Actualizar registros de Pagos',
+            'slug'        => 'payment.update',
+            'description' => 'Puede actualizar registros',
+        ]);
+
+        Permission::create([
+            'name'        => 'Eliminar registros de Pagos',
+            'slug'        => 'payment.destroy',
+            'description' => 'Puede eliminar registros',
+        ]);
+
+
+
+        
+        ////PERMISOS DE COBROS
+
+        Permission::create([
+            'name'        => 'Visualizar Cobros',
+            'slug'        => 'charge',
+            'description' => 'Puede navegar en la vista de Cobros',
+        ]);
+
+       /* Permission::create([
+            'name'        => 'Crear registros en Cobros',
+            'slug'        => 'charge.store',
+            'description' => 'Puede crear registros',
+        ]);*/
+
+        Permission::create([
+            'name'        => 'Editar registro de Cobros',
+            'slug'        => 'charge.edit',
+            'description' => 'Puede editar registros',
+        ]);
+
+        Permission::create([
+            'name'        => 'Actualizar registros de Cobros',
+            'slug'        => 'charge.update',
+            'description' => 'Puede actualizar registros',
+        ]);
+
+        Permission::create([
+            'name'        => 'Eliminar registros de Cobros',
+            'slug'        => 'charge.destroy',
+            'description' => 'Puede eliminar registros',
+        ]);
+
+
+
+
+
+        ////PERMISOS DE VENTA
+
+        Permission::create([
+            'name'        => 'Visualizar Venta',
+            'slug'        => 'sale',
+            'description' => 'Puede navegar en la vista de Venta',
+        ]);
+
+        Permission::create([
+            'name'        => 'Crear registros en Venta',
+            'slug'        => 'sale.store',
+            'description' => 'Puede crear registros',
+        ]);
+
+        /*Permission::create([
+            'name'        => 'Editar registro de Venta',
+            'slug'        => 'sale.edit',
+            'description' => 'Puede editar registros',
+        ]);*/
+
+        Permission::create([
+            'name'        => 'Ver  registros de Venta e Imprimir',
+            'slug'        => 'sale.show',
+            'description' => 'Puede actualizar registros',
+        ]);
+
+        Permission::create([
+            'name'        => 'Actualizar registros de Venta',
+            'slug'        => 'sale.update',
+            'description' => 'Puede actualizar registros',
+        ]);
+
+        Permission::create([
+            'name'        => 'Eliminar registros de Venta',
+            'slug'        => 'sale.destroy',
             'description' => 'Puede eliminar registros',
         ]);
 
@@ -313,6 +424,17 @@ class UsersTableSeeder extends Seeder
             'slug'   => 'guest',
             'description' =>'Solo puede ver recursos, pero no participar'
         ]);
+        $consultant = Role::create([
+            'name'   => 'Consultor',
+            'slug'   => 'consultant',
+            'description' =>'Solo puede ver recursos, pero no participar'
+        ]);
+        $owner = Role::create([
+            'name'   => 'Propietario',
+            'slug'   => 'owner',
+            'description' =>'Solo puede ver recursos, pero no participar'
+        ]);
+
         
 
         //ASIGNAR PERMISOS A LOS ROLES
@@ -322,13 +444,29 @@ class UsersTableSeeder extends Seeder
         'provider','provider.store','provider.edit','provider.destroy',
         'seller','seller.store','seller.edit','seller.destroy',
         'client','client.store','client.edit','client.destroy',
-        'collector','collector.store','collector.edit','collector.destroy'
+        'collector','collector.store','collector.edit','collector.destroy',
+        'user','user.store','user.update','user.destroy',
+        'payment','payment.store','payment.edit','payment.update','payment.destroy',
+        'charge','charge.edit','charge.update','charge.destroy',
+        'sale','sale.show','sale.update','sale.destroy'
         );
 
+        $consultant->givePermissionTo('batch','product','sale');
 
-
-
+        $owner->givePermissionTo('industry','line','deposit','zone',
+        'product',
+        'batch',
+        'provider',
+        'seller',
+        'client',
+        'collector',
+        'payment',
+        'charge',
+        'sale','sale.show'
+        );
         $guest->givePermissionTo('industry','line','zone','deposit','product','batch','provider','seller','client','collector');
+
+
         
 
         //CREA EL USUARIOS
@@ -341,29 +479,67 @@ class UsersTableSeeder extends Seeder
             'remember_token' => str_random(10)            
         ]);
 
-        $admin = App\User::create([
-            'name' => 'administrador',
-            'email'=> 'admin@admin.com',
+        $lucena = App\User::create([
+            'name' => 'lucena',
+            'email'=> 'lmiranda@miranda.com',
             'state' => 'ACTIVO',
             'email_verified_at' => now(),
-            'password' => bcrypt('admin'),
+            'password' => bcrypt('madison'),
             'remember_token' => str_random(10)            
         ]);
 
-        $invited = App\User::create([
-            'name' => 'invitado',
-            'email'=> 'invitado@invitado.com',
+        $admin = App\User::create([
+            'name' => 'administrador',
+            'email'=> 'administrador@miranda.com',
             'state' => 'ACTIVO',
             'email_verified_at' => now(),
-            'password' => bcrypt('invitado'),
+            'password' => bcrypt('administrador1'),
             'remember_token' => str_random(10)            
         ]);
+
+
+        $miranda = App\User::create([
+            'name' => 'administrador visualizador',
+            'email'=> 'rmiranda@miranda.com',
+            'state' => 'ACTIVO',
+            'email_verified_at' => now(),
+            'password' => bcrypt('angelica'),
+            'remember_token' => str_random(10)            
+        ]);
+        ///vendedores y cobradores
+        $seller = App\User::create([
+            'name' => 'vendedor',
+            'email'=> 'vendedores@miranda.com',
+            'state' => 'ACTIVO',
+            'email_verified_at' => now(),
+            'password' => bcrypt('mirandacobradores'),
+            'remember_token' => str_random(10)            
+        ]);
+        
+        $collectors = App\User::create([
+            'name' => 'cobradores',
+            'email'=> 'cobradores@miranda.com',
+            'state' => 'ACTIVO',
+            'email_verified_at' => now(),
+            'password' => bcrypt('mirandacobradores'),
+            'remember_token' => str_random(10)            
+        ]); 
+
+
+
+
 
 
         //ASIGNACION DE ROLES
         $bytemo->assignRoles('root');
+        $lucena->assignRoles('manager');
         $admin->assignRoles('manager');
-        $invited->assignRoles('guest');
+
+        $miranda->assignRoles('owner');
+
+        $seller->assignRoles('consultant');
+        $collectors->assignRoles('consultant');
+        //$invited->assignRoles('guest');
 
     }
 }
