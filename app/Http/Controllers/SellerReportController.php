@@ -78,4 +78,8 @@ class SellerReportController extends Controller
     {
         return view('report.reportcollector');
     }
+    public function reportaccountsreceivable()
+    {
+        return view('report.reportaccounts');
+    }
 }

@@ -52,6 +52,12 @@ function ListDataTable(){
                 data: 'product_name'
             },
             {
+                data: 'initial_stock'
+            },
+            {
+                data: 'stock'
+            },
+            {
                 data: 'wholesaler_price'
             },
             {
@@ -91,7 +97,7 @@ function ListDataTable(){
                 messageTop: 'INVENTARIO AL <br>'+currenDate.toString()+'<br>Laboratorio: '+$("#line_id option:selected").text(),
                 footer: true,
                 exportOptions: {
-                    columns: [0, 1, 2,3,4]
+                    columns: [0, 1, 2,3,4,5,6]
                 }
             },
             //btn Refresh
@@ -117,7 +123,7 @@ function ListDataTable(){
     
             // Total over all pages
             total = api
-                .column( 4 )
+                .column( 6 )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
@@ -125,14 +131,14 @@ function ListDataTable(){
     
             // Total over this page
             pageTotal = api
-                .column( 4, { page: 'current'} )
+                .column( 6, { page: 'current'} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
     
             // Update footer
-            $( api.column( 4 ).footer() ).html(
+            $( api.column( 6 ).footer() ).html(
                 pageTotal.toFixed(2) +' ( '+ total.toFixed(2) +' total)'
             );
 

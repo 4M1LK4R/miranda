@@ -111,7 +111,7 @@ Route::get('/accountsreceivables', 'AccountsReceivableController@accountsReceiva
 Route::get('/sellerreports','SellerReportController@sellerreport')->name('sellerreport')->middleware('auth');
 Route::get('/reportlines','SellerReportController@reportline')->name('reportline')->middleware('auth');
 Route::get('/reportcollectors','SellerReportController@reportcollector')->name('reportcollector')->middleware('auth');
-
+Route::get('/reportaccounts','SellerReportController@reportaccountsreceivable')->name('reportaccount')->middleware('auth');
 
 
 Route::get('/getsellers','SellerReportController@SelleReport')->name('getsellers')->middleware('auth');

@@ -121,15 +121,14 @@
                                     <i class="icon-docs"></i>Reportes
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
-                                    @can('payment')
+                                  
                                     <a class="dropdown-item" href="{{ route('sellerreport') }}">Reporte de Ventas por Vendedor</a>
-                                    @endcan
-                                    @can('collector')
+                                 
                                     <a class="dropdown-item" href="{{ route('reportline') }}">Repote de Productos por Linea</a>
-                                    @endcan
-                                    @can('charge')
+
                                     <a class="dropdown-item" href="{{ route('reportcollector') }}">Reporte de Cobranzas por Cobrador</a>
-                                    @endcan
+                                    
+                                    <a class="dropdown-item" href="{{ route('reportaccount') }}">Reporte de Cuentas por Pagar</a>
                                 </div>
                             </li>
                            
