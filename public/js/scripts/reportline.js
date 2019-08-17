@@ -139,7 +139,7 @@ function ListDataTable(){
     
             // Update footer
             $( api.column( 6 ).footer() ).html(
-                pageTotal.toFixed(2) +' ( '+ total.toFixed(2) +' total)'
+                'Total: '+pageTotal.toFixed(2)
             );
 
         }

@@ -121,14 +121,10 @@
                                     <i class="icon-docs"></i>Reportes
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
-                                  
-                                    <a class="dropdown-item" href="{{ route('sellerreport') }}">Reporte de Ventas por Vendedor</a>
-                                 
-                                    <a class="dropdown-item" href="{{ route('reportline') }}">Repote de Productos por Linea</a>
-
-                                    <a class="dropdown-item" href="{{ route('reportcollector') }}">Reporte de Cobranzas por Cobrador</a>
-                                    
-                                    <a class="dropdown-item" href="{{ route('reportaccount') }}">Reporte de Cuentas por Pagar</a>
+                                    <a class="dropdown-item" href="{{ route('sellerreport') }}">Reporte de ventas por vendedor</a>    
+                                    <a class="dropdown-item" href="{{ route('reportline') }}">Repote de productos por linea</a>
+                                    <a class="dropdown-item" href="{{ route('reportcollector') }}">Reporte de cobranzas por cobrador</a>
+                                    <a class="dropdown-item" href="{{ route('reportaccount') }}">Reporte de cuentas por cobrar</a>
                                 </div>
                             </li>
                            

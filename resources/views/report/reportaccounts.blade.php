@@ -39,10 +39,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-4 offset-md-8 d-flex justify-content-end">
+            <div class="col-md-4">
                 <button class="btn btn-outline-success btn-block" id="btn-agregar"onclick="Generate();">
                     <i class="icon-play-circled"></i>Generar
                 </button>
@@ -63,14 +60,20 @@
                             <tr>
                                 <td>Cod. Venta</td>
                                 <td>Cliente</td>
+                                <td>Fecha de Venta</td>
                                 <td>Total a Pagar</td>
-                                <td>Fecha de Cobro</td>
+                                <td>Total a con descuento</td>
+                                <td>Exp. Descuento</td>
                                 <td>Cantidad Cobrada</td>
                                 <td>Saldo</td>
+                                <td>Saldo con descuento</td>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -89,5 +92,5 @@
 
 @endsection
 @section('scripts')
-<script src="{{ URL::asset('js/scripts/account.js') }}"></script>
+<script src="{{ URL::asset('js/scripts/reportaccount.js') }}"></script>
 @endsection

@@ -142,11 +142,11 @@ function ListDataTable(){
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
-                }, 0 );
+            }, 0 );
     
             // Update footer
             $( api.column( 4 ).footer() ).html(
-                pageTotal.toFixed(2) +' ( '+ total.toFixed(2) +' total)'
+                'Total: '+pageTotal.toFixed(2)
             );
 
         }

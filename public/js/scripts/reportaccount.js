@@ -4,33 +4,29 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-   
-    SelectCollector();
-    dateEntry();
+    dateEntry();  
 });
-
-
 
 function Generate() {
     //Limpiar DataTable
     $("#table").dataTable().fnDestroy();
+    ListDataTable();
+/*
+    $.ajax({
+        url: "/getreportaccounts",
+        method: 'get',
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (result) {
+            console.log(result);
+        },
 
-    if($("#collector_id").val()== null){
-        toastr.warning("Debe Seleccionar un Cobrador.");
-    }
-    else if($("#minimum_date").val()==0){
-        toastr.warning("Debe Seleccionar una Fecha minima.");
-    }
-     else if($("#maximum_date").val()==0){
-        toastr.warning("Debe seleccionar una Fecha Maxima.");
-    }
-    else{
-        ListDataTable();
-    }
+    });*/
 }
 
 function ListDataTable(){
-    
+    var d = new Date();
     table = $('#table').DataTable({
         dom: 'lfBrtip',
         processing: true,
@@ -40,28 +36,48 @@ function ListDataTable(){
             "url": "/js/assets/Spanish.json"
         },
         ajax: {
-            url: '/getreportcollectors',
+            url: '/getreportaccounts',
             data: function (obj) {
-                obj.collector_id = $("#collector_id").val();
                 obj.minimum_date = $("#minimum_date").val();
                 obj.maximum_date = $("#maximum_date").val();
-               
             }
         },
+        /*
+            <td>Cod. Venta</td>
+            <td>Cliente</td>
+            <td>Fecha de Venta</td>
+            <td>Total a Pagar</td>
+            <td>Total a con descuento</td>
+            <td>Exp. Descuento</td>
+            <td>Cantidad Cobrada</td>
+            <td>Saldo</td>
+        */
         columns: [{
-                data: 'sale_id'
-            },
-            {
-                data: 'entry_date'
-            },
-            {
-                data: 'receipt_number'
+                data: 'id'
             },
             {
                 data: 'client_name'
             },
             {
-                data: 'payment'
+                data: 'date'
+            },
+            {
+                data: 'total'
+            },
+            {
+                data: 'total_discount'
+            },
+            {
+                data: 'expiration_discount'
+            },
+            {
+                data: 'receive'
+            },
+            {
+                data: 'residue'
+            },
+            {
+                data: 'residue_discount'
             },
         ],
         buttons: [
@@ -94,10 +110,10 @@ function ListDataTable(){
                 className: 'rounded btn-dark m-2',
                 titleAttr: 'Imprimir',
                 extend: 'print',
-                messageTop: 'COBROS REALIZADOS DE VENTAS POR VENDEDOR <br>Nombre cobrador: '+$("#collector_id option:selected").text()+'<br>Fechas: '+$("#minimum_date").val()+' - '+$("#maximum_date").val(),
+                messageTop: 'VENTAS POR COBRAR.<br>Fechas: '+$("#minimum_date").val()+' - '+$("#maximum_date").val(),
                 footer: true,
                 exportOptions: {
-                    columns: [0, 1, 2,3,4]
+                    columns: [0, 1, 2,3,4,5,6,7,8]
                 }
             },
             //btn Refresh
@@ -123,7 +139,7 @@ function ListDataTable(){
     
             // Total over all pages
             total = api
-                .column( 4 )
+                .column( 7 )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
@@ -131,46 +147,40 @@ function ListDataTable(){
     
             // Total over this page
             pageTotal = api
-                .column( 4, { page: 'current'} )
+                .column( 7, { page: 'current'} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
     
             // Update footer
-            $( api.column( 4 ).footer() ).html(
+            $( api.column( 7 ).footer() ).html(
+                'Total: '+pageTotal.toFixed(2)
+            );
+            //Another
+            // Total over all pages
+            total = api
+            .column( 8 )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+            // Total over this page
+            pageTotal = api
+                .column( 8, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // Update footer
+            $( api.column( 8 ).footer() ).html(
                 'Total: '+pageTotal.toFixed(2)
             );
 
         }
     });
-}
-
-//seleccionar cobrador
-
-function SelectCollector() {
-    $.ajax({
-        url: "listcollector",
-        method: 'get',
-        data: {
-            by: "all"
-        },
-        success: function (result) {
-            var code = '<select class="form-control border-primary" name="collector_id" id="collector_id" required>';
-            $.each(result, function (key, value) {
-                code += '<option selected value="' + value.id + '">' + value.name + '</option>';
-                code += '<option disabled value="" selected>(Seleccionar)</option>';
-            });
-            code += '</select>';
-            $("#select_collector").html(code);     
-        },
-        error: function (result) {
-            toastr.error(result.msg + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
-            console.log(result);
-        },
-
-    });
-
 }
 
 //fecha de entrada

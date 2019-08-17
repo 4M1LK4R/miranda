@@ -50,6 +50,7 @@ class SellerReportController extends Controller
     }
 
 
+
     public function ReportCollectors(Request $request)
     {
         
@@ -63,6 +64,25 @@ class SellerReportController extends Controller
             $sale_id = Sale::find($item->sale_id);
             return  $sale_id->id;
         })         
+        ->toJson();
+    }
+
+    public function ReportAccounts(Request $request)
+    {
+        $Sales =  Sale::where('state','!=','ELIMINADO')->where('payment_status_id',5)->orderBy('client_id', 'ASC')->with('client')->get();
+        return datatables()->of($Sales)
+       ->addColumn('client_name', function ($item) {
+
+            return  $item->client->name;
+        })
+        ->addColumn('residue', function ($item) {
+            $residue = $item->total-$item->receive;
+            return  $residue;
+        })  
+        ->addColumn('residue_discount', function ($item) {
+            $residue = $item->total_discount-$item->receive;
+            return  $residue;
+        })   
         ->toJson();
     }
 
