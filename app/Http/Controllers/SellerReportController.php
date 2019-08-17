@@ -52,12 +52,17 @@ class SellerReportController extends Controller
 
     public function ReportCollectors(Request $request)
     {
-        $sale = Sale::find($request->sale_id);
-        return datatables()->of(Payment::all()->where('state', 'ACTIVO')->where(6,$sale->payment_status_id)->whereBetween('date',[$request->minimum_date, $request->maximum_date]))
-        ->addColumn('client_name', function ($item) {
-            $client_name = Client::find($item->client_id);
-            return  $client_name->name;
-        })          
+        
+        return datatables()->of(Payment::all()->where('state','!=','ELIMINADO')->where('collector_id',$request->collector_id)->whereBetween('entry_date',[$request->minimum_date, $request->maximum_date]))
+       ->addColumn('client_name', function ($item) {
+            $sale = Sale::find($item->sale_id);
+            $client_name=Client::where('id',$sale->client_id)->pluck('name')->first();
+            return  $client_name;
+        })
+        ->addColumn('sale_id', function ($item) {
+            $sale_id = Sale::find($item->sale_id);
+            return  $sale_id->id;
+        })         
         ->toJson();
     }
 

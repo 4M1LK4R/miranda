@@ -52,7 +52,7 @@ function ListDataTable(){
                 data: 'sale_id'
             },
             {
-                data: 'date'
+                data: 'entry_date'
             },
             {
                 data: 'receipt_number'
@@ -94,10 +94,10 @@ function ListDataTable(){
                 className: 'rounded btn-dark m-2',
                 titleAttr: 'Imprimir',
                 extend: 'print',
-                messageTop: 'VENTAS POR VENDEDOR <br>Nombre vendedor: '+$("#seller_id option:selected").text()+'<br>Fechas: '+$("#minimum_date").val()+' - '+$("#maximum_date").val(),
+                messageTop: 'COBROS REALIZADOS DE VENTAS POR VENDEDOR <br>Nombre cobrador: '+$("#collector_id option:selected").text()+'<br>Fechas: '+$("#minimum_date").val()+' - '+$("#maximum_date").val(),
                 footer: true,
                 exportOptions: {
-                    columns: [0, 1, 2,3,4,5]
+                    columns: [0, 1, 2,3,4]
                 }
             },
             //btn Refresh
