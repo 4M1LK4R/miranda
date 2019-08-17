@@ -22,7 +22,9 @@
         <div class="card shadow">
             <div class="card-body">
                 <h3 class="text-primary"><i></i>Cobrador Seleccionado:&nbsp;<b><span id="name_collector" class="text-success"></span></b></h3>
+                <br>
                 <h3 class="text-primary"><i></i>Venta Seleccionada:&nbsp;<b><span id="code_sale" class="text-success"></span></b></h3>
+                <br>
                 <div class="row">
                         <div class="col-md-2">
                             <h3 class="text-primary">Monto de Pago:&nbsp;</h3>
@@ -33,10 +35,22 @@
                             <div class="invalid-feedback">
                                     Dato necesario.
                             </div>
+                        </div>       
+                </div>
+                <br>
+                <div class="row">
+                        <div class="col-md-2">
+                                <h3 class="text-primary">Nro de Boleta:&nbsp;</h3>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-2">
+                            <input type="text" id="receipt_number" class="form-control" placeholder="Nro de Boleta" 
+                            required>
+                            <div class="invalid-feedback">
+                                Dato necesario.
+                            </div>
                         </div>
                 </div>
+
                 <hr>
                 <h4 class="card-title text-primary"><i class="icon-id-badge"></i>Cobradores</h4>
                 <div class="md-form mb-3" id="select_collector"></div>
@@ -69,7 +83,7 @@
             </div>
         </div>
     </div>
-    
+</div>    
 
 @endsection
 @section('scripts')

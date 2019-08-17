@@ -98,10 +98,13 @@ var count = 0;
 
 function Save() {
     if($("#payment").val()== 0){
-        toastr.warning("Debe introducir un monto que cobro.");
+        toastr.warning("Debe introducir un monto que Cobro.");
+    }
+    else if($("#receipt_number").val()==0){
+        toastr.warning("Debe introducir el Numero de Boleta.");
     }
      else if(id_sale==0){
-        toastr.warning("Debe seleccionar una venta.");
+        toastr.warning("Debe seleccionar una Venta.");
     }
     
     else if (id_collector != null){
@@ -112,6 +115,7 @@ function Save() {
             'sale_id' : id_sale,
             'state' : 'ACTIVO',
             'payment' : $("#payment").val(),
+            'receipt_number':$("#receipt_number").val(),
             'entry_date':currenDate.toString(),
         };
         console.log(data);
@@ -204,4 +208,5 @@ function ClearInputs()
     $('#name_collector').empty();
     $('#code_sale').empty();
     $('#payment').val("");
+    $("#receipt_number").val("");
 }

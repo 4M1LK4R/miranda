@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     protected $fillable =[
-        'collector_id','sale_id','state','payment','entry_date'
+        'collector_id','sale_id','state','payment','entry_date','receipt_number'
     ];
 
     public function collector()

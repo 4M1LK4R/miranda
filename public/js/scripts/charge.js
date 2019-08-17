@@ -31,6 +31,9 @@ function ListDatatablePayments() {
                 data: 'collector_name'
             },
             {
+                data: 'receipt_number'
+            },
+            {
                 data: 'payment'
             },
             {

@@ -82,7 +82,6 @@
                                     @can('salecompleted')
                                     <a class="dropdown-item" href="{{ route('salecompleted') }}">Finalizar Ventas</a>
                                     @endcan
-                                    <!--<a class="dropdown-item" href="{{ route('debtstopay') }}">Cuentas por Cobrar</a>-->
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -98,9 +97,7 @@
                                     @endcan
                                     @can('provider')
                                     <a class="dropdown-item" href="{{ route('provider') }}">Proveedores</a>
-                                    @endcan
-                                    <div class="dropdown-divider"></div>
-                                    <!--<a class="dropdown-item" href="{{ route('debtstopay') }}">Cuentas por Pagar</a> -->        
+                                    @endcan       
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -110,6 +107,22 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
                                     @can('payment')
                                     <a class="dropdown-item" href="{{ route('payment') }}">Registro de Cobranzas</a>
+                                    @endcan
+                                    @can('collector')
+                                    <a class="dropdown-item" href="{{ route('collector') }}">Cobradores</a>
+                                    @endcan
+                                    @can('charge')
+                                    <a class="dropdown-item" href="{{ route('charge') }}">Cobros</a>
+                                    @endcan
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownReportes" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon-docs"></i>Reportes
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
+                                    @can('payment')
+                                    <a class="dropdown-item" href="{{ route('sellerreport') }}">Reporte de Ventas por Vendedor</a>
                                     @endcan
                                     @can('collector')
                                     <a class="dropdown-item" href="{{ route('collector') }}">Cobradores</a>

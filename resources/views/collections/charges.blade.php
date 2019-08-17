@@ -29,6 +29,7 @@
                             <tr>
                                 <td>Cod. Venta</td>
                                 <td>Cobrador</td>
+                                <td>Nro de Boleta</td>
                                 <td>Monto</td>
                                 <td>Fecha</td>
                                 <td>Eliminar</td>

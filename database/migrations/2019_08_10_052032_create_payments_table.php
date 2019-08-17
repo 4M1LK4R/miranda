@@ -19,6 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('sale_id')->unsigned();
             $table->enum('state', ['ACTIVO', 'INACTIVO','ELIMINADO'])->default('ACTIVO');
             $table->decimal('payment',8,2); // cantida cobrada
+            $table->string('receipt_number');
             $table->date('entry_date'); // fecha de entrada en deposito
             $table->timestamps();
             //RELACTIONS

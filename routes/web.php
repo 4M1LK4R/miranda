@@ -106,3 +106,7 @@ Route::get('/debtstopays', 'DebtsToPayController@debtstopay')->name('debtstopay'
 /////ACCOUNTS RECEIVABLE//////
 Route::get('/accountsreceivables', 'AccountsReceivableController@accountsReceivable')->name('accountsreceivable')->middleware('auth');
 
+/////REPORTS//////////////
+
+Route::get('/sellerreports','SellerReportController@sellerreport')->name('sellerreport')->middleware('auth');
+
