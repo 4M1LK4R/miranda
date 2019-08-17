@@ -1,3 +1,4 @@
+var table;
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -7,7 +8,7 @@ $(document).ready(function () {
    
     dateEntry();
     SelectSeller();
-    Generate();
+    //Generate();
 });
 
 
@@ -22,27 +23,317 @@ function Generate() {
         toastr.warning("Debe seleccionar una Fecha Maxima.");
     }
     else{
-        var data = {
-            'seller_id' :   $("#seller_id").val(),
-            'minimum_date' : $("#minimum_date").val(),
-            'maximum_date' : $("#maximum_date").val(),
-        };
-        console.log(data);
-        $.ajax({
-            url: "/getsellers",
-            method: 'get',
-            data: data,
-            success: function (result) {
-                console.log(result);
+        table = $('#table').DataTable({
+            dom: 'lfBrtip',
+            processing: true,
+            serverSide: true,
+            "paging": true,
+            language: {
+                "url": "/js/Spanish.json"
             },
-            error: function (result) {
-                console.log(result.responseJSON.message);
-                toastr.error("CONTACTE A SU PROVEEDOR POR FAVOR.");
-             
+            ajax: {
+                url: '/getsellers',
+                data: function (obj) {
+                    obj.seller_id = $("#seller_id").val();
+                    obj.minimum_date = $("#minimum_date").val();
+                    obj.maximum_date = $("#maximum_date").val();
+                   
+                }
             },
+            columns: [{
+                    data: 'id'
+                },
+                {
+                    data: 'date'
+                },
+                {
+                    data: 'client_name'
+                },
+                {
+                    data: 'total'
+                },
+                {
+                    data: 'discount'
+                },
+                {
+                    data: 'total_discount'
+                },
+            ],
+            buttons: [
+                {
+                    text: '<i class="icon-eye"></i> ',
+                    className: 'rounded btn-dark m-2',
+                    titleAttr: 'Columnas',
+                    extend: 'colvis'
+                },
+                {
+                    text: '<i class="icon-download"></i><i class="icon-file-excel"></i>',
+                    className: 'rounded btn-dark m-2',
+                    titleAttr: 'Excel',
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    }
+                },
+                {
+                    text: '<i class="icon-download"></i><i class="icon-file-pdf"></i> ',
+                    className: 'rounded btn-dark m-2',
+                    titleAttr: 'PDF',
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    }
+                },
+                {
+                    text: '<i class="icon-download"></i><i class="icon-print"></i> ',
+                    className: 'rounded btn-dark m-2',
+                    titleAttr: 'Imprimir',
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    }
+                },
+                //btn Refresh
+                {
+                    text: '<i class="icon-arrows-cw"></i>',
+                    className: 'rounded btn-info m-2',
+                    action: function () {
+                        table.ajax.reload();
+                    }
+                }
+            ],
         });
+
+
     }
 }
+
+
+function ListDataTable() {
+    
+    table = $('#table').DataTable({
+        dom: 'lfBrtip',
+        processing: true,
+        serverSide: true,
+        "paging": true,
+        language: {
+            "url": "/js/Spanish.json"
+        },
+        ajax: {
+            url: '../DataTableCatalogos',
+            data: function (obj) {
+                obj.id_tipo_catalogo = id_tipo_catalogo;
+            }
+        },
+        columns: [{
+                data: 'id'
+            },
+            {
+                data: 'nombre'
+            },
+            {
+                data: 'estado'
+            },
+            {
+                data: 'editar',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'eliminar',
+                orderable: false,
+                searchable: false
+            },
+        ],
+        buttons: [
+            {
+                text: '<i class="icon-eye"></i> ',
+                className: 'rounded btn-dark m-2',
+                titleAttr: 'Columnas',
+                extend: 'colvis'
+            },
+            {
+                text: '<i class="icon-download"></i><i class="icon-file-excel"></i>',
+                className: 'rounded btn-dark m-2',
+                titleAttr: 'Excel',
+                extend: 'excel',
+                exportOptions: {
+                    columns: [0, 1, 2]
+                }
+            },
+            {
+                text: '<i class="icon-download"></i><i class="icon-file-pdf"></i> ',
+                className: 'rounded btn-dark m-2',
+                titleAttr: 'PDF',
+                extend: 'pdf',
+                exportOptions: {
+                    columns: [0, 1, 2]
+                }
+            },
+            {
+                text: '<i class="icon-download"></i><i class="icon-print"></i> ',
+                className: 'rounded btn-dark m-2',
+                titleAttr: 'Imprimir',
+                extend: 'print',
+                exportOptions: {
+                    columns: [0, 1, 2]
+                }
+            },
+            //btn Refresh
+            {
+                text: '<i class="icon-arrows-cw"></i>',
+                className: 'rounded btn-info m-2',
+                action: function () {
+                    table.ajax.reload();
+                }
+            }
+        ],
+    });
+};
+
+function ListDatatable() {
+    table = $('#table').DataTable({
+        dom: 'lfBrtip',
+        processing: true,
+        serverSide: true,
+        "paging": true,
+        language: {
+            "url": "/js/assets/Spanish.json"
+        },
+        ajax: {
+            url: 'batch'
+
+        },
+        columns: [{
+                data: 'id'
+            },
+            {
+                data: 'code'
+            },
+            {
+                data: 'sanitary_registration'
+            },
+            {
+                data: 'product_name'
+            },
+            {
+                data: 'wholesaler_price'
+            },
+            {
+                data: 'stock'
+            },
+            { data: 'state',
+            "render": function (data, type, row) {
+                    if (row.state === 'ACTIVO') {
+                        return '<center><p class="bg-success text-white"><b>ACTIVO</b></p></center>';
+                    }
+                    else if (row.state === 'INACTIVO') {          
+                        return '<center><p class="bg-warning text-white"><b>INACTIVO</b></p></center>';
+                    }
+                    else if (row.state === 'ELIMINADO') {          
+                        return '<center><p class="bg-danger text-white"><b>ELIMINADO</b></p></center>';
+                    }
+                }
+            },
+            {
+                data: 'Detalle',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'Editar',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'Eliminar',
+                orderable: false,
+                searchable: false
+            },
+        ],
+        buttons: [{
+                text: '<i class="icon-eye"></i> ',
+                className: 'rounded btn-dark m-2',
+                titleAttr: 'Columnas',
+                extend: 'colvis'
+            },
+            {
+                text: '<i class="icon-download"></i><i class="icon-file-excel"></i>',
+                className: 'rounded btn-dark m-2',
+                titleAttr: 'Excel',
+                extend: 'excel',
+                exportOptions: {
+                    columns: [0, 1, 2]
+                }
+            },
+            {
+                text: '<i class="icon-download"></i><i class="icon-file-pdf"></i> ',
+                className: 'rounded btn-dark m-2',
+                titleAttr: 'PDF',
+                extend: 'pdf',
+                exportOptions: {
+                    columns: [0, 1, 2]
+                }
+            },
+            {
+                text: '<i class="icon-download"></i><i class="icon-print"></i> ',
+                className: 'rounded btn-dark m-2',
+                titleAttr: 'Imprimir',
+                footer: true,
+                extend: 'print',
+                exportOptions: {
+                    columns: [0, 1, 2,3,4,5]
+                }
+            },
+            //btn Refresh
+            {
+                text: '<i class="icon-arrows-cw"></i>',
+                className: 'rounded btn-info m-2',
+                action: function () {
+                    table.ajax.reload();
+                }
+            }
+        ],
+
+        //Metodo para Sumar todos los stock
+        "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+ 
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+ 
+            // Total over all pages
+            total = api
+                .column( 5 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Total over this page
+            pageTotal = api
+                .column( 5, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Update footer
+            $( api.column( 5 ).footer() ).html(
+                pageTotal +' ( '+ total +' total)'
+            );
+        }
+    });
+};
+
+
+
+
 
 
 
