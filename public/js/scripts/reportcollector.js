@@ -1,4 +1,3 @@
-var table;
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -6,18 +5,18 @@ $(document).ready(function () {
         }
     });
    
+    SelectCollector();
     dateEntry();
-    SelectSeller();
-    //Generate();
 });
+
 
 
 function Generate() {
     //Limpiar DataTable
     $("#table").dataTable().fnDestroy();
 
-    if($("#seller_id").val()== null){
-        toastr.warning("Debe Seleccionar un Vendedor.");
+    if($("#collector_id").val()== null){
+        toastr.warning("Debe Seleccionar un Cobrador.");
     }
     else if($("#minimum_date").val()==0){
         toastr.warning("Debe Seleccionar una Fecha minima.");
@@ -41,34 +40,28 @@ function ListDataTable(){
             "url": "/js/assets/Spanish.json"
         },
         ajax: {
-            url: '/getsellers',
+            url: '/getreportcollectors',
             data: function (obj) {
-                obj.seller_id = $("#seller_id").val();
+                obj.collector_id = $("#collector_id").val();
                 obj.minimum_date = $("#minimum_date").val();
                 obj.maximum_date = $("#maximum_date").val();
                
             }
         },
         columns: [{
-                data: 'id'
+                data: 'sale_id'
             },
             {
                 data: 'date'
             },
             {
+                data: 'receipt_number'
+            },
+            {
                 data: 'client_name'
             },
             {
-                data: 'zone_name'
-            },
-            {
-                data: 'total'
-            },
-            {
-                data: 'discount'
-            },
-            {
-                data: 'total_discount'
+                data: 'payment'
             },
         ],
         buttons: [
@@ -152,21 +145,24 @@ function ListDataTable(){
         }
     });
 }
-function SelectSeller() {
+
+//seleccionar cobrador
+
+function SelectCollector() {
     $.ajax({
-        url: "listseller",
+        url: "listcollector",
         method: 'get',
         data: {
             by: "all"
         },
         success: function (result) {
-            var code = '<select class="form-control border-primary" name="seller_id" id="seller_id" required>';
+            var code = '<select class="form-control border-primary" name="collector_id" id="collector_id" required>';
             $.each(result, function (key, value) {
                 code += '<option selected value="' + value.id + '">' + value.name + '</option>';
                 code += '<option disabled value="" selected>(Seleccionar)</option>';
             });
             code += '</select>';
-            $("#select_seller").html(code);
+            $("#select_collector").html(code);     
         },
         error: function (result) {
             toastr.error(result.msg + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
@@ -174,7 +170,9 @@ function SelectSeller() {
         },
 
     });
+
 }
+
 //fecha de entrada
 function dateEntry() {
     $('#datetimepicker1').datetimepicker({

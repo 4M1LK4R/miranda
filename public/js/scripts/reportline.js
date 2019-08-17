@@ -1,4 +1,3 @@
-var table;
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -6,24 +5,20 @@ $(document).ready(function () {
         }
     });
    
-    dateEntry();
-    SelectSeller();
-    //Generate();
+    SelectLine();
 });
+
+
+
+
 
 
 function Generate() {
     //Limpiar DataTable
     $("#table").dataTable().fnDestroy();
 
-    if($("#seller_id").val()== null){
-        toastr.warning("Debe Seleccionar un Vendedor.");
-    }
-    else if($("#minimum_date").val()==0){
-        toastr.warning("Debe Seleccionar una Fecha minima.");
-    }
-     else if($("#maximum_date").val()==0){
-        toastr.warning("Debe seleccionar una Fecha Maxima.");
+    if($("#line_id").val()== null){
+        toastr.warning("Debe Seleccionar una Linea de Producto.");
     }
     else{
         ListDataTable();
@@ -31,7 +26,8 @@ function Generate() {
 }
 
 function ListDataTable(){
-    
+    var d = new Date();
+    var currenDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
     table = $('#table').DataTable({
         dom: 'lfBrtip',
         processing: true,
@@ -41,34 +37,25 @@ function ListDataTable(){
             "url": "/js/assets/Spanish.json"
         },
         ajax: {
-            url: '/getsellers',
+            url: '/getreportlines',
             data: function (obj) {
-                obj.seller_id = $("#seller_id").val();
-                obj.minimum_date = $("#minimum_date").val();
-                obj.maximum_date = $("#maximum_date").val();
-               
+                obj.line_id = $("#line_id").val();
             }
         },
         columns: [{
                 data: 'id'
             },
             {
-                data: 'date'
+                data: 'code'
             },
             {
-                data: 'client_name'
+                data: 'product_name'
             },
             {
-                data: 'zone_name'
+                data: 'wholesaler_price'
             },
             {
-                data: 'total'
-            },
-            {
-                data: 'discount'
-            },
-            {
-                data: 'total_discount'
+                data: 'batch_price'
             },
         ],
         buttons: [
@@ -101,10 +88,10 @@ function ListDataTable(){
                 className: 'rounded btn-dark m-2',
                 titleAttr: 'Imprimir',
                 extend: 'print',
-                messageTop: 'VENTAS POR VENDEDOR <br>Nombre vendedor: '+$("#seller_id option:selected").text()+'<br>Fechas: '+$("#minimum_date").val()+' - '+$("#maximum_date").val(),
+                messageTop: 'INVENTARIO AL <br>'+currenDate.toString()+'<br>Laboratorio: '+$("#line_id option:selected").text(),
                 footer: true,
                 exportOptions: {
-                    columns: [0, 1, 2,3,4,5]
+                    columns: [0, 1, 2,3,4]
                 }
             },
             //btn Refresh
@@ -152,21 +139,30 @@ function ListDataTable(){
         }
     });
 }
-function SelectSeller() {
+
+//seleccion de linea de producto
+function SelectLine() {
     $.ajax({
-        url: "listseller",
+        url: "listcatalog",
         method: 'get',
         data: {
-            by: "all"
+            by: "type_catalog_id",
+            type_catalog_id: 4
         },
         success: function (result) {
-            var code = '<select class="form-control border-primary" name="seller_id" id="seller_id" required>';
+            var code = '<div class="form-group">';
+            code += '<label class="text-primary" for="line-product"><b>Linea de Producto:</b></label>';
+            code += '<select class="form-control" name="line_id" id="line_id" required>';
+            code += '<option disabled value="" selected>(Seleccionar)</option>';
             $.each(result, function (key, value) {
-                code += '<option selected value="' + value.id + '">' + value.name + '</option>';
-                code += '<option disabled value="" selected>(Seleccionar)</option>';
+                code += '<option value="' + value.id + '">' + value.name + '</option>';
             });
             code += '</select>';
-            $("#select_seller").html(code);
+            code += '<div class="invalid-feedback">';
+            code += 'Dato necesario.';
+            code += '</div>';
+            code += '</div>';
+            $("#select_line").html(code);
         },
         error: function (result) {
             toastr.error(result.msg + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
@@ -174,23 +170,4 @@ function SelectSeller() {
         },
 
     });
-}
-//fecha de entrada
-function dateEntry() {
-    $('#datetimepicker1').datetimepicker({
-        format: 'YYYY-MM-DD'
-    });
-    $('#datetimepicker2').datetimepicker({
-        format: 'YYYY-MM-DD'
-    });
-    $('#datetimepicker1').datetimepicker();
-        $('#datetimepicker2').datetimepicker({
-            useCurrent: false
-        });
-        $("#datetimepicker1").on("change.datetimepicker", function (e) {
-            $('#datetimepicker2').datetimepicker('minDate', e.date);
-        });
-        $("#datetimepicker2").on("change.datetimepicker", function (e) {
-            $('#datetimepicker1').datetimepicker('maxDate', e.date);
-        });
 }

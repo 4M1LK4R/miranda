@@ -125,10 +125,10 @@
                                     <a class="dropdown-item" href="{{ route('sellerreport') }}">Reporte de Ventas por Vendedor</a>
                                     @endcan
                                     @can('collector')
-                                    <a class="dropdown-item" href="{{ route('collector') }}">Cobradores</a>
+                                    <a class="dropdown-item" href="{{ route('reportline') }}">Repote de Productos por Linea</a>
                                     @endcan
                                     @can('charge')
-                                    <a class="dropdown-item" href="{{ route('charge') }}">Cobros</a>
+                                    <a class="dropdown-item" href="{{ route('reportcollector') }}">Reporte de Cobranzas por Cobrador</a>
                                     @endcan
                                 </div>
                             </li>

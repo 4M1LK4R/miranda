@@ -8,7 +8,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 d-flex justify-content-center">
-                        <h2 class="card-title text-primary">REPORTE POR VENDEDOR</h2>
+                        <h2 class="card-title text-primary">REPORTE POR COBRADOR</h2>
                     </div>
                     
                 </div>
@@ -21,8 +21,8 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-4">
-                <label class="text-primary" for=" "><b>Vendedor:</b></label>
-                <div class="md-form mb-3" id="select_seller"></div>
+                <label class="text-primary" for=" "><b>Cobrador:</b></label>
+                <div class="md-form mb-3" id="select_collector"></div>
             </div>
             <div class="col-md-4">
                 <label class="text-primary" for="expiration-date"><b>Fecha Mínima:</b></label>
@@ -66,16 +66,13 @@
                             <tr>
                                 <td>Cod. Venta</td>
                                 <td>Fecha</td>
+                                <td>Recibo</td>
                                 <td>Cliente</td>
-                                <td>Zona</td>
-                                <td>Total</td>
-                                <td>Descuento</td>
-                                <td>Total Descuento</td>
+                                <td>Cantidad Cobrada</td>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -93,5 +90,5 @@
 
 @endsection
 @section('scripts')
-<script src="{{ URL::asset('js/scripts/sellereport.js') }}"></script>
+<script src="{{ URL::asset('js/scripts/reportcollector.js') }}"></script>
 @endsection
