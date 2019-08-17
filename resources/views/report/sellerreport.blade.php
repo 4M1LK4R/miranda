@@ -43,7 +43,14 @@
                 </div>
             </div>
         </div>
-   
+        <br>
+        <div class="row">
+            <div class="col-md-4 offset-md-8 d-flex justify-content-end">
+                <button class="btn btn-outline-success btn-block" id="btn-agregar">
+                    <i class="icon-play-circled"></i>Generar
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 <br>
