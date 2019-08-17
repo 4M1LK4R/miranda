@@ -27,7 +27,7 @@
             <div class="col-md-4">
                 <label class="text-primary" for="expiration-date"><b>Fecha Mínima:</b></label>
                 <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                    <input type="text" id="expiration_date" name="expiration_date" class="form-control datetimepicker-input border-primary" data-target="#datetimepicker2" required/>
+                    <input type="text" id="minimum_date" name="minimum_date" class="form-control datetimepicker-input border-primary" data-target="#datetimepicker2" required/>
                     <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                         <div class="input-group-text bg-primary text-white"><i class="icon-minus"></i><i class="icon-calendar"></i></div>
                     </div>
@@ -36,7 +36,7 @@
             <div class="col-md-4">
                 <label class="text-primary" for="expiration-date"><b>Fecha Máxima:</b></label>
                 <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                    <input type="text" id="expiration_date" name="expiration_date" class="form-control datetimepicker-input border-primary" data-target="#datetimepicker2" required/>
+                    <input type="text" id="maximum_date" name="maximum_date" class="form-control datetimepicker-input border-primary" data-target="#datetimepicker2" required/>
                     <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                         <div class="input-group-text bg-primary text-white"><i class="icon-plus"></i><i class="icon-calendar"></i></div>
                     </div>
@@ -46,7 +46,7 @@
         <br>
         <div class="row">
             <div class="col-md-4 offset-md-8 d-flex justify-content-end">
-                <button class="btn btn-outline-success btn-block" id="btn-agregar">
+                <button class="btn btn-outline-success btn-block" id="btn-agregar"onclick="Generate();">
                     <i class="icon-play-circled"></i>Generar
                 </button>
             </div>
@@ -67,7 +67,6 @@
                                 <td>Cod. Venta</td>
                                 <td>Fecha</td>
                                 <td>Cliente</td>
-                                <td>Nro de Venta</td>
                                 <td>Total</td>
                                 <td>Descuento</td>
                                 <td>Total Descuento</td>

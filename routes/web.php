@@ -109,4 +109,5 @@ Route::get('/accountsreceivables', 'AccountsReceivableController@accountsReceiva
 /////REPORTS//////////////
 
 Route::get('/sellerreports','SellerReportController@sellerreport')->name('sellerreport')->middleware('auth');
+Route::get('/getselles','SellerReportController@SelleReport')->name('getselle')->middleware('auth');
 
