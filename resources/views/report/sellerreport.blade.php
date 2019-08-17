@@ -19,25 +19,36 @@
 <br>
 <div class="card">
     <div class="card-body">
-        <div class="col-sm-3">
-            <label for="expiration-date">Fecha Inicio:</label>
-            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                <input type="text" id="expiration_date" name="expiration_date" class="form-control datetimepicker-input" data-target="#datetimepicker2" required/>
-                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="icon-calendar"></i></div>
+        <div class="row">
+            <div class="col-md-4">
+                <label class="text-primary" for=" "><b>Vendedor:</b></label>
+                <Select class="form-control border-primary">
+                    <Option>Test 1</Option>
+                    <Option>Test 1</Option>
+                    <Option>Test 1</Option>
+                    <Option>Test 1</Option>
+                </Select>
+            </div>
+            <div class="col-md-4">
+                <label class="text-primary" for="expiration-date"><b>Fecha Mínima:</b></label>
+                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                    <input type="text" id="expiration_date" name="expiration_date" class="form-control datetimepicker-input border-primary" data-target="#datetimepicker2" required/>
+                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                        <div class="input-group-text bg-primary text-white"><i class="icon-minus"></i><i class="icon-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="text-primary" for="expiration-date"><b>Fecha Máxima:</b></label>
+                <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                    <input type="text" id="expiration_date" name="expiration_date" class="form-control datetimepicker-input border-primary" data-target="#datetimepicker2" required/>
+                    <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                        <div class="input-group-text bg-primary text-white"><i class="icon-plus"></i><i class="icon-calendar"></i></div>
+                    </div>
                 </div>
             </div>
         </div>
-        <br>
-        <div class="col-sm-3">
-            <label for="expiration-date">Fecha Finalización:</label>
-            <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                <input type="text" id="expiration_date" name="expiration_date" class="form-control datetimepicker-input" data-target="#datetimepicker2" required/>
-                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="icon-calendar"></i></div>
-                </div>
-            </div>
-        </div>
+   
     </div>
 </div>
 <br>
