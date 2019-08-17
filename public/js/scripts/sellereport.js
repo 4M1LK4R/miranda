@@ -7,7 +7,7 @@ $(document).ready(function () {
    
     dateEntry();
     SelectSeller();
-
+    Generate();
 });
 
 
@@ -29,16 +29,11 @@ function Generate() {
         };
         console.log(data);
         $.ajax({
-            url: "/getselles",
+            url: "/getsellers",
             method: 'get',
             data: data,
             success: function (result) {
-                if (result.success) {
-                    console.log(result.success);
-                } else {
-                    toastr.warning(result.msg);
-                    console.log(result.success);
-                }
+                console.log(result);
             },
             error: function (result) {
                 console.log(result.responseJSON.message);
