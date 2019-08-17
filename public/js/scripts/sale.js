@@ -340,6 +340,7 @@ $("#btn_delete").click(function () {
             id: id
         },
         success: function (result) {
+            console.log(result);
             if (result.success) {
                 toastr.success(result.msg, {
                     "progressBar": true,

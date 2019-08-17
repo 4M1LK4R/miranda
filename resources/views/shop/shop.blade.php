@@ -134,9 +134,9 @@
                     </div>
                     <div class="col-sm-6 d-flex justify-content-end">
                         @can('shop.store')
-                        <button class="btn btn-outline-success" onclick="SaveSale();">
-                            <i class="icon-floppy"></i>&nbsp;Registrar Venta
-                        </button>
+                        <a id="btn_save_sale" class="btn btn-success text-white" onclick="SaveSale();">
+                            <i class="icon-floppy"></i> Registrar Venta
+                        </a>
                         @endcan
                     </div>
                 </div>
@@ -144,14 +144,6 @@
         </div>
     </div>
 </div>
-
-
-
-<!-- Modals-->
-<!-- Modal Datos -->
-
-
-
 
 <!--Modal detalle-->
 
@@ -183,23 +175,22 @@
 
 
 
-<!-- Modal Eliminar -->
-<div class="modal fade bd-example-modal-lg" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<!-- modal_sale_susscess-->
+<div class="modal fade bd-example-modal-lg" id="modal_sale_susscess" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title">Eliminar</h5>
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">Registro exitoso</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body text-center">
-                <h2>¿Está seguro que desea eliminar el registro?</h2>
+                ¡Venta registrada correctamente!
             </div>
-            <div class="modal-footer bg-dark">
-                <button class="btn btn-danger" data-dismiss="modal">Cancelar<i class="icon-cancel"></i></button>
-                <button class="btn btn-success" id="btn_delete">Aceptar<i class="icon-ok"></i></button>
+            <div class="modal-footer">
+                <button class="btn btn-success" onclick="location.reload();">Aceptar<i class="icon-ok"></i></button>
             </div>
         </div>
     </div>

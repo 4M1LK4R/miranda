@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\User;
+use App\Batch;
 use App\Client;
 use App\Seller;
 use App\DetailSaleProduct;
@@ -111,6 +112,14 @@ class SaleController extends Controller
     public function destroy(Request $request)
     {
         $Sale = Sale::find($request->id);
+        $DetailsOfSale = DetailSaleProduct::all()->where('sale_id',$request->id);
+        foreach ($DetailsOfSale as $Detail) {
+            $Detail->state = "ELIMINADO";
+            $Detail->update();
+            $Batch = Batch::find($Detail->batch_id);
+            $Batch->stock = $Batch->stock + $Detail->amount;
+            $Batch->update();
+        }
         $Sale->state = "ELIMINADO";
         $Sale->update();
         return response()->json(['success'=>true,'msg'=>'Registro borrado.']);

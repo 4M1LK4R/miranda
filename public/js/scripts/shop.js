@@ -366,6 +366,12 @@ function SaveDetails(sale_id){
             },
         });
     }
-    toastr.success("Venta registrada correctamente");
+    SuccessSale()
     //location.reload();
+}
+
+function SuccessSale(){
+    $("#btn_save_sale").hide();
+    $("#btn_save_sale").addClass("disabled");
+    $("#modal_sale_susscess").modal("show");
 }
