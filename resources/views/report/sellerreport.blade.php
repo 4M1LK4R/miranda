@@ -22,12 +22,7 @@
         <div class="row">
             <div class="col-md-4">
                 <label class="text-primary" for=" "><b>Vendedor:</b></label>
-                <Select class="form-control border-primary">
-                    <Option>Test 1</Option>
-                    <Option>Test 1</Option>
-                    <Option>Test 1</Option>
-                    <Option>Test 1</Option>
-                </Select>
+                <div class="md-form mb-3" id="select_seller"></div>
             </div>
             <div class="col-md-4">
                 <label class="text-primary" for="expiration-date"><b>Fecha Mínima:</b></label>

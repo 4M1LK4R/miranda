@@ -7,27 +7,31 @@ $(document).ready(function () {
     });
    
     dateEntry();
+    SelectSeller();
 
 });
+function SelectSeller() {
+    $.ajax({
+        url: "listseller",
+        method: 'get',
+        data: {
+            by: "all"
+        },
+        success: function (result) {
+            var code = '<select class="form-control border-primary" name="seller_id" id="seller_id" required>';
+            $.each(result, function (key, value) {
+                code += '<option selected value="' + value.id + '">' + value.name + '</option>';
+            });
+            code += '</select>';
+            $("#select_seller").html(code);
+        },
+        error: function (result) {
+            toastr.error(result.msg + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            console.log(result);
+        },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    });
+}
 //fecha de entrada
 function dateEntry() {
     $('#datetimepicker1').datetimepicker({
