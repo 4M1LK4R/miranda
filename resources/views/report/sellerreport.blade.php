@@ -61,7 +61,7 @@
                 <hr>
                 <h4 class="card-title text-primary"><i class="icon-box"></i>Cobros</h4>
                 <div class="table-responsive">
-                    <table id="tablepayment" class="table table-striped">
+                    <table id="table" class="table table-striped">
                         <thead>
                             <tr>
                                 <td>Cod. Venta</td>

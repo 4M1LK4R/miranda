@@ -18,9 +18,17 @@ class SellerReportController extends Controller
 
     public function SelleReport(Request $request)
     {
-        return $Sale = Sale::all();
-       /* $Sales=Sale::where('payment_status_id', 5)->where('seller_id',$request->seller_id)->whereBetween('date',[$request->minimum_date, $request->maximum_date])->get();
-        return datatables()->of($Sales);*/
+        
+        return datatables()->of(Sale::all()->where('payment_status_id', 5)->where('seller_id',$request->seller_id)->whereBetween('date',[$request->minimum_date, $request->maximum_date]))
+        ->addColumn('client_name', function ($item) {
+            $client_name = Client::find($item->client_id);
+            return  $client_name->name;
+        })
+        ->addColumn('seller_name', function ($item) {
+            $seller_name = Seller::find($item->seller_id);
+            return  $seller_name->name;
+        })          
+        ->toJson();
     }
     
     public function sellerreport()
