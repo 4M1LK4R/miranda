@@ -11,6 +11,14 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+.rounded_{
+ border-radius: 25px !important;
+}
+/*
+.btn{
+  border-radius: 25px !important;
+}*/
+
  @import url("font_theme.css");
  :root {
    --blue: #158CBA;

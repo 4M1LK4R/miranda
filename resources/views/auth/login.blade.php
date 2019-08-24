@@ -54,9 +54,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Iniciar Sesión') }}
                                 </button>
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <!--<a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('¿Olvidaste tu contraseña?') }}
-                                </a>
+                                </a>-->
                             </div>
                         </div>
                     </form>

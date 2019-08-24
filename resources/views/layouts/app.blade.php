@@ -80,7 +80,7 @@
                                     @endcan
                                     <div class="dropdown-divider"></div>
                                     @can('salecompleted')
-                                    <a class="dropdown-item" href="{{ route('salecompleted') }}">Finalizar Ventas</a>
+                                    <a class="dropdown-item" href="{{ route('salecompleted') }}">Finalizar ventas</a>
                                     @endcan
                                 </div>
                             </li>
@@ -106,7 +106,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
                                     @can('payment')
-                                    <a class="dropdown-item" href="{{ route('payment') }}">Registro de Cobranzas</a>
+                                    <a class="dropdown-item" href="{{ route('payment') }}">Registro de cobranzas</a>
                                     @endcan
                                     @can('collector')
                                     <a class="dropdown-item" href="{{ route('collector') }}">Cobradores</a>
@@ -125,7 +125,7 @@
                                     <a class="dropdown-item" href="{{ route('reportline') }}">Productos por linea</a>
                                     <a class="dropdown-item" href="{{ route('reportcollector') }}">Cobranzas por cobrador</a>
                                     <a class="dropdown-item" href="{{ route('reportaccount') }}">Cuentas por cobrar</a>
-                                    <a class="dropdown-item" href="{{ route('reportzone') }}">Cuentas por cobrar por Zona</a>
+                                    <a class="dropdown-item" href="{{ route('reportzone') }}">Cuentas por cobrar por zona</a>
                                 </div>
                             </li>
                            
@@ -165,7 +165,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="!#">Cambiar contraseña</a>
+                                    <!--<a class="dropdown-item" href="!#">Cambiar contraseña</a>-->
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
