@@ -397,7 +397,7 @@ function printNote() {
     frameDoc.document.write('<html><head><title>Title</title>');
     frameDoc.document.write('</head><body>');
     //Append the external CSS file.
-    frameDoc.document.write('<link href="http://localhost:8000/css/theme.css" rel="stylesheet" type="text/css" />');
+    frameDoc.document.write('<link href="http://miranda.com/css/theme.css" rel="stylesheet" type="text/css" />');
 
     var source = 'bootstrap.min.js';
     var script = document.createElement('script');

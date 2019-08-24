@@ -61,6 +61,9 @@ function ListDataTable(){
                 data: 'wholesaler_price'
             },
             {
+                data: 'total_stock_price'
+            },
+            {
                 data: 'batch_price'
             },
         ],
@@ -77,7 +80,8 @@ function ListDataTable(){
                 titleAttr: 'Excel',
                 extend: 'excel',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1, 2,3,4,5,6,7]
+                    
                 }
             },
             {
@@ -86,7 +90,7 @@ function ListDataTable(){
                 titleAttr: 'PDF',
                 extend: 'pdf',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1, 2,3,4,5,6,7]
                 }
             },
             {
@@ -97,7 +101,7 @@ function ListDataTable(){
                 messageTop: 'INVENTARIO AL <br>'+currenDate.toString()+'<br>Laboratorio: '+$("#line_id option:selected").text(),
                 footer: true,
                 exportOptions: {
-                    columns: [0, 1, 2,3,4,5,6]
+                    columns: [0, 1, 2,3,4,5,6,7]
                 }
             },
             //btn Refresh

@@ -45,7 +45,11 @@ class SellerReportController extends Controller
         ->addColumn('product_name', function ($item) {
             $product_name = Product::find($item->product_id);
             return  $product_name->name;
-        })      
+        })
+        ->addColumn('total_stock_price', function ($item) {
+            $total_stock_price = $item->stock*$item->wholesaler_price;
+            return  $total_stock_price;
+        })  
         ->toJson();
     }
 
@@ -69,7 +73,28 @@ class SellerReportController extends Controller
 
     public function ReportAccounts(Request $request)
     {
-        $Sales =  Sale::where('state','!=','ELIMINADO')->where('payment_status_id',5)->orderBy('client_id', 'ASC')->with('client')->get();
+        $Sales =  Sale::where('state','!=','ELIMINADO')->where('payment_status_id',5)->whereBetween('date',[$request->minimum_date, $request->maximum_date])->orderBy('client_id')->with('client')->get();
+        return datatables()->of($Sales)
+       ->addColumn('client_name', function ($item) {
+
+            return  $item->client->name;
+        })
+        ->addColumn('residue', function ($item) {
+            $residue = $item->total-$item->receive;
+            return  $residue;
+        })  
+        ->addColumn('residue_discount', function ($item) {
+            $residue = $item->total_discount-$item->receive;
+            return  $residue;
+        })   
+        ->toJson();
+    }
+    public function ReportZones(Request $request)
+    {
+        //$zone = Client::where('catalog_zone_id',$request->catalog_zone_id);
+        //$zonee = Sale::where('catalog_zone_id',$request->)
+
+       $Sales =  Sale::where('state','!=','ELIMINADO')->where('payment_status_id',5)->where('Sale.Client.catalog_zone_id',$request->catalog_zone_id)->whereBetween('date',[$request->minimum_date, $request->maximum_date])->orderBy('client_id')->with('client')->get();
         return datatables()->of($Sales)
        ->addColumn('client_name', function ($item) {
 
@@ -86,6 +111,7 @@ class SellerReportController extends Controller
         ->toJson();
     }
 
+
     public function sellerreport()
     {
         return view('report.sellerreport');
@@ -101,5 +127,9 @@ class SellerReportController extends Controller
     public function reportaccountsreceivable()
     {
         return view('report.reportaccounts');
+    }
+    public function reportzone()
+    {
+        return view('report.reportareareceivable');
     }
 }

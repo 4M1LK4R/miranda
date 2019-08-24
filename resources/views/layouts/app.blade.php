@@ -125,6 +125,7 @@
                                     <a class="dropdown-item" href="{{ route('reportline') }}">Repote de productos por linea</a>
                                     <a class="dropdown-item" href="{{ route('reportcollector') }}">Reporte de cobranzas por cobrador</a>
                                     <a class="dropdown-item" href="{{ route('reportaccount') }}">Reporte de cuentas por cobrar</a>
+                                    <a class="dropdown-item" href="{{ route('reportzone') }}">Cuentas por cobrar por Zona</a>
                                 </div>
                             </li>
                            

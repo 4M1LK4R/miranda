@@ -34,7 +34,7 @@ function ListDatatable()
             { data: 'description'},
             { data: 'phone'},
             { data: 'address'},
-            { data: 'catalog_zone_id'},
+            { data: 'catalog_zone_name'},
             { data: 'state',
             "render": function (data, type, row) {
                     if (row.state === 'ACTIVO') {

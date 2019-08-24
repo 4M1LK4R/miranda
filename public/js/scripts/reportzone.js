@@ -4,13 +4,17 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    dateEntry();  
+    dateEntry();
+    SelectZone();
 });
 
 function Generate() {
     //Limpiar DataTable
     $("#table").dataTable().fnDestroy();
-    if($("#minimum_date").val()==0){
+    if($("#catalog_zone_id").val()== null){
+        toastr.warning("Debe Seleccionar una Zona.");
+    }
+    else if($("#minimum_date").val()==0){
         toastr.warning("Debe Seleccionar una Fecha minima.");
     }
      else if($("#maximum_date").val()==0){
@@ -19,6 +23,7 @@ function Generate() {
     else{
         ListDataTable();
     }
+
 }
 
 function ListDataTable(){
@@ -32,8 +37,11 @@ function ListDataTable(){
             "url": "/js/assets/Spanish.json"
         },
         ajax: {
-            url: '/getreportaccounts',
+            url: '/getreporzones',
+            
             data: function (obj) {
+                console.log(obj);
+                obj.catalog_zone_id = $("#catalog_zone_id").val();
                 obj.minimum_date = $("#minimum_date").val();
                 obj.maximum_date = $("#maximum_date").val();
             }
@@ -197,4 +205,35 @@ function dateEntry() {
         $("#datetimepicker2").on("change.datetimepicker", function (e) {
             $('#datetimepicker1').datetimepicker('maxDate', e.date);
         });
+}
+
+function SelectZone() {
+    $.ajax({
+        url: "listcatalog",
+        method: 'get',
+        data: {
+            by: "type_catalog_id",
+            type_catalog_id: 3
+        },
+        success: function (result) {
+            var code = '<div class="form-group">';
+            code += '<label for="tipo-zone"><b>Zonas:</b></label>';
+            code += '<select class="form-control" name="catalog_zone_id" id="catalog_zone_id" required>';
+            code += '<option disabled value="" selected>(Seleccionar)</option>';
+            $.each(result, function (key, value) {
+                code += '<option value="' + value.id + '">' + value.name + '</option>';
+            });
+            code += '</select>';
+            code += '<div class="invalid-feedback">';
+            code += 'Dato necesario.';
+            code += '</div>';
+            code += '</div>';
+            $("#select_zone").html(code);
+        },
+        error: function (result) {
+            toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            //console.log(result);
+        },
+
+    });
 }
