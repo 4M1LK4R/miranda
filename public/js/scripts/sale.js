@@ -89,7 +89,7 @@ function ListDatatable() {
                 titleAttr: 'Excel',
                 extend: 'excel',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                 }
             },
             {
@@ -98,7 +98,7 @@ function ListDatatable() {
                 titleAttr: 'PDF',
                 extend: 'pdf',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                 }
             },
             {
@@ -107,7 +107,7 @@ function ListDatatable() {
                 titleAttr: 'Imprimir',
                 extend: 'print',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                 }
             },
             //btn Refresh
@@ -185,9 +185,10 @@ function getSale(id) {
             string += "<table class='table table-bordered'>";
             string += "<thead class='bg-secondary'>";
             string += "<tr>";
-            string += "<td><b>Nro</b></td>";
-            string += "<td><b>Descripcón</b></td>";
+            string += "<td><b>Nro.</b></td>";
+            string += "<td><b>Descripción</b></td>";
             string += "<td><b>Cod. Lote</b></td>";
+            string += "<td><b>Nro. Lote</b></td>";
             string += "<td><b>Reg. Sanitario</b></td>";
             string += "<td><b>Vencimiento</b></td>";
             string += "<td><b>Cantidad</b></td>";
@@ -237,6 +238,8 @@ function getCompleteDetails(ArrayDetails) {
                 string += "<td>" + result[0].name_product + "</td>";
                 //Codigo lote
                 string += "<td>" + result[0].batch.code + "</td>";
+                //Codigo lote
+                string += "<td>" + result[0].batch.id + "</td>";
                 //Registro sanitario
                 string += "<td>" + result[0].batch.sanitary_registration + "</td>";
                 //Vencimiento
@@ -267,14 +270,18 @@ function getCompleteDetails(ArrayDetails) {
                     string += "Total con descuento: <b>" + sale.total_discount + "</b><br>";
                     string += "<hr>";
                     string += "Total: <b>" + sale.total + "</b><br>";
-                    
+
                     var nl = numeroALetras(parseInt(sale.total), {
                         plural: " ",
                         singular: " ",
                         centPlural: " ",
                         centSingular: " "
                     });
-                    string += nl+" "+((sale.total-parseInt(sale.total)).toFixed(2))*100+"/100 BOLIVIANOS";
+
+                    var dec = ((sale.total - parseInt(sale.total)).toFixed(2)) * 100;
+                    if (dec==0) {dec="00";}
+
+                    string += nl + " CON " + dec + "/100 BOLIVIANOS";
                     string += "<br><br><br><br><table class='table table-borderless text-center'><tr><td>________________</td><td>________________</td><td>________________</td></tr><tr><td>Despachado por</td><td>Entregue Conforme</td><td>Recibi Conforme</td></tr></table>";
                     //string += "<br><br><br><br><table class='table table-borderless text-center'><tr><td><hr class='bg-dark'></td><td><hr class='bg-dark'></td><td><hr class='bg-dark'></td></tr><tr><td>Despachado por</td><td>Entregue Conforme</td><td>Recibi Conforme</td></tr></table>";
                     string += "</div>";
@@ -309,8 +316,9 @@ function SaleNote(id) {
     string += "<div class='row p-4'>";
     string += "<div class='col-md-12 align-self-start'>";
     string += "<h3><b>IMPORTADORA MIRANDA</b></h3>";
-    string += "Av. Gran Chacho #542 - Palmarcito<br>";
-    string += "Tel: 66-31611 Fax: 66-31611";
+    string += "Av. Gran Chaco #542 - Palmarcito<br>";
+    string += "Tel: 66-31611 Cel: 74536670";
+    string += "Correo electrónico: mirandaehijos1@gmail.com";
     string += "</div>";
     string += "</div>";
 
@@ -376,7 +384,6 @@ function printNote1() {
     newWin.document.write('<html><head><title></title>');
     newWin.document.write('<link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.css" />');
     newWin.document.write('</head><body>');
-    newWin.document.write('AMILKAR');
     newWin.document.write(string);
     newWin.document.write('</body></html>');
     newWin.print();

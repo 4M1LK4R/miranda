@@ -11,22 +11,19 @@ $(document).ready(function () {
 function Generate() {
     //Limpiar DataTable
     $("#table").dataTable().fnDestroy();
-    if($("#catalog_zone_id").val()== null){
+    if ($("#catalog_zone_id").val() == null) {
         toastr.warning("Debe Seleccionar una Zona.");
-    }
-    else if($("#minimum_date").val()==0){
+    } else if ($("#minimum_date").val() == 0) {
         toastr.warning("Debe Seleccionar una Fecha minima.");
-    }
-     else if($("#maximum_date").val()==0){
+    } else if ($("#maximum_date").val() == 0) {
         toastr.warning("Debe seleccionar una Fecha Maxima.");
-    }
-    else{
+    } else {
         ListDataTable();
     }
 
 }
 
-function ListDataTable(){
+function ListDataTable() {
     var d = new Date();
     table = $('#table').DataTable({
         dom: 'lfBrtip',
@@ -38,7 +35,7 @@ function ListDataTable(){
         },
         ajax: {
             url: '/getreporzones',
-            
+
             data: function (obj) {
                 console.log(obj);
                 obj.catalog_zone_id = $("#catalog_zone_id").val();
@@ -87,8 +84,7 @@ function ListDataTable(){
                 data: 'residue_discount'
             },
         ],
-        buttons: [
-            {
+        buttons: [{
                 text: '<i class="icon-eye"></i> ',
                 className: 'rounded btn-dark m-2',
                 titleAttr: 'Columnas',
@@ -100,7 +96,7 @@ function ListDataTable(){
                 titleAttr: 'Excel',
                 extend: 'excel',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                 }
             },
             {
@@ -109,7 +105,7 @@ function ListDataTable(){
                 titleAttr: 'PDF',
                 extend: 'pdf',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                 }
             },
             {
@@ -117,10 +113,10 @@ function ListDataTable(){
                 className: 'rounded btn-dark m-2',
                 titleAttr: 'Imprimir',
                 extend: 'print',
-                messageTop: 'VENTAS POR COBRAR.<br>Fechas: '+$("#minimum_date").val()+' - '+$("#maximum_date").val(),
+                messageTop: 'VENTAS POR COBRAR.<br>Fechas: ' + $("#minimum_date").val() + ' - ' + $("#maximum_date").val(),
                 footer: true,
                 exportOptions: {
-                    columns: [0, 1, 2,3,4,5,6,7,8]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                 }
             },
             //btn Refresh
@@ -130,60 +126,65 @@ function ListDataTable(){
                 action: function () {
                     table.ajax.reload();
                 }
-            } 
+            }
         ],
         //Metodo para Sumar todos los stock
-        "footerCallback": function ( row, data, start, end, display ) {
-            var api = this.api(), data;
-    
+        "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(),
+                data;
+
             // Remove the formatting to get integer data for summation
-            var intVal = function ( i ) {
+            var intVal = function (i) {
                 return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '')*1 :
+                    i.replace(/[\$,]/g, '') * 1 :
                     typeof i === 'number' ?
-                        i : 0;
+                    i : 0;
             };
-    
+
             // Total over all pages
             total = api
-                .column( 7 )
+                .column(7)
                 .data()
-                .reduce( function (a, b) {
+                .reduce(function (a, b) {
                     return intVal(a) + intVal(b);
-                }, 0 );
-    
+                }, 0);
+
             // Total over this page
             pageTotal = api
-                .column( 7, { page: 'current'} )
+                .column(7, {
+                    page: 'current'
+                })
                 .data()
-                .reduce( function (a, b) {
+                .reduce(function (a, b) {
                     return intVal(a) + intVal(b);
-                }, 0 );
-    
+                }, 0);
+
             // Update footer
-            $( api.column( 7 ).footer() ).html(
-                'Total: '+pageTotal.toFixed(2)
+            $(api.column(7).footer()).html(
+                'Total: ' + pageTotal.toFixed(2)
             );
             //Another
             // Total over all pages
             total = api
-            .column( 8 )
-            .data()
-            .reduce( function (a, b) {
-                return intVal(a) + intVal(b);
-            }, 0 );
+                .column(8)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
 
             // Total over this page
             pageTotal = api
-                .column( 8, { page: 'current'} )
+                .column(8, {
+                    page: 'current'
+                })
                 .data()
-                .reduce( function (a, b) {
+                .reduce(function (a, b) {
                     return intVal(a) + intVal(b);
-                }, 0 );
+                }, 0);
 
             // Update footer
-            $( api.column( 8 ).footer() ).html(
-                'Total: '+pageTotal.toFixed(2)
+            $(api.column(8).footer()).html(
+                'Total: ' + pageTotal.toFixed(2)
             );
 
         }
@@ -199,15 +200,15 @@ function dateEntry() {
         format: 'YYYY-MM-DD'
     });
     $('#datetimepicker1').datetimepicker();
-        $('#datetimepicker2').datetimepicker({
-            useCurrent: false
-        });
-        $("#datetimepicker1").on("change.datetimepicker", function (e) {
-            $('#datetimepicker2').datetimepicker('minDate', e.date);
-        });
-        $("#datetimepicker2").on("change.datetimepicker", function (e) {
-            $('#datetimepicker1').datetimepicker('maxDate', e.date);
-        });
+    $('#datetimepicker2').datetimepicker({
+        useCurrent: false
+    });
+    $("#datetimepicker1").on("change.datetimepicker", function (e) {
+        $('#datetimepicker2').datetimepicker('minDate', e.date);
+    });
+    $("#datetimepicker2").on("change.datetimepicker", function (e) {
+        $('#datetimepicker1').datetimepicker('maxDate', e.date);
+    });
 }
 
 function SelectZone() {
@@ -234,7 +235,7 @@ function SelectZone() {
             $("#select_zone").html(code);
         },
         error: function (result) {
-            toastr.error(result.msg +' CONTACTE A SU PROVEEDOR POR FAVOR.');
+            toastr.error(result.msg + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
             //console.log(result);
         },
 
