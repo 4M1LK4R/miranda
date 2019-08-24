@@ -181,7 +181,7 @@ function getSale(id) {
             //TABLA DETALLES
             string += "<br>";
             string += "<div class='row'>";
-            string += "<div class='col-md-12 '>";
+            string += "<div class='col-md-12 table-responsive'>";
             string += "<table class='table table-bordered'>";
             string += "<thead class='bg-secondary'>";
             string += "<tr>";
@@ -282,8 +282,7 @@ function getCompleteDetails(ArrayDetails) {
                     if (dec==0) {dec="00";}
 
                     string += nl + " CON " + dec + "/100 BOLIVIANOS";
-                    string += "<br><br><br><br><table class='table table-borderless text-center'><tr><td>________________</td><td>________________</td><td>________________</td></tr><tr><td>Despachado por</td><td>Entregue Conforme</td><td>Recibi Conforme</td></tr></table>";
-                    //string += "<br><br><br><br><table class='table table-borderless text-center'><tr><td><hr class='bg-dark'></td><td><hr class='bg-dark'></td><td><hr class='bg-dark'></td></tr><tr><td>Despachado por</td><td>Entregue Conforme</td><td>Recibi Conforme</td></tr></table>";
+                    string += "<br><br><br><br><div class='table-responsive'><table class='table table-borderless text-center'><tr><td>________________</td><td>________________</td><td>________________</td></tr><tr><td>Despachado por</td><td>Entregué conforme</td><td>Recibí conforme</td></tr></table></div>";
                     string += "</div>";
                     string += "</div>";
                     //string += "</div>";
@@ -317,7 +316,7 @@ function SaleNote(id) {
     string += "<div class='col-md-12 align-self-start'>";
     string += "<h3><b>IMPORTADORA MIRANDA</b></h3>";
     string += "Av. Gran Chaco #542 - Palmarcito<br>";
-    string += "Tel: 66-31611 Cel: 74536670";
+    string += "Tel: 66-31611 Cel: 74536670<br>";
     string += "Correo electrónico: mirandaehijos1@gmail.com";
     string += "</div>";
     string += "</div>";
@@ -376,20 +375,6 @@ $("#btn_delete").click(function () {
 
 // METODOS NECESARIOS
 
-
-
-function printNote1() {
-    //var divToPrint = document.getElementById("nota_venta");
-    newWin = window.open("");
-    newWin.document.write('<html><head><title></title>');
-    newWin.document.write('<link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.css" />');
-    newWin.document.write('</head><body>');
-    newWin.document.write(string);
-    newWin.document.write('</body></html>');
-    newWin.print();
-    newWin.close();
-}
-
 function printNote() {
     var frame1 = $('<iframe />');
     frame1[0].name = "frame1";
@@ -401,10 +386,10 @@ function printNote() {
     var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
     frameDoc.document.open();
     //Create a new HTML document.
-    frameDoc.document.write('<html><head><title>Title</title>');
+    frameDoc.document.write('<html><head><title>Distribuidora Miranda</title>');
     frameDoc.document.write('</head><body>');
     //Append the external CSS file.
-    frameDoc.document.write('<link href="http://miranda.com/css/theme.css" rel="stylesheet" type="text/css" />');
+    frameDoc.document.write('<link href="css/theme.css" rel="stylesheet" type="text/css" />');
 
     var source = 'bootstrap.min.js';
     var script = document.createElement('script');
