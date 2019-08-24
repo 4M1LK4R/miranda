@@ -142,7 +142,7 @@ function getSale(id) {
             //console.log(result[0].details);
 
             sale = result[0];
-            console.log(sale);
+            //console.log(sale);
             //DATOS DE VENTA
 
             string += "<div class='row card border-dark'>";
@@ -314,7 +314,8 @@ function SaleNote(id) {
     //string += "<div class='p-2'>";
     string += "<div class='row p-4'>";
     string += "<div class='col-md-12 align-self-start'>";
-    string += "<h3><b>IMPORTADORA MIRANDA</b></h3>";
+    string += "<h3><b>Distribuidora Miranda</b></h3>";
+    //string += "<img src='http://ibpipuc.org/wp-content/uploads/2017/05/logoibp-smart.png' alt='...' class='img-fluid'><br>";
     string += "Av. Gran Chaco #542 - Palmarcito<br>";
     string += "Tel: 66-31611 Cel: 74536670<br>";
     string += "Correo electrónico: mirandaehijos1@gmail.com";

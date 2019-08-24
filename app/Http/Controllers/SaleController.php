@@ -31,7 +31,7 @@ class SaleController extends Controller
         $visibility = "";
         if (!$isUser) {$visibility="disabled";}
         
-        return datatables()->of(Sale::all())
+        return datatables()->of(Sale::all()->where('state','!=','ELIMINADO'))
         ->addColumn('user_name', function ($item) {
             $user_name = User::find($item->user_id);
             return  $user_name->name;
