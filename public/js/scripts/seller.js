@@ -61,7 +61,7 @@ function ListDatatable()
                 titleAttr: 'Excel',
                 extend: 'excel',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1, 2,3,4]
                 }
             },
             {
@@ -70,7 +70,7 @@ function ListDatatable()
                 titleAttr: 'PDF',
                 extend: 'pdf',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1, 2,3,4]
                 }
             },
             {
@@ -79,7 +79,7 @@ function ListDatatable()
                 titleAttr: 'Imprimir',
                 extend: 'print',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1, 2,3,4]
                 }
             },
             //btn Refresh

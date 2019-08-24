@@ -84,7 +84,7 @@ function ListDataTable(){
                 titleAttr: 'Excel',
                 extend: 'excel',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1, 2,3,4,5,6]
                 }
             },
             {
@@ -93,7 +93,7 @@ function ListDataTable(){
                 titleAttr: 'PDF',
                 extend: 'pdf',
                 exportOptions: {
-                    columns: [0, 1, 2]
+                    columns: [0, 1, 2,3,4,5,6]
                 }
             },
             {
@@ -104,7 +104,7 @@ function ListDataTable(){
                 messageTop: 'VENTAS POR VENDEDOR <br>Nombre vendedor: '+$("#seller_id option:selected").text()+'<br>Fechas: '+$("#minimum_date").val()+' - '+$("#maximum_date").val(),
                 footer: true,
                 exportOptions: {
-                    columns: [0, 1, 2,3,4,5]
+                    columns: [0, 1, 2,3,4,5,6]
                 }
             },
             //btn Refresh
