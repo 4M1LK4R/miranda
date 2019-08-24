@@ -63,6 +63,9 @@ function ListDataTable(){
                 data: 'client_name'
             },
             {
+                data: 'zone'
+            },
+            {
                 data: 'date'
             },
             {

@@ -61,6 +61,7 @@
                             <tr>
                                 <td>Cod. Venta</td>
                                 <td>Cliente</td>
+                                <td>Zona</td>
                                 <td>Fecha de Venta</td>
                                 <td>Total a Pagar</td>
                                 <td>Total a con descuento</td>

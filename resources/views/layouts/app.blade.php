@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Miranda</title>
+    <title>Distribuidora Miranda</title>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
@@ -121,10 +121,10 @@
                                     <i class="icon-docs"></i>Reportes
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownReportes">
-                                    <a class="dropdown-item" href="{{ route('sellerreport') }}">Reporte de ventas por vendedor</a>    
-                                    <a class="dropdown-item" href="{{ route('reportline') }}">Repote de productos por linea</a>
-                                    <a class="dropdown-item" href="{{ route('reportcollector') }}">Reporte de cobranzas por cobrador</a>
-                                    <a class="dropdown-item" href="{{ route('reportaccount') }}">Reporte de cuentas por cobrar</a>
+                                    <a class="dropdown-item" href="{{ route('sellerreport') }}">Ventas por vendedor</a>    
+                                    <a class="dropdown-item" href="{{ route('reportline') }}">Productos por linea</a>
+                                    <a class="dropdown-item" href="{{ route('reportcollector') }}">Cobranzas por cobrador</a>
+                                    <a class="dropdown-item" href="{{ route('reportaccount') }}">Cuentas por cobrar</a>
                                     <a class="dropdown-item" href="{{ route('reportzone') }}">Cuentas por cobrar por Zona</a>
                                 </div>
                             </li>

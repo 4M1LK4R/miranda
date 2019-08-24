@@ -15,7 +15,7 @@ use App\Payment;
 
 use Yajra\DataTables\DataTables;
 
-class SellerReportController extends Controller
+class ReportController extends Controller
 {
 
     public function SelleReport(Request $request)
@@ -89,16 +89,25 @@ class SellerReportController extends Controller
         })   
         ->toJson();
     }
-    public function ReportZones(Request $request)
+    public function ReportSalesZones(Request $request)
     {
         //$zone = Client::where('catalog_zone_id',$request->catalog_zone_id);
         //$zonee = Sale::where('catalog_zone_id',$request->)
+       $Sales =  Sale::where('state','!=','ELIMINADO')
+       ->where('payment_status_id',5)
+       ->whereBetween('date',[$request->minimum_date, $request->maximum_date])
+       ->orderBy('client_id')
+       ->with('client')->get()
+       ->where('client.catalog_zone_id',$request->catalog_zone_id);
+       //->where('Sale.Client.catalog_zone_id',$request->catalog_zone_id)
 
-       $Sales =  Sale::where('state','!=','ELIMINADO')->where('payment_status_id',5)->where('Sale.Client.catalog_zone_id',$request->catalog_zone_id)->whereBetween('date',[$request->minimum_date, $request->maximum_date])->orderBy('client_id')->with('client')->get();
         return datatables()->of($Sales)
        ->addColumn('client_name', function ($item) {
-
             return  $item->client->name;
+        })
+        ->addColumn('zone', function ($item) {
+            $zone = Catalogue::find($item->client->catalog_zone_id);
+            return  $zone->name;
         })
         ->addColumn('residue', function ($item) {
             $residue = $item->total-$item->receive;
