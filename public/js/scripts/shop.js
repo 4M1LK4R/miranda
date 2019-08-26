@@ -241,9 +241,9 @@ function AmountChange(row_index, id) {
     //Busca indice (index) del item en el array mediante el ID
     var index = Basket.findIndex(item => item.id === id);
     var val_imput =  parseInt($(idinput).val());
-    console.log("valor input: "+val_imput);
-    console.log("valor stock en carrito: "+Basket[index].stock);
-    console.log(Basket);
+    //console.log("valor input: "+val_imput);
+    //console.log("valor stock en carrito: "+Basket[index].stock);
+    //console.log(Basket);
     if (Basket[index].stock>=val_imput){     
         Basket[index].amount = val_imput;
         Basket[index].subtotal = Basket[index].price * Basket[index].amount;
@@ -345,7 +345,7 @@ function SaveDetails(sale_id){
             'batch_id':Basket[index].id,
             'state':'ACTIVO',
         };
-        console.log(data);
+        //console.log(data);
         $.ajax({
             url: "detail",
             method: 'post',

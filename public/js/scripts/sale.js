@@ -254,7 +254,6 @@ function getCompleteDetails(ArrayDetails) {
 
 
                 if ((key + 1) == ArrayDetails.length) {
-                    //console.log("si es");
                     string += "</tbody>";
                     string += "</table>";
                     string += "</div>";
@@ -348,7 +347,7 @@ $("#btn_delete").click(function () {
             id: id
         },
         success: function (result) {
-            console.log(result);
+            //console.log(result);
             if (result.success) {
                 toastr.success(result.msg, {
                     "progressBar": true,

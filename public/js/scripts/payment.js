@@ -118,7 +118,7 @@ function Save() {
             'receipt_number':$("#receipt_number").val(),
             'entry_date':currenDate.toString(),
         };
-        console.log(data);
+        //console.log(data);
         conver();
         $.ajax({
             url: "payment",
@@ -154,17 +154,17 @@ function SaleUpdate(data){
             'receive':data,
             'id':id_sale,
         };
-        console.log(data);
+        //console.log(data);
         $.ajax({
             url: "payment/{payment}",
             method: 'put',
             data: data,
             success: function (result) {
                 if (result.success) {
-                    console.log(result.msg);
+                    //console.log(result.msg);
     
                 } else {
-                    console.log(result.msg);
+                    //console.log(result.msg);
                 }
             },
             error: function (result) {
@@ -188,8 +188,8 @@ function Collector() {
 function SelectSale(id,receive){
     id_sale=id;
     count = receive;
-    console.log(id_sale);
-    console.log(count);
+    //console.log(id_sale);
+    //console.log(count);
     $("#code_sale").html(id);
     
     
@@ -199,7 +199,7 @@ function conver()
     result = parseFloat(count);
     amount = parseFloat($("#payment").val());
     result = result + amount;
-    console.log(result);
+    //console.log(result);
    SaleUpdate(result);
 
 }

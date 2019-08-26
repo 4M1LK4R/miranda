@@ -143,7 +143,7 @@ function Edit(id) {
 var data_old;
 function show_data(obj) {
     ClearInputs();
-    console.log(obj)
+    //console.log(obj)
     obj = JSON.parse(obj);
     id= obj.id;
     $("#name").val(obj.name);
@@ -237,7 +237,7 @@ function catch_parameters()
 {
     var data = $(".form-data").serialize();
     data += "&id="+id;
-    console.log(data);
+    //console.log(data);
     return data;
     
 }

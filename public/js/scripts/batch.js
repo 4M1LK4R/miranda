@@ -185,7 +185,7 @@ function Save() {
 }
 // detalle de lote
 function Detail(id) {
-    console.log(id);
+    //console.log(id);
     $.ajax({
         url: "batch/{batch}",
         method: 'get',
@@ -200,7 +200,7 @@ function Detail(id) {
         },
         error: function (result) {
             toastr.error(result + 'CONTACTE A SU PROVEEDOR POR FAVOR.');
-            console.log(result);
+            //console.log(result);
         },
 
     });
@@ -261,7 +261,7 @@ function Edit(id) {
             show_data(result);
         },
         error: function (result) {
-            console.log(result);
+            //console.log(result);
             toastr.error(result + ' CONTACTE A SU PROVEEDOR POR FAVOR.');
         },
 

@@ -176,8 +176,8 @@ string += "</div>";
 //FIN TABLA DETALLES
 
 //TOTALES VENTA
-console.log("Totales venta")
-console.log(sale);
+//console.log("Totales venta")
+//console.log(sale);
 string += "<div class='row'>";
 string += "<div class='col-md-12 text-right'>";
 string += "<b></b>";

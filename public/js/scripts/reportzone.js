@@ -37,7 +37,7 @@ function ListDataTable() {
             url: '/getreporzones',
 
             data: function (obj) {
-                console.log(obj);
+                //console.log(obj);
                 obj.catalog_zone_id = $("#catalog_zone_id").val();
                 obj.minimum_date = $("#minimum_date").val();
                 obj.maximum_date = $("#maximum_date").val();
